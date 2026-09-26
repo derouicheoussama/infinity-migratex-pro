@@ -327,12 +327,51 @@
 
 .imp-footer {
 	display: flex;
-	justify-content: space-between;
-	gap: 10px;
-	flex-wrap: wrap;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 7px;
+	text-align: center;
 	color: var(--imp-muted);
-	font-size: 12px;
-	padding: 4px 6px;
+	font-size: 12.5px;
+	padding: 18px 10px 8px;
+	margin-top: 8px;
+}
+.imp-footer-made { margin: 0; font-size: 13px; }
+.imp-footer-made strong { color: var(--imp-ink); }
+.imp-footer-heart { color: #e0245e; font-size: 14px; }
+.imp-footer-sep { opacity: .5; margin: 0 2px; }
+.imp-footer-brand { font-weight: 700; color: var(--imp-accent); }
+.imp-footer-version { opacity: .65; margin-left: 6px; font-size: 11px; }
+.imp-footer-links {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.imp-footer-links a {
+	color: var(--imp-accent);
+	text-decoration: none;
+	font-weight: 600;
+}
+.imp-footer-links a:hover { text-decoration: underline; }
+.imp-footer-links span { opacity: .4; }
+.imp-footer-social {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+.imp-footer-social .imp-social {
+	color: var(--imp-muted);
+	display: inline-flex;
+	padding: 4px;
+	border-radius: 6px;
+	transition: color .15s ease, background .15s ease;
+}
+.imp-footer-social .imp-social:hover {
+	color: var(--imp-accent);
+	background: var(--imp-accent-weak);
 }
 
 /* ------------------------------------------------------------------ *

@@ -358,6 +358,10 @@ final class IMP_Admin_About {
 			<section class="imp-panel">
 				<div class="imp-panel-head"><h3><?php esc_html_e( 'Changelog', 'infinity-migratex-pro' ); ?></h3></div>
 				<div class="imp-panel-body">
+					<h4>3.10.1</h4>
+					<ul class="imp-changelog">
+						<li><?php esc_html_e( 'UI: centered footer with author credit, useful links and social icons on every screen.', 'infinity-migratex-pro' ); ?></li>
+					</ul>
 					<h4>3.10.0</h4>
 					<ul class="imp-changelog">
 						<li><?php esc_html_e( 'Commercialization hardening: unguessable license activation, order-by-e-mail/WhatsApp channels, ready-to-deploy license server.', 'infinity-migratex-pro' ); ?></li>

@@ -686,16 +686,67 @@ final class IMP_Admin {
 		?>
 				</main>
 				<footer class="imp-footer">
-					<span>∞ Infinity MigrateX Pro — <?php
-					/* translators: %s: plugin version. */
-					echo esc_html( sprintf( __( 'version %s', 'infinity-migratex-pro' ), IMP_VERSION ) );
-					?></span>
-					<span><?php esc_html_e( 'by Derouiche Oussama · Infinity Coder', 'infinity-migratex-pro' ); ?></span>
+					<p class="imp-footer-made">
+						<?php esc_html_e( 'Made with', 'infinity-migratex-pro' ); ?>
+						<span class="imp-footer-heart" aria-hidden="true">♥</span>
+						<?php esc_html_e( 'by', 'infinity-migratex-pro' ); ?>
+						<strong>Derouiche Oussama</strong>
+						<span class="imp-footer-sep">·</span>
+						<span class="imp-footer-brand">∞ Infinity Coder</span>
+						<span class="imp-footer-version">v<?php echo esc_html( IMP_VERSION ); ?></span>
+					</p>
+					<nav class="imp-footer-links" aria-label="<?php esc_attr_e( 'Useful links', 'infinity-migratex-pro' ); ?>">
+						<a href="<?php echo esc_url( 'https://www.derouicheoussama.com' ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Website', 'infinity-migratex-pro' ); ?></a>
+						<span aria-hidden="true">/</span>
+						<a href="<?php echo esc_url( 'https://www.derouicheoussama.com' ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Support', 'infinity-migratex-pro' ); ?></a>
+						<span aria-hidden="true">/</span>
+						<a href="<?php echo esc_url( 'https://github.com/derouicheoussama/infinity-migratex-pro' ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Docs', 'infinity-migratex-pro' ); ?></a>
+						<span aria-hidden="true">/</span>
+						<a href="<?php echo esc_url( 'https://github.com/derouicheoussama/infinity-migratex-pro/releases' ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Changelog', 'infinity-migratex-pro' ); ?></a>
+						<span aria-hidden="true">/</span>
+						<a href="<?php echo esc_url( 'https://profiles.wordpress.org/derouicheoussama/' ); ?>" target="_blank" rel="noopener noreferrer">WordPress.org</a>
+					</nav>
+					<div class="imp-footer-social">
+						<?php echo self::social_icons(); // phpcs:ignore WordPress.Security.EscapeOutput -- SVG statiques contrôlés. ?>
+					</div>
 				</footer>
 			</div>
 			<?php IMP_Checkout::render(); // Tunnel d'achat Pro intégré (dans .imp-wrap : hérite du thème). ?>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Icônes sociales de l'auteur (SVG inline — Facebook, Instagram,
+	 * TikTok) pour le footer centré.
+	 *
+	 * @return string
+	 */
+	public static function social_icons() {
+		$icons = array(
+			'facebook'  => array(
+				'url'   => 'https://www.facebook.com/derouiche.oussama',
+				'label' => __( 'Facebook', 'infinity-migratex-pro' ),
+				'path'  => 'M13.5 9H15V6.5h-1.9c-2 0-3.1 1.2-3.1 3.2V11H8v2.5h2V22h3v-8.5h2.5l.5-2.5H13V9.8c0-.5.2-.8.5-.8z',
+			),
+			'instagram' => array(
+				'url'   => 'https://www.instagram.com/derouiche.oussama/',
+				'label' => __( 'Instagram', 'infinity-migratex-pro' ),
+				'path'  => 'M12 8.8A3.2 3.2 0 1 0 12 15.2 3.2 3.2 0 1 0 12 8.8zm0-2.1a5.3 5.3 0 1 1 0 10.6 5.3 5.3 0 0 1 0-10.6zM17.9 4a1.4 1.4 0 1 1 0 2.8 1.4 1.4 0 0 1 0-2.8zM12 2c-2.7 0-3 0-4.1.1-2.7.1-4.6 2-4.7 4.7C3.1 7.9 3.1 8.2 3.1 12s0 4.1.1 5.2c.1 2.7 2 4.6 4.7 4.7 1.1.1 1.4.1 4.1.1s3 0 4.1-.1c2.7-.1 4.6-2 4.7-4.7.1-1.1.1-1.4.1-5.2s0-4.1-.1-5.2c-.1-2.7-2-4.6-4.7-4.7C15 2 14.7 2 12 2zm0 2c2.6 0 2.9 0 4 .1 2 .1 2.8.9 2.9 2.9.1 1.1.1 1.3.1 4s0 2.9-.1 4c-.1 2-.9 2.8-2.9 2.9-1.1.1-1.4.1-4 .1s-2.9 0-4-.1c-2-.1-2.8-.9-2.9-2.9-.1-1.1-.1-1.4-.1-4s0-2.9.1-4c.1-2 .9-2.8 2.9-2.9 1.1-.1 1.4-.1 4-.1z',
+			),
+			'tiktok'    => array(
+				'url'   => 'https://www.tiktok.com/@derouiche.oussama',
+				'label' => __( 'TikTok', 'infinity-migratex-pro' ),
+				'path'  => 'M16.6 3c.3 1.7 1.3 3.1 3.4 3.3v2.8c-1.3 0-2.5-.4-3.4-1v6.2c0 3.9-2.8 5.7-5.5 5.7-2.5 0-5.1-1.7-5.1-5 0-3.5 3.1-5.3 5.7-4.9v2.9c-1.2-.4-2.9.1-2.9 1.9 0 1.7 1.5 2.4 2.7 2.3 1.4-.1 2.3-1.1 2.3-2.9V3h2.8z',
+			),
+		);
+		$out = '';
+		foreach ( $icons as $icon ) {
+			$out .= '<a class="imp-social" href="' . esc_url( $icon['url'] ) . '" target="_blank" rel="noopener noreferrer" aria-label="' . esc_attr( $icon['label'] ) . '" title="' . esc_attr( $icon['label'] ) . '">'
+				. '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="' . $icon['path'] . '"></path></svg>'
+				. '</a>';
+		}
+		return $out;
 	}
 
 	/**

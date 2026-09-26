@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.10.0
+Stable tag: 3.10.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,10 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.10.1 =
+
+* UI: centered footer on every screen — "Made with ♥ by Derouiche Oussama · ∞ Infinity Coder", useful links (Website, Support, Docs, Changelog, WordPress.org) and social icons (Facebook, Instagram, TikTok).
 
 = 3.10.0 =
 
