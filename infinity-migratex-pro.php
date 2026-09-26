@@ -15,7 +15,7 @@
  * Plugin Name:       Infinity MigrateX Pro
  * Plugin URI:        https://github.com/derouicheoussama/infinity-migratex-pro
  * Description:       Migrer, sauvegarder et restaurer un site WordPress sans timeout : changement de domaine avec URLs réécrites sans casser les données sérialisées, clonage staging, sauvegardes automatiques avec rétention, restauration vérifiée par checksums, scanner de sécurité et journal détaillé. Moteur par chunks avec reprise après interruption — WooCommerce et Elementor inclus.
- * Version:           3.4.0
+ * Version:           3.5.0
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Tested up to:      7.1
@@ -31,7 +31,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'IMP_VERSION', '3.4.0' );
+define( 'IMP_VERSION', '3.5.0' );
 define( 'IMP_DB_VERSION', '1.0.0' );
 define( 'IMP_FILE', __FILE__ );
 define( 'IMP_DIR', plugin_dir_path( __FILE__ ) );
@@ -246,6 +246,11 @@ require_once IMP_DIR . 'core/class-backup-engine.php';
 require_once IMP_DIR . 'integrations/class-wordpress.php';
 require_once IMP_DIR . 'integrations/class-woocommerce.php';
 require_once IMP_DIR . 'integrations/class-elementor.php';
+
+// Garde-fou des mises à jour WordPress (sauvegarde de sécurité avant
+// update) — doit être chargé en admin ET en cron (mises à jour auto).
+require_once IMP_DIR . 'includes/class-upgrade-guard.php';
+IMP_Upgrade_Guard::init();
 
 if ( is_admin() ) {
 	global $pagenow;

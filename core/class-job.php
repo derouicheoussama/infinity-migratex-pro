@@ -670,6 +670,8 @@ final class IMP_Job {
 				$clean['enc_pass_enc'] = ( 1 === $clean['encrypt'] && ! empty( $data['enc_pass'] ) )
 					? IMP_Security::encrypt( (string) $data['enc_pass'] )
 					: '';
+				// Origine transmise au moteur (safety = exclu de la rétention).
+				$clean['origin'] = isset( $data['origin'] ) ? sanitize_key( (string) $data['origin'] ) : '';
 				break;
 
 			case 'restore':

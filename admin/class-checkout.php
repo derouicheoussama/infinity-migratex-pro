@@ -181,6 +181,11 @@ final class IMP_Checkout {
 						</div>
 
 						<button type="button" class="imp-co-compare-link" data-imp-co-compare><?php esc_html_e( 'Compare Free vs Pro', 'infinity-migratex-pro' ); ?> ▾</button>
+						<?php if ( ! $is_pro && ! IMP_License::trial_used() ) : ?>
+							<p style="margin:10px 0 0;text-align:center;">
+								<button type="button" class="imp-btn imp-btn-ghost" data-imp-co-trial>🎁 <?php esc_html_e( 'Or start the 14-day free PRO trial', 'infinity-migratex-pro' ); ?></button>
+							</p>
+						<?php endif; ?>
 						<div class="imp-co-compare" hidden>
 							<table>
 								<thead><tr><th><?php esc_html_e( 'Feature', 'infinity-migratex-pro' ); ?></th><th><?php esc_html_e( 'Free', 'infinity-migratex-pro' ); ?></th><th>Pro</th></tr></thead>

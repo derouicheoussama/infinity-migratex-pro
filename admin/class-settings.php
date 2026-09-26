@@ -275,6 +275,14 @@ final class IMP_Admin_Settings {
 				</td>
 			</tr>
 			<tr>
+				<th scope="row"><?php esc_html_e( 'Safety backup before updates', 'infinity-migratex-pro' ); ?></th>
+				<td>
+					<label class="imp-switch"><input type="checkbox" name="imp_settings[preupdate_backup]" value="1" <?php checked( ! empty( $settings['preupdate_backup'] ) ); ?> <?php disabled( ! $sched_pro ); ?>><span class="imp-switch-slider"></span></label>
+					<?php echo $sched_pro ? '' : '<span class="imp-edition imp-edition-pro" style="margin-left:8px;">PRO</span>'; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+					<p class="description"><?php esc_html_e( 'Before WordPress installs an update (plugin, theme or core — manual or automatic), a database safety snapshot is taken automatically so you can always roll back.', 'infinity-migratex-pro' ); ?></p>
+				</td>
+			</tr>
+			<tr>
 				<th scope="row"><label for="imp_setting_schedule"><?php esc_html_e( 'Schedule', 'infinity-migratex-pro' ); ?></label></th>
 				<td>
 					<select id="imp_setting_schedule" name="imp_settings[backup_schedule]" <?php disabled( ! $sched_pro ); ?>>
@@ -661,7 +669,7 @@ final class IMP_Admin_Settings {
 		$clean['default_exclusions'] = implode( "\n", $clean['default_exclusions'] );
 
 		// Bascules.
-		foreach ( array( 'auto_cleanup', 'confirm_destructive', 'compression', 'backup_schedule_enabled', 'urlreplace_in_json', 'secure_tmp', 'admin_notifications', 'debug_mode', 'delete_data_on_uninstall' ) as $flag ) {
+		foreach ( array( 'auto_cleanup', 'confirm_destructive', 'compression', 'backup_schedule_enabled', 'urlreplace_in_json', 'secure_tmp', 'admin_notifications', 'debug_mode', 'delete_data_on_uninstall', 'preupdate_backup' ) as $flag ) {
 			$clean[ $flag ] = empty( $input[ $flag ] ) ? 0 : 1;
 		}
 
@@ -771,6 +779,19 @@ final class IMP_Admin_Settings {
 
 		$message = __( 'Settings saved.', 'infinity-migratex-pro' );
 		wp_send_json_success( array( 'message' => $message ) );
+	}
+
+	/**
+	 * AJAX : démarre l'essai PRO de 14 jours (une seule fois par site).
+	 */
+	public static function ajax_start_trial() {
+		IMP_Security::ajax_guard( 'settings' );
+
+		$result = IMP_License::start_trial();
+		if ( ! $result['ok'] ) {
+			wp_send_json_error( array( 'message' => $result['message'] ), 409 );
+		}
+		wp_send_json_success( array( 'message' => $result['message'], 'trial' => true ) );
 	}
 
 	/**

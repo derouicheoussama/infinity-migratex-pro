@@ -108,6 +108,7 @@ final class IMP_Admin_Dashboard {
 		       * avec les gains concrets et ouverture du tunnel d'achat. */
 		if ( IMP_License::is_pro() ) :
 			$dash_license = IMP_License::get();
+			$dash_trial   = IMP_License::days_left();
 			$dash_until   = (int) $dash_license['expires'] > 0
 				? mysql2date( get_option( 'date_format' ), gmdate( 'Y-m-d H:i:s', (int) $dash_license['expires'] ) )
 				: '';
@@ -115,22 +116,30 @@ final class IMP_Admin_Dashboard {
 		<section class="imp-edition-banner imp-edition-banner-pro">
 			<span class="imp-edition-banner-star" aria-hidden="true">★</span>
 			<div class="imp-edition-banner-main">
-				<strong><?php esc_html_e( 'PRO edition active', 'infinity-migratex-pro' ); ?></strong>
+				<strong><?php
+				echo null !== $dash_trial
+					? esc_html( sprintf( /* translators: %s: days */ __( 'PRO trial active — %s days left', 'infinity-migratex-pro' ), number_format_i18n( $dash_trial ) ) )
+					: esc_html__( 'PRO edition active', 'infinity-migratex-pro' );
+				?></strong>
 				<p><?php
 				echo esc_html( sprintf(
-					/* translators: 1: plan 2: sites limit or unlimited */
+					/* translators: 1: plan */
 					__( 'Plan: %1$s · Cloud destinations, scheduled backups, AES-256 encryption, turbo speed and priority support unlocked.', 'infinity-migratex-pro' ),
 					(string) $dash_license['plan']
 				) );
 				?></p>
 			</div>
 			<div class="imp-edition-banner-side">
-				<?php if ( '' !== $dash_until ) : ?>
-					<span class="imp-edition-valid"><?php echo esc_html( sprintf( /* translators: %s: date */ __( 'Valid until %s', 'infinity-migratex-pro' ), $dash_until ) ); ?></span>
+				<?php if ( null !== $dash_trial ) : ?>
+					<button type="button" class="imp-btn imp-btn-small imp-btn-primary" data-imp-checkout="personal"><?php esc_html_e( 'Keep PRO — upgrade now', 'infinity-migratex-pro' ); ?></button>
 				<?php else : ?>
-					<span class="imp-edition-valid"><?php esc_html_e( 'Lifetime license', 'infinity-migratex-pro' ); ?></span>
+					<?php if ( '' !== $dash_until ) : ?>
+						<span class="imp-edition-valid"><?php echo esc_html( sprintf( /* translators: %s: date */ __( 'Valid until %s', 'infinity-migratex-pro' ), $dash_until ) ); ?></span>
+					<?php else : ?>
+						<span class="imp-edition-valid"><?php esc_html_e( 'Lifetime license', 'infinity-migratex-pro' ); ?></span>
+					<?php endif; ?>
+					<a class="imp-btn imp-btn-small imp-btn-ghost" href="<?php echo esc_url( admin_url( 'admin.php?page=infinity-migratex-pro-settings' ) ); ?>#advanced"><?php esc_html_e( 'Manage license', 'infinity-migratex-pro' ); ?></a>
 				<?php endif; ?>
-				<a class="imp-btn imp-btn-small imp-btn-ghost" href="<?php echo esc_url( admin_url( 'admin.php?page=infinity-migratex-pro-settings' ) ); ?>#advanced"><?php esc_html_e( 'Manage license', 'infinity-migratex-pro' ); ?></a>
 			</div>
 		</section>
 		<?php else : ?>

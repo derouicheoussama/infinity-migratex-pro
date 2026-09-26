@@ -1925,6 +1925,29 @@
 			coGo(Math.max(1, coState.step - 1));
 		});
 
+		/* Essai PRO 14 jours : une fois par site, débloque tout
+		 * immédiatement (aucun paiement). */
+		var trialBtn = co$('[data-imp-co-trial]');
+		if (trialBtn) {
+			trialBtn.addEventListener('click', function () {
+				if (!window.confirm('Start the 14-day free PRO trial? Every Pro feature unlocks immediately — one trial per site, no payment required.')) { return; }
+				trialBtn.disabled = true;
+				ajax('imp_license_trial', {}).then(function (json) {
+					if (json && json.success) {
+						toast(json.data.message, 'success');
+						impConfetti('checkout-trial');
+						coShowSuccess();
+					} else {
+						trialBtn.disabled = false;
+						coError((json && json.data && json.data.message) || i18n.error);
+					}
+				}).catch(function () {
+					trialBtn.disabled = false;
+					coError(i18n.networkError || 'Connection lost — try again.');
+				});
+			});
+		}
+
 		co$$('[data-imp-co-close]').forEach(function (el) {
 			el.addEventListener('click', closeCheckout);
 		});

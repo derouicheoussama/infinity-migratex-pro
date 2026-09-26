@@ -585,15 +585,21 @@ final class IMP_Admin {
 					<?php if ( IMP_License::is_pro() ) : ?>
 						<?php
 						$pro_license = IMP_License::get();
+						$trial_left  = IMP_License::days_left();
 						$pro_until   = (int) $pro_license['expires'] > 0
 							? mysql2date( get_option( 'date_format' ), gmdate( 'Y-m-d H:i:s', (int) $pro_license['expires'] ) )
 							: '';
 						?>
-						<span class="imp-edition-license">★ <?php echo esc_html( sprintf( /* translators: %s: plan */ __( 'PRO — %s', 'infinity-migratex-pro' ), (string) $pro_license['plan'] ) ); ?></span>
-						<?php if ( '' !== $pro_until ) : ?>
-							<span class="imp-byline-sub"><?php echo esc_html( sprintf( /* translators: %s: date */ __( 'valid until %s', 'infinity-migratex-pro' ), $pro_until ) ); ?></span>
+						<?php if ( null !== $trial_left ) : ?>
+							<span class="imp-edition-license">★ <?php echo esc_html( sprintf( /* translators: %s: days */ __( 'TRIAL — %s days left', 'infinity-migratex-pro' ), number_format_i18n( $trial_left ) ) ); ?></span>
+							<span class="imp-byline-sub"><?php esc_html_e( 'upgrade anytime to keep Pro', 'infinity-migratex-pro' ); ?></span>
 						<?php else : ?>
-							<span class="imp-byline-sub"><?php esc_html_e( 'lifetime license', 'infinity-migratex-pro' ); ?></span>
+							<span class="imp-edition-license">★ <?php echo esc_html( sprintf( /* translators: %s: plan */ __( 'PRO — %s', 'infinity-migratex-pro' ), (string) $pro_license['plan'] ) ); ?></span>
+							<?php if ( '' !== $pro_until ) : ?>
+								<span class="imp-byline-sub"><?php echo esc_html( sprintf( /* translators: %s: date */ __( 'valid until %s', 'infinity-migratex-pro' ), $pro_until ) ); ?></span>
+							<?php else : ?>
+								<span class="imp-byline-sub"><?php esc_html_e( 'lifetime license', 'infinity-migratex-pro' ); ?></span>
+							<?php endif; ?>
 						<?php endif; ?>
 					<?php else : ?>
 						<button type="button" class="imp-gopro-side" data-imp-checkout="personal">★ <?php esc_html_e( 'Upgrade to PRO', 'infinity-migratex-pro' ); ?></button>
@@ -733,6 +739,7 @@ final class IMP_Admin {
 			'imp_logs_action'          => array( 'IMP_Admin_Logs', 'ajax_action' ),
 			'imp_settings_save'        => array( 'IMP_Admin_Settings', 'ajax_save' ),
 			'imp_settings_save_all'    => array( 'IMP_Admin_Settings', 'ajax_save_all' ),
+			'imp_license_trial'        => array( 'IMP_Admin_Settings', 'ajax_start_trial' ),
 			'imp_settings_export'      => array( 'IMP_Admin_Settings', 'ajax_settings_export' ),
 			'imp_settings_import'      => array( 'IMP_Admin_Settings', 'ajax_settings_import' ),
 			'imp_settings_reset'       => array( 'IMP_Admin_Settings', 'ajax_settings_reset' ),

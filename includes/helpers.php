@@ -779,6 +779,9 @@ function imp_default_settings() {
 		'backup_reminder_days'         => 14,
 		'scan_reminder_days'           => 30,
 
+		// Sauvegarde de sécurité automatique avant mise à jour WP (Pro).
+		'preupdate_backup'             => 1,
+
 		// WooCommerce : tables éphémères exclues des dumps.
 		'wc_skip_sessions'             => 1,
 		'wc_skip_scheduler'            => 1,

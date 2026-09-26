@@ -36,16 +36,20 @@ final class IMP_License {
 	const OPTION = 'imp_license';
 
 	/**
-	 * État de la licence.
+	 * État de la licence — cache statique par requête (get_option lu
+	 * des dizaines de fois par page : badge, sidebar, gates, wizards).
 	 *
 	 * @return array{key:string,status:string,plan:string,billing:string,expires:int,email:string,checked:int}
 	 */
 	public static function get() {
+		if ( null !== self::$memo ) {
+			return self::$memo;
+		}
 		$data = get_option( self::OPTION, array() );
 		if ( ! is_array( $data ) ) {
 			$data = array();
 		}
-		return wp_parse_args(
+		$data = wp_parse_args(
 			$data,
 			array(
 				'key'     => '',
@@ -57,7 +61,12 @@ final class IMP_License {
 				'checked' => 0,
 			)
 		);
+		self::$memo = $data;
+		return $data;
 	}
+
+	/** @var array|null Mémo de la licence (durée de la requête). */
+	private static $memo = null;
 
 	/**
 	 * Mode Pro actif ?
@@ -271,8 +280,9 @@ final class IMP_License {
 	 * @return void
 	 */
 	public static function deactivate() {
-		$data        = self::get();
+		$data           = self::get();
 		$data['status'] = 'inactive';
+		self::$memo     = null; // Invalide le mémo de requête.
 		update_option( self::OPTION, $data, false );
 	}
 
@@ -289,6 +299,7 @@ final class IMP_License {
 	 * @return void
 	 */
 	private static function save( $key, $status, $plan, $billing, $expires, $email, $domain = '' ) {
+		self::$memo = null; // Invalide le mémo de requête.
 		update_option(
 			self::OPTION,
 			array(
@@ -302,6 +313,78 @@ final class IMP_License {
 				'checked' => time(),
 			),
 			false
+		);
+	}
+
+	/**
+	 * L'essai gratuit de 14 jours a-t-il déjà été consommé sur ce site ?
+	 *
+	 * @return bool
+	 */
+	public static function trial_used() {
+		return (bool) get_option( 'imp_trial_used', false );
+	}
+
+	/**
+	 * Jours restants de l'essai (null si pas un essai actif).
+	 *
+	 * @return int|null
+	 */
+	public static function days_left() {
+		$data = self::get();
+		if ( 'trial' !== $data['billing'] || 'active' !== $data['status'] ) {
+			return null;
+		}
+		$left = (int) ceil( ( (int) $data['expires'] - time() ) / DAY_IN_SECONDS );
+		return max( 0, $left );
+	}
+
+	/**
+	 * Démarre l'essai PRO de 14 jours — une seule fois par site, jamais
+	 * sur une installation déjà Pro. Le statut redescend en Free
+	 * automatiquement à l'expiration (is_pro vérifie expires).
+	 *
+	 * @return array{ok:bool,message:string}
+	 */
+	public static function start_trial() {
+		if ( ! class_exists( 'IMP_Hardening' ) || ! IMP_Hardening::rate_ok( 'trial', 2, HOUR_IN_SECONDS ) ) {
+			return array(
+				'ok'      => false,
+				'message' => __( 'Too many attempts — wait a minute before retrying.', 'infinity-migratex-pro' ),
+			);
+		}
+		if ( self::is_pro() ) {
+			return array(
+				'ok'      => false,
+				'message' => __( 'PRO is already active on this site — the trial is not needed.', 'infinity-migratex-pro' ),
+			);
+		}
+		if ( self::trial_used() ) {
+			return array(
+				'ok'      => false,
+				'message' => __( 'The 14-day trial has already been used on this site — one trial per site.', 'infinity-migratex-pro' ),
+			);
+		}
+
+		$host = (string) wp_parse_url( home_url(), PHP_URL_HOST );
+		self::save(
+			'trial-' . substr( md5( $host ), 0, 8 ),
+			'active',
+			'trial',
+			'trial',
+			time() + 14 * DAY_IN_SECONDS,
+			'',
+			$host
+		);
+		update_option( 'imp_trial_used', time(), false );
+
+		if ( class_exists( 'IMP_Hardening' ) ) {
+			IMP_Hardening::log_event( 'trial-started', __( '14-day PRO trial started.', 'infinity-migratex-pro' ) );
+		}
+
+		return array(
+			'ok'      => true,
+			'message' => __( '14-day PRO trial started — every Pro feature is unlocked right now. Enjoy!', 'infinity-migratex-pro' ),
 		);
 	}
 }

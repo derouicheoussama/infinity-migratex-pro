@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.4.0
+Stable tag: 3.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,13 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.5.0 =
+
+* New (Pro): safety backup before every WordPress update — when a plugin, theme or core update is installed (manual or automatic), a database snapshot is taken first so you can always roll back. Toggle in Settings → Backup; one trigger per hour; safety backups are excluded from retention.
+* New: 14-day free PRO trial — start it from the purchase wizard, one trial per site, every Pro feature unlocked instantly with a live days-left counter (sidebar + dashboard).
+* Performance: the license state is now memoized per request (it was read dozens of times per admin page).
+* Fixed: safety backups are correctly excluded from retention (the origin flag now reaches the engine).
 
 = 3.4.0 =
 

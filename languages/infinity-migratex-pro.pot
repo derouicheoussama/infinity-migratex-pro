@@ -18,7 +18,7 @@ msgstr ""
 msgid "— Choose a stored package —"
 msgstr ""
 
-#: admin/class-settings.php:361
+#: admin/class-settings.php:369
 msgid "— None —"
 msgstr ""
 
@@ -70,11 +70,11 @@ msgstr ""
 msgid "%1$s — %2$s files in %3$s"
 msgstr ""
 
-#: admin/class-dashboard.php:314
+#: admin/class-dashboard.php:323
 msgid "%1$s ago · %2$s"
 msgstr ""
 
-#: admin/class-dashboard.php:169
+#: admin/class-dashboard.php:178
 msgid "%1$s backups · %2$s restores"
 msgstr ""
 
@@ -94,7 +94,7 @@ msgstr ""
 msgid "%1$s tables — %2$s"
 msgstr ""
 
-#: admin/class-dashboard.php:159
+#: admin/class-dashboard.php:168
 msgid "%1$s tables · %2$s rows"
 msgstr ""
 
@@ -146,7 +146,7 @@ msgstr ""
 msgid "%s customers"
 msgstr ""
 
-#: admin/class-dashboard.php:154
+#: admin/class-dashboard.php:163
 msgid "%s file"
 msgid_plural "%s files"
 msgstr[0] ""
@@ -156,7 +156,7 @@ msgstr[1] ""
 msgid "%s orders (%s)"
 msgstr ""
 
-#: admin/class-dashboard.php:164 admin/class-packages.php:75
+#: admin/class-dashboard.php:173 admin/class-packages.php:75
 msgid "%s package"
 msgid_plural "%s packages"
 msgstr[0] ""
@@ -202,6 +202,14 @@ msgstr ""
 msgid "128M or more recommended for large sites. The plugin works by small chunks to stay within limits."
 msgstr ""
 
+#: includes/license.php:387
+msgid "14-day PRO trial started — every Pro feature is unlocked right now. Enjoy!"
+msgstr ""
+
+#: includes/license.php:382
+msgid "14-day PRO trial started."
+msgstr ""
+
 #: admin/class-about.php:223
 msgid "2 · Migrate"
 msgstr ""
@@ -238,7 +246,7 @@ msgstr ""
 msgid "A .infinitymigrate archive will be built (files + database + manifest with checksums). Import it on the destination from Packages → Import."
 msgstr ""
 
-#: core/class-job.php:1412
+#: core/class-job.php:1414
 msgid "A folder may have unreadable permissions. The operation skips it and continues — retry if files are missing."
 msgstr ""
 
@@ -246,7 +254,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: admin/class-settings.php:410
+#: admin/class-settings.php:418
 msgid "Access token"
 msgstr ""
 
@@ -258,23 +266,23 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: admin/class-about.php:91 admin/class-checkout.php:139 admin/class-settings.php:596
+#: admin/class-about.php:91 admin/class-checkout.php:139 admin/class-settings.php:604
 msgid "Activate"
 msgstr ""
 
-#: admin/class-checkout.php:256
+#: admin/class-checkout.php:261
 msgid "Activate Pro"
 msgstr ""
 
-#: core/class-job.php:1536
+#: core/class-job.php:1538
 msgid "Activate your Pro license in Settings → Advanced to unlock Google Drive, Dropbox and FTP backups."
 msgstr ""
 
-#: admin/class-checkout.php:259
+#: admin/class-checkout.php:264
 msgid "Activation is verified and rate-limited. Your key is bound to this site."
 msgstr ""
 
-#: admin/class-dashboard.php:229
+#: admin/class-dashboard.php:238
 msgid "active"
 msgstr ""
 
@@ -290,15 +298,15 @@ msgstr ""
 msgid "Activity logs"
 msgstr ""
 
-#: admin/class-settings.php:513
+#: admin/class-settings.php:521
 msgid "Adapts the database batch size to the available memory."
 msgstr ""
 
-#: admin/class-settings.php:548
+#: admin/class-settings.php:556
 msgid "Adds technical detail to error messages (for diagnosis only)."
 msgstr ""
 
-#: admin/class-settings.php:489
+#: admin/class-settings.php:497
 msgid "Admin notifications"
 msgstr ""
 
@@ -306,7 +314,7 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
-#: includes/license.php:171
+#: includes/license.php:180
 msgid "Advanced migration profiles"
 msgstr ""
 
@@ -318,7 +326,7 @@ msgstr ""
 msgid "AES-256 archive encryption"
 msgstr ""
 
-#: admin/class-checkout.php:191
+#: admin/class-checkout.php:196
 msgid "AES-256 backup encryption"
 msgstr ""
 
@@ -334,11 +342,11 @@ msgstr ""
 msgid "After a migration or restore, regenerate the CSS once: Elementor rebuilds its styles for the new URLs automatically."
 msgstr ""
 
-#: admin/class-checkout.php:239
+#: admin/class-checkout.php:244
 msgid "After payment, come back here and activate the license key you received by e-mail."
 msgstr ""
 
-#: admin/class-settings.php:511
+#: admin/class-settings.php:519
 msgid "Aggressive (large batches, dedicated servers)"
 msgstr ""
 
@@ -378,15 +386,15 @@ msgstr ""
 msgid "Also handle JSON values (decode → replace → re-encode)"
 msgstr ""
 
-#: includes/license.php:170
+#: includes/license.php:179
 msgid "Amazon S3 & OneDrive destinations"
 msgstr ""
 
-#: admin/class-settings.php:366
+#: admin/class-settings.php:374
 msgid "Amazon S3 and OneDrive are on the roadmap."
 msgstr ""
 
-#: core/class-job.php:1580
+#: core/class-job.php:1582
 msgid "An encrypted backup requires a password of at least 6 characters — an archive locked with an empty key would give false security. Enter a password or uncheck encryption."
 msgstr ""
 
@@ -394,7 +402,7 @@ msgstr ""
 msgid "an error occurred during activation (the plugin is active, but some features may need attention):"
 msgstr ""
 
-#: admin/class-dashboard.php:176
+#: admin/class-dashboard.php:185
 msgid "An operation is in progress."
 msgstr ""
 
@@ -402,7 +410,7 @@ msgstr ""
 msgid "An unexpected server error interrupted the operation. You can resume it from where it stopped."
 msgstr ""
 
-#: core/class-job.php:1503
+#: core/class-job.php:1505
 msgid "Another operation is already running."
 msgstr ""
 
@@ -410,7 +418,7 @@ msgstr ""
 msgid "Another operation is in progress on this site."
 msgstr ""
 
-#: core/class-job.php:1568
+#: core/class-job.php:1570
 msgid "Anti brute-force protection. Wait a minute and retry."
 msgstr ""
 
@@ -418,7 +426,7 @@ msgstr ""
 msgid "Any FTP or FTPS (explicit TLS) server: your hosting FTP account, a NAS or a backup box. The remote folders are created automatically."
 msgstr ""
 
-#: admin/class-settings.php:412
+#: admin/class-settings.php:420
 msgid "App Console → generate token with files.content.write scope. Stored encrypted."
 msgstr ""
 
@@ -434,7 +442,7 @@ msgstr ""
 msgid "Apply the search & replace to the database now?"
 msgstr ""
 
-#: core/class-job.php:1455
+#: core/class-job.php:1457
 msgid "Archive unreadable or corrupted."
 msgstr ""
 
@@ -442,11 +450,11 @@ msgstr ""
 msgid "Ask for confirmation before restore, import, replace and delete operations."
 msgstr ""
 
-#: core/class-job.php:1556
+#: core/class-job.php:1558
 msgid "Ask your host to enable the “ftp” PHP extension, or pick Google Drive / Dropbox instead."
 msgstr ""
 
-#: core/class-job.php:1424
+#: core/class-job.php:1426
 msgid "Ask your host to enable the “zip” PHP extension — it is required for archives."
 msgstr ""
 
@@ -486,7 +494,7 @@ msgstr ""
 msgid "Automatic URL rewriting on import"
 msgstr ""
 
-#: admin/class-settings.php:354
+#: admin/class-settings.php:362
 msgid "Automatically upload each new backup (manual and scheduled) to the destination below."
 msgstr ""
 
@@ -494,7 +502,7 @@ msgstr ""
 msgid "Available"
 msgstr ""
 
-#: admin/class-checkout.php:272
+#: admin/class-checkout.php:277
 msgid "Back"
 msgstr ""
 
@@ -530,11 +538,11 @@ msgstr ""
 msgid "Backup complete: %1$s files, %2$s."
 msgstr ""
 
-#: core/class-job.php:1479
+#: core/class-job.php:1481
 msgid "Backup directory could not be created."
 msgstr ""
 
-#: core/class-job.php:1572
+#: core/class-job.php:1574
 msgid "Backup encryption needs OpenSSL — ask your host to enable it, or restore this backup with the original password on a server that has it."
 msgstr ""
 
@@ -546,7 +554,7 @@ msgstr ""
 msgid "Backup location (absolute path, empty = default)"
 msgstr ""
 
-#: core/class-backup-engine.php:767 core/class-job.php:1447
+#: core/class-backup-engine.php:767 core/class-job.php:1449
 msgid "Backup manifest missing or unreadable."
 msgstr ""
 
@@ -554,7 +562,7 @@ msgstr ""
 msgid "Backup name"
 msgstr ""
 
-#: admin/class-admin.php:930 core/class-backup-engine.php:267 core/class-remote.php:811
+#: admin/class-admin.php:937 core/class-backup-engine.php:267 core/class-remote.php:811
 msgid "Backup not found."
 msgstr ""
 
@@ -562,7 +570,7 @@ msgstr ""
 msgid "Backup older than"
 msgstr ""
 
-#: core/class-job.php:1475
+#: core/class-job.php:1477
 msgid "Backup or package not found."
 msgstr ""
 
@@ -574,7 +582,7 @@ msgstr ""
 msgid "Backup storage writable"
 msgstr ""
 
-#: admin/class-admin.php:32 admin/class-dashboard.php:162
+#: admin/class-admin.php:32 admin/class-dashboard.php:171
 msgid "Backups"
 msgstr ""
 
@@ -586,7 +594,7 @@ msgstr ""
 msgid "Backups and packages can be written here."
 msgstr ""
 
-#: admin/class-settings.php:621
+#: admin/class-settings.php:629
 msgid "Backups are NEVER deleted on uninstall, even with this option on."
 msgstr ""
 
@@ -594,7 +602,7 @@ msgstr ""
 msgid "Backups that actually finish"
 msgstr ""
 
-#: admin/class-about.php:478
+#: admin/class-about.php:482
 msgid "Backups with manifest, SHA-256 checksums, scheduled backups and retention."
 msgstr ""
 
@@ -602,7 +610,7 @@ msgstr ""
 msgid "Backups, packages and temporary files live outside the media library, blocked by .htaccess / web.config."
 msgstr ""
 
-#: admin/class-checkout.php:188
+#: admin/class-checkout.php:193
 msgid "Backups, restore, migration (unlimited size)"
 msgstr ""
 
@@ -610,7 +618,7 @@ msgstr ""
 msgid "Balanced"
 msgstr ""
 
-#: admin/class-migration.php:168 admin/class-settings.php:510
+#: admin/class-migration.php:168 admin/class-settings.php:518
 msgid "Balanced (default)"
 msgstr ""
 
@@ -626,6 +634,10 @@ msgstr ""
 msgid "Before migration"
 msgstr ""
 
+#: admin/class-settings.php:282
+msgid "Before WordPress installs an update (plugin, theme or core — manual or automatic), a database safety snapshot is taken automatically so you can always roll back."
+msgstr ""
+
 #: admin/class-database.php:131
 msgid "Belongs to"
 msgstr ""
@@ -638,7 +650,7 @@ msgstr ""
 msgid "Best value"
 msgstr ""
 
-#: admin/class-checkout.php:229
+#: admin/class-checkout.php:234
 msgid "Billing"
 msgstr ""
 
@@ -650,7 +662,7 @@ msgstr ""
 msgid "Blocked AJAX call (nonce/capability failed)."
 msgstr ""
 
-#: admin/class-admin.php:873
+#: admin/class-admin.php:880
 msgid "Blocked download attempt (nonce/capability failed)."
 msgstr ""
 
@@ -678,11 +690,11 @@ msgstr ""
 msgid "Buy Personal — pay here"
 msgstr ""
 
-#: admin/class-admin.php:601
+#: admin/class-admin.php:607
 msgid "by Derouiche Oussama"
 msgstr ""
 
-#: admin/class-admin.php:667 admin/class-plugins-page.php:321
+#: admin/class-admin.php:673 admin/class-plugins-page.php:321
 msgid "by Derouiche Oussama · Infinity Coder"
 msgstr ""
 
@@ -698,11 +710,11 @@ msgstr ""
 msgid "Caching plugins active"
 msgstr ""
 
-#: admin/class-admin.php:442 admin/class-dashboard.php:182
+#: admin/class-admin.php:442 admin/class-dashboard.php:191
 msgid "Cancel"
 msgstr ""
 
-#: admin/class-dashboard.php:361 admin/class-logs.php:73 admin/class-logs.php:138
+#: admin/class-dashboard.php:370 admin/class-logs.php:73 admin/class-logs.php:138
 msgid "Canceled"
 msgstr ""
 
@@ -750,7 +762,7 @@ msgstr ""
 msgid "Check for updates now"
 msgstr ""
 
-#: core/class-job.php:1440
+#: core/class-job.php:1442
 msgid "Check host, user, password and that the user has CREATE/INSERT privileges."
 msgstr ""
 
@@ -758,15 +770,15 @@ msgstr ""
 msgid "Check permissions"
 msgstr ""
 
-#: core/class-job.php:1480
+#: core/class-job.php:1482
 msgid "Check storage permissions (Settings → General → backup location)."
 msgstr ""
 
-#: core/class-job.php:1432
+#: core/class-job.php:1434
 msgid "Check that the file exists in the protected storage and is readable."
 msgstr ""
 
-#: core/class-job.php:1540
+#: core/class-job.php:1542
 msgid "Check the connection details and use the “Test connection” button in Settings → Cloud."
 msgstr ""
 
@@ -774,7 +786,7 @@ msgstr ""
 msgid "Checksums"
 msgstr ""
 
-#: core/class-job.php:1512
+#: core/class-job.php:1514
 msgid "Choose a file and try again."
 msgstr ""
 
@@ -786,7 +798,7 @@ msgstr ""
 msgid "Chunked operations: no PHP timeout, pause / resume / cancel everywhere, real progress."
 msgstr ""
 
-#: admin/class-about.php:477
+#: admin/class-about.php:481
 msgid "Chunked, resumable engine — no PHP timeouts, pause/resume/cancel on every operation."
 msgstr ""
 
@@ -856,11 +868,11 @@ msgstr ""
 msgid "Cloud (Pro)"
 msgstr ""
 
-#: core/class-job.php:1543
+#: core/class-job.php:1545
 msgid "Cloud authentication failed."
 msgstr ""
 
-#: includes/license.php:169
+#: includes/license.php:178
 msgid "Cloud backup destinations (Google Drive, Dropbox, FTP/FTPS)"
 msgstr ""
 
@@ -872,7 +884,7 @@ msgstr ""
 msgid "Cloud backups (Drive, Dropbox, FTP), scheduled backups with e-mail alerts, Turbo speed, cross-site URL rewrite, priority support."
 msgstr ""
 
-#: admin/class-dashboard.php:141
+#: admin/class-dashboard.php:150
 msgid "Cloud backups (Google Drive, Dropbox, FTP) · scheduled backups with e-mail alerts · AES-256 archive encryption · turbo speed · priority support."
 msgstr ""
 
@@ -892,15 +904,15 @@ msgstr ""
 msgid "Cloud credentials expired — send again."
 msgstr ""
 
-#: admin/class-checkout.php:189
+#: admin/class-checkout.php:194
 msgid "Cloud destinations (Drive, Dropbox, FTP)"
 msgstr ""
 
-#: core/class-job.php:1535
+#: core/class-job.php:1537
 msgid "Cloud destinations are a Pro feature."
 msgstr ""
 
-#: core/class-job.php:1551
+#: core/class-job.php:1553
 msgid "Cloud quota exceeded or file refused."
 msgstr ""
 
@@ -928,7 +940,7 @@ msgstr ""
 msgid "Collation"
 msgstr ""
 
-#: includes/license.php:170 includes/license.php:171
+#: includes/license.php:179 includes/license.php:180
 msgid "Coming in a future release."
 msgstr ""
 
@@ -948,7 +960,7 @@ msgstr ""
 msgid "Compatible (7.4 or newer)."
 msgstr ""
 
-#: admin/class-dashboard.php:358 admin/class-logs.php:70 admin/class-logs.php:135
+#: admin/class-dashboard.php:367 admin/class-logs.php:70 admin/class-logs.php:135
 msgid "Completed"
 msgstr ""
 
@@ -956,15 +968,15 @@ msgstr ""
 msgid "Components"
 msgstr ""
 
-#: admin/class-settings.php:316
+#: admin/class-settings.php:324
 msgid "Compression (gzip database dumps)"
 msgstr ""
 
-#: admin/class-settings.php:843
+#: admin/class-settings.php:864
 msgid "Configuration imported — review the highlighted values and save."
 msgstr ""
 
-#: admin/class-settings.php:573
+#: admin/class-settings.php:581
 msgid "Configuration tools"
 msgstr ""
 
@@ -1012,11 +1024,11 @@ msgstr ""
 msgid "Connection to the target database failed — check host, user, password and that the user has CREATE privileges."
 msgstr ""
 
-#: core/class-job.php:1439
+#: core/class-job.php:1441
 msgid "Connection to the target database failed."
 msgstr ""
 
-#: admin/class-settings.php:509
+#: admin/class-settings.php:517
 msgid "Conservative (small batches)"
 msgstr ""
 
@@ -1024,15 +1036,15 @@ msgstr ""
 msgid "Consider enabling maintenance mode or clearing caches before and after the migration."
 msgstr ""
 
-#: admin/class-backup.php:43 admin/class-backup.php:124 admin/class-backup.php:153 admin/class-packages.php:87 admin/class-settings.php:299
+#: admin/class-backup.php:43 admin/class-backup.php:124 admin/class-backup.php:153 admin/class-packages.php:87 admin/class-settings.php:307
 msgid "Contents"
 msgstr ""
 
-#: admin/class-checkout.php:274
+#: admin/class-checkout.php:279
 msgid "Continue →"
 msgstr ""
 
-#: admin/class-checkout.php:245
+#: admin/class-checkout.php:250
 msgid "Copy order details"
 msgstr ""
 
@@ -1052,7 +1064,7 @@ msgstr ""
 msgid "Core checksums against WordPress.org, detection of PHP files in uploads, suspicious-code patterns, protected storage, Zip-Slip-proof package imports — and zero telemetry."
 msgstr ""
 
-#: admin/class-dashboard.php:209
+#: admin/class-dashboard.php:218
 msgid "Core checksums and file analysis"
 msgstr ""
 
@@ -1060,7 +1072,7 @@ msgstr ""
 msgid "Could not create the remote folder — check permissions."
 msgstr ""
 
-#: core/class-job.php:1539
+#: core/class-job.php:1541
 msgid "Could not reach the cloud destination."
 msgstr ""
 
@@ -1088,7 +1100,7 @@ msgstr ""
 msgid "Create backup"
 msgstr ""
 
-#: admin/class-backup.php:97 admin/class-dashboard.php:198
+#: admin/class-backup.php:97 admin/class-dashboard.php:207
 msgid "Create Backup"
 msgstr ""
 
@@ -1100,7 +1112,7 @@ msgstr ""
 msgid "Credentials are encrypted (AES-256-GCM when available) for the duration of the migration and destroyed at the end. They never appear in logs or packages."
 msgstr ""
 
-#: core/class-job.php:1436
+#: core/class-job.php:1438
 msgid "Credentials are encrypted and time-limited. Restart the migration wizard."
 msgstr ""
 
@@ -1144,7 +1156,7 @@ msgstr ""
 msgid "Customers and addresses"
 msgstr ""
 
-#: admin/class-settings.php:281
+#: admin/class-settings.php:289
 msgid "Daily"
 msgstr ""
 
@@ -1160,7 +1172,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: admin/class-admin.php:37 admin/class-backup.php:191 admin/class-dashboard.php:157 admin/class-import.php:85 admin/class-logs.php:65 admin/class-migration.php:59 admin/class-restore.php:98 admin/class-tools.php:93
+#: admin/class-admin.php:37 admin/class-backup.php:191 admin/class-dashboard.php:166 admin/class-import.php:85 admin/class-logs.php:65 admin/class-migration.php:59 admin/class-restore.php:98 admin/class-tools.php:93
 msgid "Database"
 msgstr ""
 
@@ -1176,7 +1188,7 @@ msgstr ""
 msgid "Database export"
 msgstr ""
 
-#: includes/license.php:163
+#: includes/license.php:172
 msgid "Database export / import"
 msgstr ""
 
@@ -1188,19 +1200,23 @@ msgstr ""
 msgid "Database manager"
 msgstr ""
 
-#: admin/class-backup.php:47 admin/class-settings.php:303
+#: admin/class-backup.php:47 admin/class-settings.php:311
 msgid "Database only"
 msgstr ""
 
-#: admin/class-settings.php:517
+#: admin/class-settings.php:525
 msgid "Database rows per batch"
 msgstr ""
 
-#: admin/class-dashboard.php:224
+#: includes/class-upgrade-guard.php:91
+msgid "Database safety backup started before a WordPress update."
+msgstr ""
+
+#: admin/class-dashboard.php:233
 msgid "Database server"
 msgstr ""
 
-#: admin/class-dashboard.php:228
+#: admin/class-dashboard.php:237
 msgid "Database size"
 msgstr ""
 
@@ -1212,7 +1228,7 @@ msgstr ""
 msgid "Database: %1$d rows — table %2$s"
 msgstr ""
 
-#: admin/class-backup.php:152 admin/class-dashboard.php:347 admin/class-logs.php:109
+#: admin/class-backup.php:152 admin/class-dashboard.php:356 admin/class-logs.php:109
 msgid "Date"
 msgstr ""
 
@@ -1228,7 +1244,7 @@ msgstr ""
 msgid "DB rows"
 msgstr ""
 
-#: admin/class-settings.php:545
+#: admin/class-settings.php:553
 msgid "Debug mode"
 msgstr ""
 
@@ -1256,7 +1272,7 @@ msgstr ""
 msgid "Default exclusions"
 msgstr ""
 
-#: admin/class-settings.php:859
+#: admin/class-settings.php:880
 msgid "Default settings restored — reloading…"
 msgstr ""
 
@@ -1268,7 +1284,7 @@ msgstr ""
 msgid "Delete failed — check directory permissions."
 msgstr ""
 
-#: admin/class-settings.php:618
+#: admin/class-settings.php:626
 msgid "Delete plugin data on uninstall"
 msgstr ""
 
@@ -1296,7 +1312,7 @@ msgstr ""
 msgid "Deletes expired/weekly cached calculations (_transient_wc_*)."
 msgstr ""
 
-#: admin/class-migration.php:42 admin/class-settings.php:358
+#: admin/class-migration.php:42 admin/class-settings.php:366
 msgid "Destination"
 msgstr ""
 
@@ -1320,7 +1336,7 @@ msgstr ""
 msgid "Detail"
 msgstr ""
 
-#: includes/license.php:167
+#: includes/license.php:176
 msgid "Detailed activity logs"
 msgstr ""
 
@@ -1340,7 +1356,7 @@ msgstr ""
 msgid "Details & version history"
 msgstr ""
 
-#: core/class-job.php:1207
+#: core/class-job.php:1209
 msgid "Details and logs: Infinity MigrateX Pro → Logs."
 msgstr ""
 
@@ -1380,7 +1396,7 @@ msgstr ""
 msgid "Domain migration complete: %1$d URL values updated — site now at %2$s."
 msgstr ""
 
-#: admin/class-dashboard.php:194
+#: admin/class-dashboard.php:203
 msgid "Domain, folder, export package"
 msgstr ""
 
@@ -1388,7 +1404,7 @@ msgstr ""
 msgid "Downgrade detected"
 msgstr ""
 
-#: admin/class-backup.php:201 admin/class-dashboard.php:321 admin/class-packages.php:129
+#: admin/class-backup.php:201 admin/class-dashboard.php:330 admin/class-packages.php:129
 msgid "Download"
 msgstr ""
 
@@ -1440,15 +1456,15 @@ msgstr ""
 msgid "Dry run (preview)"
 msgstr ""
 
-#: core/class-job.php:838
+#: core/class-job.php:840
 msgid "Dry run complete: %1$d values would change in %2$d rows. Nothing was written."
 msgstr ""
 
-#: admin/class-dashboard.php:346 admin/class-logs.php:113
+#: admin/class-dashboard.php:355 admin/class-logs.php:113
 msgid "Duration"
 msgstr ""
 
-#: admin/class-checkout.php:208 admin/class-checkout.php:232
+#: admin/class-checkout.php:213 admin/class-checkout.php:237
 msgid "E-mail"
 msgstr ""
 
@@ -1492,7 +1508,7 @@ msgstr ""
 msgid "Elementor pages and their serialized data"
 msgstr ""
 
-#: core/class-job.php:1467
+#: core/class-job.php:1469
 msgid "Empty package: no files and no database."
 msgstr ""
 
@@ -1508,7 +1524,7 @@ msgstr ""
 msgid "Encryption failed for %s — the backup was not validated."
 msgstr ""
 
-#: core/class-job.php:1575
+#: core/class-job.php:1577
 msgid "Encryption failed."
 msgstr ""
 
@@ -1516,7 +1532,7 @@ msgstr ""
 msgid "Encryption password (required)"
 msgstr ""
 
-#: core/class-job.php:1579
+#: core/class-job.php:1581
 msgid "Encryption password missing."
 msgstr ""
 
@@ -1524,7 +1540,7 @@ msgstr ""
 msgid "Engine"
 msgstr ""
 
-#: admin/class-settings.php:742
+#: admin/class-settings.php:750
 msgid "Enter a license key."
 msgstr ""
 
@@ -1532,7 +1548,7 @@ msgstr ""
 msgid "Enter a valid absolute URL, e.g. https://newsite.com — different from the current one."
 msgstr ""
 
-#: includes/license.php:198
+#: includes/license.php:207
 msgid "Enter a valid license key (at least 8 characters)."
 msgstr ""
 
@@ -1540,7 +1556,7 @@ msgstr ""
 msgid "Enter an absolute path on this server, different from the current site."
 msgstr ""
 
-#: core/class-job.php:1584
+#: core/class-job.php:1586
 msgid "Enter the exact password used when the backup was created. Nothing was restored."
 msgstr ""
 
@@ -1560,7 +1576,7 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: admin/class-dashboard.php:264
+#: admin/class-dashboard.php:273
 msgid "ERROR"
 msgstr ""
 
@@ -1600,7 +1616,7 @@ msgstr ""
 msgid "Everything in Personal, for 5 sites — the best value for freelancers and agencies managing several WordPress installs."
 msgstr ""
 
-#: admin/class-dashboard.php:288
+#: admin/class-dashboard.php:297
 msgid "Everything is covered."
 msgstr ""
 
@@ -1640,7 +1656,7 @@ msgstr ""
 msgid "Export a migration package"
 msgstr ""
 
-#: admin/class-settings.php:575
+#: admin/class-settings.php:583
 msgid "Export configuration (JSON)"
 msgstr ""
 
@@ -1672,11 +1688,11 @@ msgstr ""
 msgid "Export JSON"
 msgstr ""
 
-#: admin/class-settings.php:552
+#: admin/class-settings.php:560
 msgid "Export logs"
 msgstr ""
 
-#: admin/class-settings.php:580
+#: admin/class-settings.php:588
 msgid "Export/import replicates your setup on another site in seconds. Secrets (cloud tokens, passwords) are never exported — re-enter them on the target site. Restore defaults keeps your license and all backups."
 msgstr ""
 
@@ -1688,11 +1704,11 @@ msgstr ""
 msgid "Exporting database: %1$d rows — %2$s"
 msgstr ""
 
-#: admin/class-dashboard.php:359 admin/class-logs.php:71 admin/class-logs.php:136
+#: admin/class-dashboard.php:368 admin/class-logs.php:71 admin/class-logs.php:136
 msgid "Failed"
 msgstr ""
 
-#: admin/class-about.php:334 admin/class-checkout.php:186
+#: admin/class-about.php:334 admin/class-checkout.php:191
 msgid "Feature"
 msgstr ""
 
@@ -1704,19 +1720,19 @@ msgstr ""
 msgid "File indexing"
 msgstr ""
 
-#: admin/class-admin.php:891
+#: admin/class-admin.php:898
 msgid "File not found."
 msgstr ""
 
-#: admin/class-admin.php:903
+#: admin/class-admin.php:910
 msgid "File not readable."
 msgstr ""
 
-#: core/class-job.php:1519
+#: core/class-job.php:1521
 msgid "File too large."
 msgstr ""
 
-#: core/class-job.php:1515
+#: core/class-job.php:1517
 msgid "File type not allowed."
 msgstr ""
 
@@ -1724,7 +1740,7 @@ msgstr ""
 msgid "File: %s — then click “Check for updates now”. The official WordPress.org edition never uses this channel (its updates come from WordPress.org)."
 msgstr ""
 
-#: admin/class-dashboard.php:227 admin/class-tools.php:98
+#: admin/class-dashboard.php:236 admin/class-tools.php:98
 msgid "files"
 msgstr ""
 
@@ -1752,7 +1768,7 @@ msgstr ""
 msgid "Files archive"
 msgstr ""
 
-#: admin/class-backup.php:46 admin/class-settings.php:304
+#: admin/class-backup.php:46 admin/class-settings.php:312
 msgid "Files only"
 msgstr ""
 
@@ -1784,31 +1800,31 @@ msgstr ""
 msgid "Finalization"
 msgstr ""
 
-#: core/class-job.php:1508
+#: core/class-job.php:1510
 msgid "Fix the reported problems (destination path, database connection…) and run the preflight again."
 msgstr ""
 
-#: admin/class-about.php:471
+#: admin/class-about.php:475
 msgid "Fixed a fatal error at installation on PHP 7.4/8.0 (octal literal)."
 msgstr ""
 
-#: admin/class-about.php:415
+#: admin/class-about.php:419
 msgid "Fixed: no more \"unexpected output\" at activation; admin menu icon and sidebar logo sized correctly on every admin theme."
 msgstr ""
 
-#: admin/class-about.php:424
+#: admin/class-about.php:428
 msgid "Fixed: no more false \"SECURITY ALERT\" after a legitimate update — the source seal rebuilds itself automatically when the sealed version differs from the installed one."
 msgstr ""
 
-#: admin/class-about.php:381
+#: admin/class-about.php:385
 msgid "Fixed: stale backup name after rename; encrypted-backup-without-password is now refused server-side (IMP-258)."
 msgstr ""
 
-#: admin/class-about.php:410
+#: admin/class-about.php:414
 msgid "Fixed: the Database \"Repair\" action ran \"Optimize\" (operator precedence) — Repair repairs again."
 msgstr ""
 
-#: admin/class-about.php:363
+#: admin/class-about.php:367
 msgid "Fixed: updates now detected automatically — the GitHub channel is active by default on this edition and both channels are checked passively every day."
 msgstr ""
 
@@ -1824,19 +1840,19 @@ msgstr ""
 msgid "Flush WordPress Rewrite Rules"
 msgstr ""
 
-#: admin/class-settings.php:400
+#: admin/class-settings.php:408
 msgid "Folder ID (optional)"
 msgstr ""
 
-#: admin/class-checkout.php:186
+#: admin/class-checkout.php:191
 msgid "Free"
 msgstr ""
 
-#: admin/class-dashboard.php:231 core/class-migrator.php:43 includes/compatibility.php:244
+#: admin/class-dashboard.php:240 core/class-migrator.php:43 includes/compatibility.php:244
 msgid "Free disk space"
 msgstr ""
 
-#: admin/class-settings.php:591
+#: admin/class-settings.php:599
 msgid "Free edition"
 msgstr ""
 
@@ -1844,19 +1860,19 @@ msgstr ""
 msgid "FREE EDITION"
 msgstr ""
 
-#: core/class-job.php:1488
+#: core/class-job.php:1490
 msgid "Free some space before restoring."
 msgstr ""
 
-#: core/class-job.php:1552
+#: core/class-job.php:1554
 msgid "Free some space on the destination or raise its upload limits, then resume."
 msgstr ""
 
-#: admin/class-dashboard.php:145
+#: admin/class-dashboard.php:154
 msgid "from 39€/year — 14-day money-back"
 msgstr ""
 
-#: admin/class-settings.php:364 admin/class-settings.php:418
+#: admin/class-settings.php:372 admin/class-settings.php:426
 msgid "FTP / FTPS"
 msgstr ""
 
@@ -1864,7 +1880,7 @@ msgstr ""
 msgid "FTP login refused — check user and password."
 msgstr ""
 
-#: admin/class-settings.php:442
+#: admin/class-settings.php:450
 msgid "FTPS (explicit TLS)"
 msgstr ""
 
@@ -1876,7 +1892,7 @@ msgstr ""
 msgid "Full / files / database, scheduled daily-weekly-monthly with retention and SHA-256 checksums."
 msgstr ""
 
-#: includes/license.php:160
+#: includes/license.php:169
 msgid "Full / partial site migration"
 msgstr ""
 
@@ -1888,15 +1904,15 @@ msgstr ""
 msgid "Full copy with its own database and fresh wp-config.php."
 msgstr ""
 
-#: admin/class-checkout.php:204
+#: admin/class-checkout.php:209
 msgid "Full name"
 msgstr ""
 
-#: admin/class-backup.php:124 admin/class-settings.php:302
+#: admin/class-backup.php:124 admin/class-settings.php:310
 msgid "Full site"
 msgstr ""
 
-#: admin/class-dashboard.php:199
+#: admin/class-dashboard.php:208
 msgid "Full site, files or database"
 msgstr ""
 
@@ -1908,7 +1924,7 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: admin/class-settings.php:397
+#: admin/class-settings.php:405
 msgid "Generate with the drive.file scope."
 msgstr ""
 
@@ -1928,7 +1944,7 @@ msgstr ""
 msgid "Global settings (Kit)"
 msgstr ""
 
-#: admin/class-admin.php:628 admin/class-backup.php:93 admin/class-import.php:102 admin/class-import.php:109 admin/class-import.php:116 admin/class-plugins-page.php:133 admin/class-settings.php:266 admin/class-settings.php:345
+#: admin/class-admin.php:634 admin/class-backup.php:93 admin/class-import.php:102 admin/class-import.php:109 admin/class-import.php:116 admin/class-plugins-page.php:133 admin/class-settings.php:266 admin/class-settings.php:353
 msgid "Go Pro"
 msgstr ""
 
@@ -1960,15 +1976,15 @@ msgstr ""
 msgid "GPL v2 or later — 100% of the features listed below work in this version. Updates are delivered automatically from official GitHub releases."
 msgstr ""
 
-#: includes/license.php:162
+#: includes/license.php:171
 msgid "Guided restore"
 msgstr ""
 
-#: admin/class-dashboard.php:204
+#: admin/class-dashboard.php:213
 msgid "Guided restore from a backup"
 msgstr ""
 
-#: admin/class-about.php:479
+#: admin/class-about.php:483
 msgid "Guided restore with pre-restore integrity verification."
 msgstr ""
 
@@ -1984,11 +2000,11 @@ msgstr ""
 msgid "Hardening module disabled (safe mode)."
 msgstr ""
 
-#: admin/class-settings.php:421
+#: admin/class-settings.php:429
 msgid "Host"
 msgstr ""
 
-#: admin/class-settings.php:288
+#: admin/class-settings.php:296
 msgid "Hour of the day"
 msgstr ""
 
@@ -2044,11 +2060,11 @@ msgstr ""
 msgid "Import a SQL file (.sql / .sql.gz)"
 msgstr ""
 
-#: core/class-job.php:1076
+#: core/class-job.php:1078
 msgid "Import complete: %1$d statements executed, %2$d tables created."
 msgstr ""
 
-#: admin/class-settings.php:577
+#: admin/class-settings.php:585
 msgid "Import configuration"
 msgstr ""
 
@@ -2088,7 +2104,7 @@ msgstr ""
 msgid "Importing this package will OVERWRITE existing files and database tables. Continue?"
 msgstr ""
 
-#: core/class-job.php:1052
+#: core/class-job.php:1054
 msgid "Importing: %1$d statements — %2$s"
 msgstr ""
 
@@ -2096,11 +2112,11 @@ msgstr ""
 msgid "Imports run in the resumable engine — no timeout, pause / resume at any step."
 msgstr ""
 
-#: admin/class-about.php:430
+#: admin/class-about.php:434
 msgid "Improved: every Go Pro button opens the same unified wizard — About, Import, Plugins page and Turbo upsells."
 msgstr ""
 
-#: admin/class-about.php:385
+#: admin/class-about.php:389
 msgid "Improved: the inactive GitHub channel now shows a full activation guide with a Copy button; channel errors display the repo and expected asset."
 msgstr ""
 
@@ -2132,7 +2148,7 @@ msgstr ""
 msgid "Informational"
 msgstr ""
 
-#: admin/class-about.php:476
+#: admin/class-about.php:480
 msgid "Initial release: full & partial migration assistant (domain, folder clone, package export)."
 msgstr ""
 
@@ -2168,7 +2184,7 @@ msgstr ""
 msgid "Integrity check failed: checksums do not match — this backup is corrupted or altered. Restore refused."
 msgstr ""
 
-#: core/class-job.php:1471
+#: core/class-job.php:1473
 msgid "Integrity check failed: checksums do not match."
 msgstr ""
 
@@ -2184,7 +2200,7 @@ msgstr ""
 msgid "Integrity verdicts are re-checked daily and after every official update. Any unexpected modification raises a visible alert and a security journal entry."
 msgstr ""
 
-#: core/class-job.php:955
+#: core/class-job.php:957
 msgid "Integrity: %1$d files restored, %2$d SQL statements, %3$d tables online."
 msgstr ""
 
@@ -2196,43 +2212,43 @@ msgstr ""
 msgid "Internal checksums do not match — this package is corrupted or has been altered. Import refused."
 msgstr ""
 
-#: admin/class-admin.php:925 core/class-backup-engine.php:762
+#: admin/class-admin.php:932 core/class-backup-engine.php:762
 msgid "Invalid backup reference."
 msgstr ""
 
-#: core/class-job.php:1495 core/class-migrator.php:352
+#: core/class-job.php:1497 core/class-migrator.php:352
 msgid "Invalid destination path."
 msgstr ""
 
-#: includes/license.php:227
+#: includes/license.php:236
 msgid "Invalid license key for this site."
 msgstr ""
 
-#: core/class-job.php:1451
+#: core/class-job.php:1453
 msgid "Invalid or missing manifest in the package."
 msgstr ""
 
-#: core/class-job.php:1443
+#: core/class-job.php:1445
 msgid "Invalid search/replacement pair."
 msgstr ""
 
-#: admin/class-settings.php:764
+#: admin/class-settings.php:772
 msgid "Invalid settings payload."
 msgstr ""
 
-#: core/class-job.php:1491 core/class-migrator.php:336
+#: core/class-job.php:1493 core/class-migrator.php:336
 msgid "Invalid source or target URL."
 msgstr ""
 
-#: admin/class-dashboard.php:177
+#: admin/class-dashboard.php:186
 msgid "It is paused — click Resume to continue where it stopped."
 msgstr ""
 
-#: core/class-job.php:1476
+#: core/class-job.php:1478
 msgid "It may have been deleted. Refresh the list."
 msgstr ""
 
-#: admin/class-checkout.php:205
+#: admin/class-checkout.php:210
 msgid "John Doe"
 msgstr ""
 
@@ -2240,15 +2256,19 @@ msgstr ""
 msgid "Keep last %s backups"
 msgstr ""
 
-#: admin/class-settings.php:370
+#: admin/class-settings.php:378
 msgid "Keep local copy"
 msgstr ""
 
-#: admin/class-settings.php:312
+#: admin/class-dashboard.php:134
+msgid "Keep PRO — upgrade now"
+msgstr ""
+
+#: admin/class-settings.php:320
 msgid "Keep the last N backups — older ones are deleted automatically."
 msgstr ""
 
-#: admin/class-settings.php:523
+#: admin/class-settings.php:531
 msgid "Large file threshold (MB, scanner)"
 msgstr ""
 
@@ -2272,7 +2292,7 @@ msgstr ""
 msgid "Last security scan"
 msgstr ""
 
-#: admin/class-dashboard.php:310
+#: admin/class-dashboard.php:319
 msgid "Latest backup: %s"
 msgstr ""
 
@@ -2292,23 +2312,23 @@ msgstr ""
 msgid "Level"
 msgstr ""
 
-#: admin/class-settings.php:585
+#: admin/class-settings.php:593
 msgid "License"
 msgstr ""
 
-#: includes/license.php:202
+#: includes/license.php:211
 msgid "License activated (local development mode — no license server configured)."
 msgstr ""
 
-#: includes/license.php:265
+#: includes/license.php:274
 msgid "License activated. Thank you for supporting Infinity Migrate Pro!"
 msgstr ""
 
-#: includes/license.php:228
+#: includes/license.php:237
 msgid "License activation refused by the license server."
 msgstr ""
 
-#: includes/license.php:137
+#: includes/license.php:146
 msgid "License API configured without shared secret — enable INFINITY_MIGRATEX_PRO_LICENSE_SECRET for domain binding and signed keys."
 msgstr ""
 
@@ -2316,19 +2336,19 @@ msgstr ""
 msgid "License binding & signed updates (Pro anti-piracy)"
 msgstr ""
 
-#: admin/class-settings.php:595
+#: admin/class-settings.php:603
 msgid "License key"
 msgstr ""
 
-#: includes/license.php:250
+#: includes/license.php:259
 msgid "License response signature invalid — activation refused (possible tampering)."
 msgstr ""
 
-#: includes/license.php:247
+#: includes/license.php:256
 msgid "License server response signature mismatch — activation refused."
 msgstr ""
 
-#: includes/license.php:219
+#: includes/license.php:228
 msgid "License server unreachable. Try again later."
 msgstr ""
 
@@ -2340,11 +2360,11 @@ msgstr ""
 msgid "Lifetime"
 msgstr ""
 
-#: admin/class-admin.php:596
+#: admin/class-admin.php:601
 msgid "lifetime license"
 msgstr ""
 
-#: admin/class-dashboard.php:131
+#: admin/class-dashboard.php:139
 msgid "Lifetime license"
 msgstr ""
 
@@ -2368,7 +2388,7 @@ msgstr ""
 msgid "Live verification: signature, manifest, checksums"
 msgstr ""
 
-#: includes/license.php:139
+#: includes/license.php:148
 msgid "Local development mode: any key (8+ chars) activates Pro on this site only. Configure the license API + secret for production."
 msgstr ""
 
@@ -2376,7 +2396,7 @@ msgstr ""
 msgid "Log entry not found in the recent window."
 msgstr ""
 
-#: admin/class-settings.php:539
+#: admin/class-settings.php:547
 msgid "Log retention (days)"
 msgstr ""
 
@@ -2412,7 +2432,7 @@ msgstr ""
 msgid "Maintenance tools"
 msgstr ""
 
-#: admin/class-dashboard.php:133
+#: admin/class-dashboard.php:141
 msgid "Manage license"
 msgstr ""
 
@@ -2424,7 +2444,7 @@ msgstr ""
 msgid "Manifests carry SHA-256 checksums of every archive part; verify before any restore or import."
 msgstr ""
 
-#: includes/license.php:161
+#: includes/license.php:170
 msgid "Manual backups (files, database, full)"
 msgstr ""
 
@@ -2452,7 +2472,7 @@ msgstr ""
 msgid "Memory limit"
 msgstr ""
 
-#: admin/class-settings.php:506
+#: admin/class-settings.php:514
 msgid "Memory strategy"
 msgstr ""
 
@@ -2496,7 +2516,7 @@ msgstr ""
 msgid "Migration package created (%s) — available on the Packages page."
 msgstr ""
 
-#: includes/license.php:165
+#: includes/license.php:174
 msgid "Migration packages (.infinitymigrate)"
 msgstr ""
 
@@ -2508,7 +2528,7 @@ msgstr ""
 msgid "Migration type"
 msgstr ""
 
-#: admin/class-dashboard.php:167
+#: admin/class-dashboard.php:176
 msgid "Migrations"
 msgstr ""
 
@@ -2520,7 +2540,7 @@ msgstr ""
 msgid "Missing: %s — regenerate via WooCommerce → Status → Tools."
 msgstr ""
 
-#: admin/class-settings.php:283
+#: admin/class-settings.php:291
 msgid "Monthly"
 msgstr ""
 
@@ -2536,7 +2556,7 @@ msgstr ""
 msgid "mu-plugins"
 msgstr ""
 
-#: admin/class-backup.php:151 admin/class-checkout.php:231 admin/class-import.php:54 admin/class-packages.php:84
+#: admin/class-backup.php:151 admin/class-checkout.php:236 admin/class-import.php:54 admin/class-packages.php:84
 msgid "Name"
 msgstr ""
 
@@ -2548,27 +2568,31 @@ msgstr ""
 msgid "Never remind"
 msgstr ""
 
-#: admin/class-about.php:406
+#: admin/class-about.php:410
 msgid "New (GitHub): ETag conditional requests, compatibility metadata, icons in the update dialog, structured errors."
 msgstr ""
 
-#: admin/class-about.php:456
+#: admin/class-about.php:460
 msgid "New (Pro): cloud backup destinations — Google Drive, Dropbox, FTP/FTPS, with resumable uploads and connection test."
 msgstr ""
 
-#: admin/class-about.php:452
+#: admin/class-about.php:456
 msgid "New (Pro): HMAC-signed license with domain binding, private GitHub update channel with authenticated proxy."
 msgstr ""
 
-#: admin/class-about.php:472
+#: admin/class-about.php:363
+msgid "New (Pro): safety backup before every WordPress update; new 14-day free PRO trial; license state memoized per request."
+msgstr ""
+
+#: admin/class-about.php:476
 msgid "New clean light dashboard with reinforced contrast."
 msgstr ""
 
-#: admin/class-about.php:434
+#: admin/class-about.php:438
 msgid "New identity: Infinity MigrateX Pro — official neon logo in the plugin and WordPress.org assets generated."
 msgstr ""
 
-#: admin/class-about.php:440
+#: admin/class-about.php:444
 msgid "New pricing panel in About: Personal (1 site) and Business (5 sites) plans."
 msgstr ""
 
@@ -2576,63 +2600,63 @@ msgstr ""
 msgid "New URL"
 msgstr ""
 
-#: admin/class-about.php:465
+#: admin/class-about.php:469
 msgid "New: About page with full product tour and direct download links."
 msgstr ""
 
-#: admin/class-about.php:457
+#: admin/class-about.php:461
 msgid "New: automatic cloud sending after every backup, or one-click per backup."
 msgstr ""
 
-#: admin/class-about.php:371
+#: admin/class-about.php:375
 msgid "New: clear edition identity — golden PRO pill and tags everywhere, dashboard edition banner, persistent upgrade entry points on the Free edition."
 msgstr ""
 
-#: admin/class-about.php:405
+#: admin/class-about.php:409
 msgid "New: dual update system — official WordPress.org channel and direct GitHub Releases channel, with a one-click check on the About page."
 msgstr ""
 
-#: admin/class-about.php:461
+#: admin/class-about.php:465
 msgid "New: enriched Plugins page — version status, full details & history modal, Go Pro banner."
 msgstr ""
 
-#: admin/class-about.php:428
+#: admin/class-about.php:432
 msgid "New: in-plugin purchase wizard — Go Pro in 4 steps (plan, details, payment, activation) without leaving WordPress."
 msgstr ""
 
-#: admin/class-about.php:466
+#: admin/class-about.php:470
 msgid "New: instant navigation — pages are prefetched while you hover the menu."
 msgstr ""
 
-#: admin/class-about.php:451
+#: admin/class-about.php:455
 msgid "New: multi-layer hardening — rate limiting, security journal, source code seal with daily integrity checks."
 msgstr ""
 
-#: admin/class-about.php:429
+#: admin/class-about.php:433
 msgid "New: Personal / Business with yearly & lifetime pricing, order summary and instant license activation."
 msgstr ""
 
-#: admin/class-about.php:438
+#: admin/class-about.php:442
 msgid "New: Safe / Balanced / Turbo speed presets — Turbo (Pro) uses 3× bigger batches for 30-50% faster operations."
 msgstr ""
 
-#: admin/class-about.php:419
+#: admin/class-about.php:423
 msgid "New: Settings in ONE screen — instant tabs, sticky save bar, AJAX saving with unsaved-changes protection."
 msgstr ""
 
-#: admin/class-about.php:389
+#: admin/class-about.php:393
 msgid "New: settings search, JSON export/import of the configuration, default restore, adjustable smart reminders, Ctrl+S to save."
 msgstr ""
 
-#: admin/class-about.php:467
+#: admin/class-about.php:471
 msgid "New: smooth page transitions (respects reduced-motion preferences)."
 msgstr ""
 
-#: admin/class-about.php:397
+#: admin/class-about.php:401
 msgid "New: Update Center — automatic background check, cached statuses on open, and one-click \"Update to X\" without leaving the page."
 msgstr ""
 
-#: admin/class-about.php:376
+#: admin/class-about.php:380
 msgid "New: WooCommerce Import & Export panel — from → to flow with a detailed live inventory."
 msgstr ""
 
@@ -2644,7 +2668,7 @@ msgstr ""
 msgid "Next scheduled run"
 msgstr ""
 
-#: admin/class-checkout.php:220
+#: admin/class-checkout.php:225
 msgid "No account needed — the license is delivered by e-mail right after payment."
 msgstr ""
 
@@ -2696,7 +2720,7 @@ msgstr ""
 msgid "No external cache plugin detected — plugin caches cleared."
 msgstr ""
 
-#: core/class-job.php:1511
+#: core/class-job.php:1513
 msgid "No file was uploaded."
 msgstr ""
 
@@ -2724,7 +2748,7 @@ msgstr ""
 msgid "No old site URL detected in the restored database — nothing to rewrite."
 msgstr ""
 
-#: admin/class-dashboard.php:338
+#: admin/class-dashboard.php:347
 msgid "No operations recorded yet. Your migrations, backups and scans will be listed here."
 msgstr ""
 
@@ -2780,7 +2804,7 @@ msgstr ""
 msgid "not detected on this site. Install and activate WooCommerce, then reload this page: the dedicated tools below unlock automatically."
 msgstr ""
 
-#: core/class-job.php:1487
+#: core/class-job.php:1489
 msgid "Not enough disk space to restore safely."
 msgstr ""
 
@@ -2812,7 +2836,7 @@ msgstr ""
 msgid "Not tested"
 msgstr ""
 
-#: core/class-job.php:1468
+#: core/class-job.php:1470
 msgid "Nothing to import — rebuild the package."
 msgstr ""
 
@@ -2820,11 +2844,11 @@ msgstr ""
 msgid "Notification e-mail (empty = admin e-mail)"
 msgstr ""
 
-#: admin/class-settings.php:386
+#: admin/class-settings.php:394
 msgid "OAuth client ID"
 msgstr ""
 
-#: admin/class-settings.php:390
+#: admin/class-settings.php:398
 msgid "OAuth client secret"
 msgstr ""
 
@@ -2840,7 +2864,7 @@ msgstr ""
 msgid "Old-site URLs detected and rewritten to this address automatically during the import."
 msgstr ""
 
-#: core/class-job.php:1000
+#: core/class-job.php:1002
 msgid "Old-site URLs rewritten: %1$d values now point to %2$s."
 msgstr ""
 
@@ -2852,11 +2876,11 @@ msgstr ""
 msgid "On failure only (recommended)"
 msgstr ""
 
-#: infinity-migratex-pro.php:394
+#: infinity-migratex-pro.php:399
 msgid "Once Monthly (Infinity MigrateX Pro)"
 msgstr ""
 
-#: infinity-migratex-pro.php:388
+#: infinity-migratex-pro.php:393
 msgid "Once Weekly (Infinity MigrateX Pro)"
 msgstr ""
 
@@ -2864,7 +2888,7 @@ msgstr ""
 msgid "One .infinitymigrate file to import on the new host."
 msgstr ""
 
-#: core/class-job.php:1560
+#: core/class-job.php:1562
 msgid "One or more statements could not be executed — the database may be in a mixed state. Restore the safety backup, fix the source dump, then retry."
 msgstr ""
 
@@ -2872,15 +2896,15 @@ msgstr ""
 msgid "One pattern per line. Cache folders, logs and other backup plugins are excluded by default."
 msgstr ""
 
-#: admin/class-checkout.php:241
+#: admin/class-checkout.php:246
 msgid "Online checkout is being set up. Meanwhile: copy your order details below and send them via the author’s website — or continue to activation if you already have a key."
 msgstr ""
 
-#: core/class-job.php:1516
+#: core/class-job.php:1518
 msgid "Only .infinitymigrate, .zip and .sql/.sql.gz files are accepted."
 msgstr ""
 
-#: core/class-job.php:1564
+#: core/class-job.php:1566
 msgid "Only standard dump statements are importable (INSERT, CREATE, UPDATE…). Dangerous constructs like LOAD DATA or INTO OUTFILE are blocked."
 msgstr ""
 
@@ -2892,7 +2916,7 @@ msgstr ""
 msgid "Open the Import page"
 msgstr ""
 
-#: admin/class-checkout.php:246
+#: admin/class-checkout.php:251
 msgid "Open the order page"
 msgstr ""
 
@@ -2900,7 +2924,7 @@ msgstr ""
 msgid "OpenSSL is missing — encryption impossible. Disable backup encryption or enable OpenSSL."
 msgstr ""
 
-#: admin/class-dashboard.php:343 admin/class-logs.php:110
+#: admin/class-dashboard.php:352 admin/class-logs.php:110
 msgid "Operation"
 msgstr ""
 
@@ -2908,15 +2932,15 @@ msgstr ""
 msgid "Operation canceled by the user."
 msgstr ""
 
-#: core/class-job.php:1122
+#: core/class-job.php:1124
 msgid "Operation completed."
 msgstr ""
 
-#: core/class-job.php:1150
+#: core/class-job.php:1152
 msgid "Operation failed."
 msgstr ""
 
-#: admin/class-about.php:447
+#: admin/class-about.php:451
 msgid "Operations keep progressing when the browser tab is closed; scheduled backup e-mail notifications."
 msgstr ""
 
@@ -2928,7 +2952,11 @@ msgstr ""
 msgid "Optional maintenance mode during import"
 msgstr ""
 
-#: admin/class-checkout.php:226
+#: admin/class-checkout.php:186
+msgid "Or start the 14-day free PRO trial"
+msgstr ""
+
+#: admin/class-checkout.php:231
 msgid "Order summary"
 msgstr ""
 
@@ -2976,7 +3004,7 @@ msgstr ""
 msgid "Package download failed."
 msgstr ""
 
-#: core/class-job.php:878
+#: core/class-job.php:880
 msgid "Package file not found."
 msgstr ""
 
@@ -2984,7 +3012,7 @@ msgstr ""
 msgid "Package import"
 msgstr ""
 
-#: core/class-job.php:917
+#: core/class-job.php:919
 msgid "Package manifest missing."
 msgstr ""
 
@@ -3000,7 +3028,7 @@ msgstr ""
 msgid "Package not found or delete failed."
 msgstr ""
 
-#: admin/class-admin.php:953
+#: admin/class-admin.php:960
 msgid "Package not found."
 msgstr ""
 
@@ -3008,11 +3036,11 @@ msgstr ""
 msgid "Package preview"
 msgstr ""
 
-#: core/class-job.php:1459
+#: core/class-job.php:1461
 msgid "Package rejected: unsafe entries (path traversal)."
 msgstr ""
 
-#: core/class-job.php:1463
+#: core/class-job.php:1465
 msgid "Package too large when decompressed."
 msgstr ""
 
@@ -3020,11 +3048,11 @@ msgstr ""
 msgid "Package uploads check extension, size and real zip signature, and land in the protected storage — never in public uploads."
 msgstr ""
 
-#: admin/class-settings.php:473
+#: admin/class-settings.php:481
 msgid "Package validation"
 msgstr ""
 
-#: admin/class-import.php:198 core/class-job.php:884
+#: admin/class-import.php:198 core/class-job.php:886
 msgid "Package verification failed — import refused."
 msgstr ""
 
@@ -3032,7 +3060,7 @@ msgstr ""
 msgid "Package verified"
 msgstr ""
 
-#: core/class-job.php:929
+#: core/class-job.php:931
 msgid "Package verified — checksums valid, extraction begins."
 msgstr ""
 
@@ -3044,15 +3072,15 @@ msgstr ""
 msgid "Packages are verified before anything is written: signature, manifest, checksums and a content scan. Nothing is extracted without your explicit confirmation."
 msgstr ""
 
-#: admin/class-dashboard.php:262 admin/class-woocommerce.php:134
+#: admin/class-dashboard.php:271 admin/class-woocommerce.php:134
 msgid "PASS"
 msgstr ""
 
-#: admin/class-settings.php:446
+#: admin/class-settings.php:454
 msgid "Passive mode"
 msgstr ""
 
-#: admin/class-settings.php:433
+#: admin/class-settings.php:441
 msgid "Password"
 msgstr ""
 
@@ -3060,7 +3088,7 @@ msgstr ""
 msgid "Passwords, keys and tokens are scrubbed before any log entry is written; migration credentials are encrypted, then destroyed."
 msgstr ""
 
-#: admin/class-checkout.php:253
+#: admin/class-checkout.php:258
 msgid "Paste the license key you received after payment."
 msgstr ""
 
@@ -3084,7 +3112,7 @@ msgstr ""
 msgid "Paused"
 msgstr ""
 
-#: admin/class-checkout.php:238
+#: admin/class-checkout.php:243
 msgid "Pay securely online"
 msgstr ""
 
@@ -3104,23 +3132,23 @@ msgstr ""
 msgid "Performance"
 msgstr ""
 
-#: admin/class-about.php:367
+#: admin/class-about.php:371
 msgid "Performance (major): the dashboard never waits on the full-site scan anymore — stale-while-revalidate statistics, cached health checks and cached packages list."
 msgstr ""
 
-#: admin/class-about.php:401
+#: admin/class-about.php:405
 msgid "Performance: instant page-to-page navigation (SPA) — no more full admin reloads; zero plugin code on public pages; backups list cached."
 msgstr ""
 
-#: admin/class-about.php:393
+#: admin/class-about.php:397
 msgid "Performance: minified assets (JS −41%), session pre-warm of Dashboard & Settings, lighter locked Cloud tab."
 msgstr ""
 
-#: admin/class-about.php:375
+#: admin/class-about.php:379
 msgid "Performance: targeted update detection (one API call) + passive daily cron detection with a topbar update badge."
 msgstr ""
 
-#: admin/class-about.php:420
+#: admin/class-about.php:424
 msgid "Performance: ThickBox dropped from plugin pages; lighter admin assets."
 msgstr ""
 
@@ -3140,11 +3168,11 @@ msgstr ""
 msgid "PHP 7.4 or newer is required."
 msgstr ""
 
-#: admin/class-dashboard.php:226 includes/compatibility.php:190
+#: admin/class-dashboard.php:235 includes/compatibility.php:190
 msgid "PHP memory limit"
 msgstr ""
 
-#: admin/class-dashboard.php:223 includes/compatibility.php:168
+#: admin/class-dashboard.php:232 includes/compatibility.php:168
 msgid "PHP version"
 msgstr ""
 
@@ -3152,7 +3180,7 @@ msgstr ""
 msgid "Pick a backup, integrity is verified before anything is written, choose the components, optional maintenance mode and safety backup — then restore with live progress."
 msgstr ""
 
-#: admin/class-settings.php:894
+#: admin/class-settings.php:915
 msgid "Pick a destination first."
 msgstr ""
 
@@ -3160,11 +3188,11 @@ msgstr ""
 msgid "Pick a package straight from your cloud storage — no manual download."
 msgstr ""
 
-#: admin/class-checkout.php:136 admin/class-checkout.php:228
+#: admin/class-checkout.php:136 admin/class-checkout.php:233
 msgid "Plan"
 msgstr ""
 
-#: admin/class-dashboard.php:122
+#: admin/class-dashboard.php:127
 msgid "Plan: %1$s · Cloud destinations, scheduled backups, AES-256 encryption, turbo speed and priority support unlocked."
 msgstr ""
 
@@ -3184,23 +3212,23 @@ msgstr ""
 msgid "Plugin updated successfully."
 msgstr ""
 
-#: admin/class-dashboard.php:229 admin/class-migration.php:157 admin/class-restore.php:93
+#: admin/class-dashboard.php:238 admin/class-migration.php:157 admin/class-restore.php:93
 msgid "Plugins"
 msgstr ""
 
-#: admin/class-settings.php:425
+#: admin/class-settings.php:433
 msgid "Port"
 msgstr ""
 
-#: core/class-job.php:1420
+#: core/class-job.php:1422
 msgid "Possible causes: insufficient permissions, disk space, filesystem restriction. Check the destination and retry."
 msgstr ""
 
-#: core/class-job.php:1428
+#: core/class-job.php:1430
 msgid "Possible causes: storage not writable, disk full, file locks. Retry in a moment."
 msgstr ""
 
-#: core/class-job.php:1408
+#: core/class-job.php:1410
 msgid "Possible causes: storage not writable, disk full. Fix the storage directory permissions in Settings → General."
 msgstr ""
 
@@ -3232,7 +3260,7 @@ msgstr ""
 msgid "Preflight checks"
 msgstr ""
 
-#: core/class-job.php:1507
+#: core/class-job.php:1509
 msgid "Preflight checks report critical issues."
 msgstr ""
 
@@ -3264,7 +3292,7 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
-#: admin/class-checkout.php:193 includes/license.php:172
+#: admin/class-checkout.php:198 includes/license.php:181
 msgid "Priority support"
 msgstr ""
 
@@ -3272,11 +3300,11 @@ msgstr ""
 msgid "Priority support, front of the queue"
 msgstr ""
 
-#: admin/class-admin.php:592
+#: admin/class-admin.php:597
 msgid "PRO — %s"
 msgstr ""
 
-#: admin/class-settings.php:590
+#: admin/class-settings.php:598
 msgid "Pro active — %s"
 msgstr ""
 
@@ -3284,15 +3312,15 @@ msgstr ""
 msgid "PRO EDITION"
 msgstr ""
 
-#: admin/class-dashboard.php:118
+#: admin/class-dashboard.php:122
 msgid "PRO edition active"
 msgstr ""
 
-#: admin/class-admin.php:625
+#: admin/class-admin.php:631
 msgid "PRO edition active on this site"
 msgstr ""
 
-#: admin/class-settings.php:264 admin/class-settings.php:343
+#: admin/class-settings.php:264 admin/class-settings.php:351
 msgid "Pro feature"
 msgstr ""
 
@@ -3300,12 +3328,20 @@ msgstr ""
 msgid "Pro import features"
 msgstr ""
 
-#: admin/class-checkout.php:264
+#: admin/class-checkout.php:269
 msgid "Pro is active on this site"
 msgstr ""
 
-#: admin/class-about.php:439
+#: includes/license.php:359
+msgid "PRO is already active on this site — the trial is not needed."
+msgstr ""
+
+#: admin/class-about.php:443
 msgid "Pro sharpened: scheduled backups, e-mail alerts and cross-site URL rewrite are now Pro features (server-enforced)."
+msgstr ""
+
+#: admin/class-dashboard.php:121
+msgid "PRO trial active — %s days left"
 msgstr ""
 
 #: integrations/class-woocommerce.php:210
@@ -3348,7 +3384,7 @@ msgstr ""
 msgid "Protection"
 msgstr ""
 
-#: core/class-job.php:1444
+#: core/class-job.php:1446
 msgid "Provide a search string (3 characters min) different from the replacement."
 msgstr ""
 
@@ -3360,11 +3396,11 @@ msgstr ""
 msgid "Put the site in maintenance mode during the restore (recommended)"
 msgstr ""
 
-#: admin/class-about.php:411
+#: admin/class-about.php:415
 msgid "Quality: full wp.org-style compliance audit — 0 errors across all PHP files."
 msgstr ""
 
-#: admin/class-dashboard.php:189
+#: admin/class-dashboard.php:198
 msgid "Quick actions"
 msgstr ""
 
@@ -3376,7 +3412,7 @@ msgstr ""
 msgid "Rate limiting (anti brute-force)"
 msgstr ""
 
-#: admin/class-dashboard.php:250
+#: admin/class-dashboard.php:259
 msgid "Re-check now"
 msgstr ""
 
@@ -3400,7 +3436,7 @@ msgstr ""
 msgid "Real checks: WordPress core checksums from the official WordPress.org API, PHP files inside uploads, potentially suspicious code patterns, large files and risky permissions."
 msgstr ""
 
-#: core/class-job.php:1452
+#: core/class-job.php:1454
 msgid "Rebuild the package from its source site."
 msgstr ""
 
@@ -3408,15 +3444,15 @@ msgstr ""
 msgid "Rebuilds wc_product_*_lookup after a migration (prices, stock, attributes)."
 msgstr ""
 
-#: admin/class-dashboard.php:330
+#: admin/class-dashboard.php:339
 msgid "Recent activity"
 msgstr ""
 
-#: admin/class-dashboard.php:289
+#: admin/class-dashboard.php:298
 msgid "Recent scan, backups on file, protection layers active."
 msgstr ""
 
-#: admin/class-settings.php:373
+#: admin/class-settings.php:381
 msgid "Recommended ON. When off, remote parts are deleted from this server after a verified upload (the manifest always stays)."
 msgstr ""
 
@@ -3428,7 +3464,7 @@ msgstr ""
 msgid "Refresh table list"
 msgstr ""
 
-#: admin/class-settings.php:395
+#: admin/class-settings.php:403
 msgid "Refresh token"
 msgstr ""
 
@@ -3448,19 +3484,19 @@ msgstr ""
 msgid "Regeneration could not be scheduled — try WooCommerce → Status → Tools."
 msgstr ""
 
-#: admin/class-about.php:445
+#: admin/class-about.php:449
 msgid "Reliability: comment-aware SQL parsing with strict verb allowlist, disk watchdog, zip self-verification, backup ID collision guard."
 msgstr ""
 
-#: admin/class-about.php:444
+#: admin/class-about.php:448
 msgid "Reliability: SQL import failures are now detected, reported and stop the import to protect data."
 msgstr ""
 
-#: core/class-job.php:1500
+#: core/class-job.php:1502
 msgid "Reload the page — the request was malformed."
 msgstr ""
 
-#: admin/class-settings.php:438
+#: admin/class-settings.php:446
 msgid "Remote path"
 msgstr ""
 
@@ -3496,11 +3532,11 @@ msgstr ""
 msgid "Replacement"
 msgstr ""
 
-#: core/class-job.php:844
+#: core/class-job.php:846
 msgid "Replacement complete: %1$d values updated in %2$d rows."
 msgstr ""
 
-#: core/class-job.php:769
+#: core/class-job.php:771
 msgid "Replacement starts — serialized and JSON data handled safely."
 msgstr ""
 
@@ -3528,11 +3564,11 @@ msgstr ""
 msgid "REST API keys"
 msgstr ""
 
-#: core/class-job.php:1416
+#: core/class-job.php:1418
 msgid "Restart the operation: the list is rebuilt automatically."
 msgstr ""
 
-#: admin/class-admin.php:33 admin/class-backup.php:202 admin/class-dashboard.php:203 admin/class-dashboard.php:322 admin/class-logs.php:60 core/class-job.php:65
+#: admin/class-admin.php:33 admin/class-backup.php:202 admin/class-dashboard.php:212 admin/class-dashboard.php:331 admin/class-logs.php:60 core/class-job.php:65
 msgid "Restore"
 msgstr ""
 
@@ -3540,11 +3576,11 @@ msgstr ""
 msgid "Restore assistant"
 msgstr ""
 
-#: core/class-job.php:993
+#: core/class-job.php:995
 msgid "Restore complete — caches cleared and rewrite rules flushed."
 msgstr ""
 
-#: admin/class-settings.php:578
+#: admin/class-settings.php:586
 msgid "Restore default settings…"
 msgstr ""
 
@@ -3556,7 +3592,7 @@ msgstr ""
 msgid "Restore now"
 msgstr ""
 
-#: admin/class-about.php:446
+#: admin/class-about.php:450
 msgid "Restore: optional maintenance mode, WP version mismatch warning, stale cache drop-in detection."
 msgstr ""
 
@@ -3584,15 +3620,15 @@ msgstr ""
 msgid "Resume"
 msgstr ""
 
-#: admin/class-dashboard.php:181
+#: admin/class-dashboard.php:190
 msgid "Resume operation"
 msgstr ""
 
-#: core/class-job.php:1504
+#: core/class-job.php:1506
 msgid "Resume or cancel the current operation before starting a new one."
 msgstr ""
 
-#: admin/class-backup.php:125 admin/class-settings.php:309
+#: admin/class-backup.php:125 admin/class-settings.php:317
 msgid "Retention"
 msgstr ""
 
@@ -3660,7 +3696,7 @@ msgstr ""
 msgid "Run replacement"
 msgstr ""
 
-#: admin/class-dashboard.php:360 admin/class-logs.php:72 admin/class-logs.php:137
+#: admin/class-dashboard.php:369 admin/class-logs.php:72 admin/class-logs.php:137
 msgid "Running"
 msgstr ""
 
@@ -3682,6 +3718,18 @@ msgstr ""
 
 #: admin/class-migration.php:167
 msgid "Safe (shared hosting)"
+msgstr ""
+
+#: includes/class-upgrade-guard.php:74
+msgid "Safety backup — before update"
+msgstr ""
+
+#: admin/class-settings.php:278
+msgid "Safety backup before updates"
+msgstr ""
+
+#: includes/class-upgrade-guard.php:89
+msgid "Safety backup triggered"
 msgstr ""
 
 #: admin/class-migration.php:72
@@ -3716,7 +3764,7 @@ msgstr ""
 msgid "Scan now"
 msgstr ""
 
-#: admin/class-dashboard.php:208
+#: admin/class-dashboard.php:217
 msgid "Scan Site"
 msgstr ""
 
@@ -3724,7 +3772,7 @@ msgstr ""
 msgid "Scan site now"
 msgstr ""
 
-#: core/class-job.php:806
+#: core/class-job.php:808
 msgid "Scanned %1$d rows, %2$d values updated — %3$s"
 msgstr ""
 
@@ -3740,7 +3788,7 @@ msgstr ""
 msgid "Scanner page"
 msgstr ""
 
-#: admin/class-settings.php:278
+#: admin/class-settings.php:286
 msgid "Schedule"
 msgstr ""
 
@@ -3752,7 +3800,7 @@ msgstr ""
 msgid "Scheduled"
 msgstr ""
 
-#: includes/license.php:168
+#: includes/license.php:177
 msgid "Scheduled & automatic backups"
 msgstr ""
 
@@ -3764,11 +3812,11 @@ msgstr ""
 msgid "Scheduled at"
 msgstr ""
 
-#: infinity-migratex-pro.php:486
+#: infinity-migratex-pro.php:491
 msgid "Scheduled backup"
 msgstr ""
 
-#: admin/class-checkout.php:159 admin/class-checkout.php:190
+#: admin/class-checkout.php:159 admin/class-checkout.php:195
 msgid "Scheduled backups + e-mail alerts"
 msgstr ""
 
@@ -3784,7 +3832,7 @@ msgstr ""
 msgid "Search a setting… (ex: retention, theme, cloud)"
 msgstr ""
 
-#: core/class-job.php:766
+#: core/class-job.php:768
 msgid "Search and replacement strings are identical."
 msgstr ""
 
@@ -3804,7 +3852,7 @@ msgstr ""
 msgid "Secrets isolation (anti-leak)"
 msgstr ""
 
-#: admin/class-checkout.php:273
+#: admin/class-checkout.php:278
 msgid "Secure · 14-day money-back guarantee"
 msgstr ""
 
@@ -3812,7 +3860,7 @@ msgstr ""
 msgid "Secure Backup Encryption — protect the archive with AES-256"
 msgstr ""
 
-#: admin/class-settings.php:482
+#: admin/class-settings.php:490
 msgid "Secure temporary files"
 msgstr ""
 
@@ -3844,11 +3892,11 @@ msgstr ""
 msgid "Security scan older than"
 msgstr ""
 
-#: admin/class-plugins-page.php:345 admin/class-scanner.php:34 includes/license.php:166
+#: admin/class-plugins-page.php:345 admin/class-scanner.php:34 includes/license.php:175
 msgid "Security scanner"
 msgstr ""
 
-#: admin/class-about.php:481
+#: admin/class-about.php:485
 msgid "Security scanner, database manager, detailed logs, WooCommerce & Elementor integrations."
 msgstr ""
 
@@ -3872,11 +3920,11 @@ msgstr ""
 msgid "Selected files and database tables will be replaced by the backup content. A safety backup is strongly recommended and enabled by default below."
 msgstr ""
 
-#: admin/class-settings.php:351
+#: admin/class-settings.php:359
 msgid "Send backups to the cloud"
 msgstr ""
 
-#: admin/class-settings.php:344
+#: admin/class-settings.php:352
 msgid "Send every backup to Google Drive, Dropbox or an FTP server. The engine below is fully implemented (resumable uploads, connection test) and unlocks with your Pro license. Everything is tested locally in development mode: activate any key in the Advanced tab to try it now."
 msgstr ""
 
@@ -3892,7 +3940,7 @@ msgstr ""
 msgid "Serialized-safe JSON replacement"
 msgstr ""
 
-#: includes/license.php:164
+#: includes/license.php:173
 msgid "Serialized-safe URL replacement"
 msgstr ""
 
@@ -3916,7 +3964,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: admin/class-settings.php:772
+#: admin/class-settings.php:780
 msgid "Settings saved."
 msgstr ""
 
@@ -3928,7 +3976,7 @@ msgstr ""
 msgid "Shipping zones and methods"
 msgstr ""
 
-#: admin/class-settings.php:492
+#: admin/class-settings.php:500
 msgid "Show a notice in the admin when an operation fails."
 msgstr ""
 
@@ -3936,15 +3984,15 @@ msgstr ""
 msgid "Showing the first 500 findings."
 msgstr ""
 
-#: core/class-job.php:1528
+#: core/class-job.php:1530
 msgid "Signature check failed — re-download the package and retry."
 msgstr ""
 
-#: includes/license.php:134
+#: includes/license.php:143
 msgid "Signed license API active: keys are HMAC-verified and bound to the licensed domain — a key copied to another site loses Pro features."
 msgstr ""
 
-#: admin/class-about.php:380
+#: admin/class-about.php:384
 msgid "Simplified backup form: name + contents + one button, everything else in a collapsible Advanced options section."
 msgstr ""
 
@@ -3952,7 +4000,7 @@ msgstr ""
 msgid "Site"
 msgstr ""
 
-#: admin/class-dashboard.php:215
+#: admin/class-dashboard.php:224
 msgid "Site information"
 msgstr ""
 
@@ -3960,7 +4008,7 @@ msgstr ""
 msgid "Site root"
 msgstr ""
 
-#: admin/class-dashboard.php:152 admin/class-dashboard.php:227
+#: admin/class-dashboard.php:161 admin/class-dashboard.php:236
 msgid "Site size"
 msgstr ""
 
@@ -3980,11 +4028,11 @@ msgstr ""
 msgid "site-migration"
 msgstr ""
 
-#: core/class-job.php:1208
+#: core/class-job.php:1210
 msgid "Site: %s"
 msgstr ""
 
-#: admin/class-checkout.php:230
+#: admin/class-checkout.php:235
 msgid "Sites"
 msgstr ""
 
@@ -4000,7 +4048,7 @@ msgstr ""
 msgid "Small batches, very low server load."
 msgstr ""
 
-#: admin/class-dashboard.php:283 admin/class-settings.php:175
+#: admin/class-dashboard.php:292 admin/class-settings.php:175
 msgid "Smart reminders"
 msgstr ""
 
@@ -4036,15 +4084,15 @@ msgstr ""
 msgid "SQL dump"
 msgstr ""
 
-#: core/class-job.php:1034
+#: core/class-job.php:1036
 msgid "SQL file not found in protected storage."
 msgstr ""
 
-#: core/class-job.php:1559
+#: core/class-job.php:1561
 msgid "SQL import errors were detected."
 msgstr ""
 
-#: admin/class-settings.php:477
+#: admin/class-settings.php:485
 msgid "Standard — skip unsafe entries, import the rest"
 msgstr ""
 
@@ -4056,11 +4104,11 @@ msgstr ""
 msgid "Start migration"
 msgstr ""
 
-#: admin/class-dashboard.php:193
+#: admin/class-dashboard.php:202
 msgid "Start Migration"
 msgstr ""
 
-#: admin/class-checkout.php:266
+#: admin/class-checkout.php:271
 msgid "Start using Pro →"
 msgstr ""
 
@@ -4068,7 +4116,7 @@ msgstr ""
 msgid "Starting…"
 msgstr ""
 
-#: admin/class-about.php:336 admin/class-dashboard.php:345 admin/class-logs.php:112 admin/class-security.php:55 admin/class-security.php:87 admin/class-woocommerce.php:126
+#: admin/class-about.php:336 admin/class-dashboard.php:354 admin/class-logs.php:112 admin/class-security.php:55 admin/class-security.php:87 admin/class-woocommerce.php:126
 msgid "Status"
 msgstr ""
 
@@ -4088,7 +4136,7 @@ msgstr ""
 msgid "Storage guards rewritten: .htaccess denies all web access, index files in place."
 msgstr ""
 
-#: core/class-job.php:1484
+#: core/class-job.php:1486
 msgid "Storage may be full or read-only."
 msgstr ""
 
@@ -4096,7 +4144,7 @@ msgstr ""
 msgid "Storage recreated — on nginx servers, deny access to the storage folder in your vhost config."
 msgstr ""
 
-#: admin/class-settings.php:392 admin/class-settings.php:435
+#: admin/class-settings.php:400 admin/class-settings.php:443
 msgid "Stored encrypted (AES-256-GCM when available)."
 msgstr ""
 
@@ -4104,7 +4152,7 @@ msgstr ""
 msgid "Stored packages"
 msgstr ""
 
-#: admin/class-settings.php:476
+#: admin/class-settings.php:484
 msgid "Strict — refuse any unsafe entry"
 msgstr ""
 
@@ -4124,7 +4172,7 @@ msgstr ""
 msgid "System Error"
 msgstr ""
 
-#: admin/class-dashboard.php:248
+#: admin/class-dashboard.php:257
 msgid "System health"
 msgstr ""
 
@@ -4156,7 +4204,7 @@ msgstr ""
 msgid "Table prefix for the clone"
 msgstr ""
 
-#: admin/class-dashboard.php:228
+#: admin/class-dashboard.php:237
 msgid "tables"
 msgstr ""
 
@@ -4208,7 +4256,7 @@ msgstr ""
 msgid "Target database credentials expired — restart the migration wizard."
 msgstr ""
 
-#: core/class-job.php:1435
+#: core/class-job.php:1437
 msgid "Target database credentials expired."
 msgstr ""
 
@@ -4240,11 +4288,15 @@ msgstr ""
 msgid "Term recount is unavailable in this WooCommerce version."
 msgstr ""
 
-#: admin/class-settings.php:460
+#: admin/class-settings.php:468
 msgid "Test connection"
 msgstr ""
 
-#: core/class-job.php:1472
+#: includes/license.php:365
+msgid "The 14-day trial has already been used on this site — one trial per site."
+msgstr ""
+
+#: core/class-job.php:1474
 msgid "The archive is corrupted or was altered. Refused on purpose — rebuild or re-download it."
 msgstr ""
 
@@ -4252,11 +4304,11 @@ msgstr ""
 msgid "The backup archive just written is unreadable — the storage may be failing. The backup was NOT validated."
 msgstr ""
 
-#: core/class-job.php:1448
+#: core/class-job.php:1450
 msgid "The backup folder may be incomplete — create a new backup."
 msgstr ""
 
-#: admin/class-settings.php:295
+#: admin/class-settings.php:303
 msgid "The backup runs at the first site visit from this hour (WP-Cron behavior)."
 msgstr ""
 
@@ -4264,11 +4316,11 @@ msgstr ""
 msgid "The cloud destination is incomplete — check the settings."
 msgstr ""
 
-#: admin/class-settings.php:332
+#: admin/class-settings.php:340
 msgid "The cloud module is disabled (INFINITY_MIGRATEX_PRO_SAFE_MODE)."
 msgstr ""
 
-#: core/class-job.php:1547
+#: core/class-job.php:1549
 msgid "The cloud upload failed."
 msgstr ""
 
@@ -4296,15 +4348,15 @@ msgstr ""
 msgid "The dry run inspects the options and postmeta tables. The real replacement walks every table with text columns."
 msgstr ""
 
-#: core/class-job.php:1576
+#: core/class-job.php:1578
 msgid "The encrypted copy was removed to avoid corruption — retry the backup. Check disk space if it repeats."
 msgstr ""
 
-#: core/class-job.php:1520
+#: core/class-job.php:1522
 msgid "The file exceeds the size limit — import it from the server storage instead."
 msgstr ""
 
-#: core/class-job.php:1527
+#: core/class-job.php:1529
 msgid "The file is not a valid zip archive."
 msgstr ""
 
@@ -4316,7 +4368,7 @@ msgstr ""
 msgid "The file list had been removed from the temporary directory — it was rebuilt automatically and the operation resumed."
 msgstr ""
 
-#: core/class-job.php:1415
+#: core/class-job.php:1417
 msgid "The file list is unreadable."
 msgstr ""
 
@@ -4340,11 +4392,11 @@ msgstr ""
 msgid "the last operation “%1$s” failed: %2$s. Check the Logs page for details."
 msgstr ""
 
-#: core/class-job.php:1588
+#: core/class-job.php:1590
 msgid "The operation can be resumed from where it stopped. If it repeats, enable debug mode in Settings for details."
 msgstr ""
 
-#: core/class-job.php:1548
+#: core/class-job.php:1550
 msgid "The operation is resumable: press Resume to continue from where it stopped. Check the destination storage quota if it repeats."
 msgstr ""
 
@@ -4352,19 +4404,19 @@ msgstr ""
 msgid "The package contains PHP files inside wp-content/uploads — potentially suspicious, needs review before import."
 msgstr ""
 
-#: core/class-job.php:1496
+#: core/class-job.php:1498
 msgid "The path must be outside the current site root (or a clean subfolder) and writable."
 msgstr ""
 
-#: core/class-job.php:1555
+#: core/class-job.php:1557
 msgid "The PHP FTP extension is missing."
 msgstr ""
 
-#: core/class-job.php:1571
+#: core/class-job.php:1573
 msgid "The PHP OpenSSL extension is missing."
 msgstr ""
 
-#: core/class-job.php:1423
+#: core/class-job.php:1425
 msgid "The PHP zip extension (ZipArchive) is missing."
 msgstr ""
 
@@ -4376,15 +4428,15 @@ msgstr ""
 msgid "The secure checkout opens in a window inside this plugin — you never leave WordPress."
 msgstr ""
 
-#: core/class-job.php:1524
+#: core/class-job.php:1526
 msgid "The server rejected the upload (permissions or size limits)."
 msgstr ""
 
-#: core/class-job.php:1411
+#: core/class-job.php:1413
 msgid "The site directory could not be scanned."
 msgstr ""
 
-#: core/class-job.php:1431
+#: core/class-job.php:1433
 msgid "The SQL file could not be read."
 msgstr ""
 
@@ -4396,11 +4448,11 @@ msgstr ""
 msgid "The target database already contains tables with this prefix. Empty it first or explicitly allow overwriting."
 msgstr ""
 
-#: core/class-job.php:1544
+#: core/class-job.php:1546
 msgid "The token or password was refused — regenerate it (Drive refresh token, Dropbox token, FTP password) and test again."
 msgstr ""
 
-#: core/class-job.php:1464
+#: core/class-job.php:1466
 msgid "The uncompressed content exceeds the 4 GB safety limit."
 msgstr ""
 
@@ -4416,11 +4468,11 @@ msgstr ""
 msgid "The WordPress.org checksum API was unreachable during this scan: core verification was skipped. Other checks ran normally."
 msgstr ""
 
-#: core/class-job.php:1456
+#: core/class-job.php:1458
 msgid "The zip could not be opened — re-download or rebuild the archive."
 msgstr ""
 
-#: admin/class-dashboard.php:230 admin/class-migration.php:158 admin/class-restore.php:94
+#: admin/class-dashboard.php:239 admin/class-migration.php:158 admin/class-restore.php:94
 msgid "Themes"
 msgstr ""
 
@@ -4448,11 +4500,11 @@ msgstr ""
 msgid "This backup is flagged as encrypted but no encrypted part was found — it may be corrupted."
 msgstr ""
 
-#: admin/class-settings.php:831
+#: admin/class-settings.php:852
 msgid "This file is not an Infinity MigrateX configuration export."
 msgstr ""
 
-#: core/class-job.php:1460
+#: core/class-job.php:1462
 msgid "This package contains paths trying to escape the destination. Import refused in strict mode."
 msgstr ""
 
@@ -4460,7 +4512,7 @@ msgstr ""
 msgid "This permanently deletes the plugin (settings and logs — backups are KEPT). Continue?"
 msgstr ""
 
-#: admin/class-settings.php:621
+#: admin/class-settings.php:629
 msgid "This removes settings, logs and scan reports only. Default: off."
 msgstr ""
 
@@ -4476,7 +4528,7 @@ msgstr ""
 msgid "this site runs an incompatible PHP or WordPress version. The plugin stays inactive to avoid errors. PHP 7.4+ and WordPress 5.8+ are required."
 msgstr ""
 
-#: core/class-job.php:1563
+#: core/class-job.php:1565
 msgid "This SQL file contains statements that are not allowed."
 msgstr ""
 
@@ -4488,15 +4540,19 @@ msgstr ""
 msgid "Time budget per AJAX step. The plugin stays under the PHP max_execution_time automatically."
 msgstr ""
 
-#: includes/license.php:187
+#: includes/license.php:196
 msgid "Too many activation attempts — try again in one hour (anti brute-force protection)."
 msgstr ""
 
-#: core/class-job.php:1567
+#: includes/license.php:353
+msgid "Too many attempts — wait a minute before retrying."
+msgstr ""
+
+#: core/class-job.php:1569
 msgid "Too many requests — temporary lock."
 msgstr ""
 
-#: admin/class-admin.php:867
+#: admin/class-admin.php:874
 msgid "Too many requests — wait a minute (anti brute-force protection)."
 msgstr ""
 
@@ -4508,7 +4564,7 @@ msgstr ""
 msgid "Tools"
 msgstr ""
 
-#: admin/class-checkout.php:233
+#: admin/class-checkout.php:238
 msgid "Total"
 msgstr ""
 
@@ -4518,6 +4574,10 @@ msgstr ""
 
 #: admin/class-checkout.php:177
 msgid "Transferable between your clients"
+msgstr ""
+
+#: admin/class-admin.php:594
+msgid "TRIAL — %s days left"
 msgstr ""
 
 #: admin/class-woocommerce.php:162
@@ -4532,7 +4592,7 @@ msgstr ""
 msgid "Turbo import"
 msgstr ""
 
-#: admin/class-checkout.php:192
+#: admin/class-checkout.php:197
 msgid "Turbo speed + cross-site URL rewrite"
 msgstr ""
 
@@ -4540,11 +4600,11 @@ msgstr ""
 msgid "Turbo speed + priority support"
 msgstr ""
 
-#: admin/class-dashboard.php:344 admin/class-logs.php:111 admin/class-scanner.php:122
+#: admin/class-dashboard.php:353 admin/class-logs.php:111 admin/class-scanner.php:122
 msgid "Type"
 msgstr ""
 
-#: core/class-job.php:1427
+#: core/class-job.php:1429
 msgid "Unable to create the archive."
 msgstr ""
 
@@ -4560,15 +4620,15 @@ msgstr ""
 msgid "Unable to create the download archive."
 msgstr ""
 
-#: core/class-job.php:1407
+#: core/class-job.php:1409
 msgid "Unable to open the file index for writing."
 msgstr ""
 
-#: core/class-job.php:1419
+#: core/class-job.php:1421
 msgid "Unable to write a destination file."
 msgstr ""
 
-#: core/class-job.php:1483
+#: core/class-job.php:1485
 msgid "Unable to write a metadata file."
 msgstr ""
 
@@ -4584,7 +4644,7 @@ msgstr ""
 msgid "Unauthorized request — nonce, capability or HTTP method check failed. Reload the page and try again."
 msgstr ""
 
-#: admin/class-admin.php:771 admin/class-admin.php:875 admin/class-admin.php:878 admin/class-plugins-page.php:74 admin/class-plugins-page.php:273 core/class-job.php:1531 includes/class-updater.php:241
+#: admin/class-admin.php:778 admin/class-admin.php:882 admin/class-admin.php:885 admin/class-plugins-page.php:74 admin/class-plugins-page.php:273 core/class-job.php:1533 includes/class-updater.php:241
 msgid "Unauthorized request."
 msgstr ""
 
@@ -4596,7 +4656,7 @@ msgstr ""
 msgid "Unexpected PHP file at the site root: %s — needs review."
 msgstr ""
 
-#: core/class-job.php:1587
+#: core/class-job.php:1589
 msgid "Unexpected server error."
 msgstr ""
 
@@ -4608,7 +4668,7 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: core/class-job.php:1596
+#: core/class-job.php:1598
 msgid "Unknown error — retry or contact support with the operation log."
 msgstr ""
 
@@ -4616,7 +4676,7 @@ msgstr ""
 msgid "Unknown migration type."
 msgstr ""
 
-#: core/class-job.php:1499
+#: core/class-job.php:1501
 msgid "Unknown operation type."
 msgstr ""
 
@@ -4636,7 +4696,7 @@ msgstr ""
 msgid "Unlock the Pro roadmap: cloud backup destinations, advanced migration profiles, priority features and priority support — while keeping every free feature forever."
 msgstr ""
 
-#: admin/class-checkout.php:265
+#: admin/class-checkout.php:270
 msgid "Unlocked instantly: cloud destinations, scheduled backups with e-mail alerts, AES-256 encryption, turbo speed and priority support."
 msgstr ""
 
@@ -4656,7 +4716,7 @@ msgstr ""
 msgid "Up to date (cached)."
 msgstr ""
 
-#: admin/class-admin.php:641
+#: admin/class-admin.php:647
 msgid "Update %s"
 msgstr ""
 
@@ -4680,7 +4740,7 @@ msgstr ""
 msgid "updated successfully. Settings, backups and logs preserved."
 msgstr ""
 
-#: admin/class-settings.php:602
+#: admin/class-settings.php:610
 msgid "Updates"
 msgstr ""
 
@@ -4688,11 +4748,15 @@ msgstr ""
 msgid "Updates — dual channel"
 msgstr ""
 
+#: admin/class-admin.php:595
+msgid "upgrade anytime to keep Pro"
+msgstr ""
+
 #: admin/class-about.php:68 admin/class-plugins-page.php:219 admin/class-plugins-page.php:352
 msgid "Upgrade to Pro"
 msgstr ""
 
-#: admin/class-admin.php:599 admin/class-dashboard.php:144
+#: admin/class-admin.php:605 admin/class-dashboard.php:153
 msgid "Upgrade to PRO"
 msgstr ""
 
@@ -4708,7 +4772,7 @@ msgstr ""
 msgid "Upload a .infinitymigrate / .zip package"
 msgstr ""
 
-#: core/class-job.php:1523
+#: core/class-job.php:1525
 msgid "Upload failed."
 msgstr ""
 
@@ -4740,7 +4804,7 @@ msgstr ""
 msgid "Uploads (media)"
 msgstr ""
 
-#: admin/class-settings.php:485
+#: admin/class-settings.php:493
 msgid "Uploads and working files stay in the .htaccess-protected storage."
 msgstr ""
 
@@ -4780,7 +4844,7 @@ msgstr ""
 msgid "URLs rewritten to this site, serialized-safe"
 msgstr ""
 
-#: core/class-job.php:1492
+#: core/class-job.php:1494
 msgid "Use complete absolute URLs (https://example.com)."
 msgstr ""
 
@@ -4792,7 +4856,7 @@ msgstr ""
 msgid "Used to compress database dumps. Without it, dumps are stored uncompressed."
 msgstr ""
 
-#: admin/class-settings.php:429
+#: admin/class-settings.php:437
 msgid "Username"
 msgstr ""
 
@@ -4804,11 +4868,11 @@ msgstr ""
 msgid "Valid absolute URL (http/https), different from the current URL."
 msgstr ""
 
-#: admin/class-admin.php:594
+#: admin/class-admin.php:599
 msgid "valid until %s"
 msgstr ""
 
-#: admin/class-dashboard.php:129
+#: admin/class-dashboard.php:137
 msgid "Valid until %s"
 msgstr ""
 
@@ -4828,7 +4892,7 @@ msgstr ""
 msgid "VERIFIED"
 msgstr ""
 
-#: admin/class-about.php:480
+#: admin/class-about.php:484
 msgid "Verified .infinitymigrate packages (Zip Slip protection) and serialized-safe URL replacement."
 msgstr ""
 
@@ -4852,7 +4916,7 @@ msgstr ""
 msgid "Verify to check"
 msgstr ""
 
-#: admin/class-admin.php:665
+#: admin/class-admin.php:671
 msgid "version %s"
 msgstr ""
 
@@ -4860,7 +4924,7 @@ msgstr ""
 msgid "Version %s available."
 msgstr ""
 
-#: admin/class-settings.php:610
+#: admin/class-settings.php:618
 msgid "Version %s is available — update from Plugins page."
 msgstr ""
 
@@ -4872,7 +4936,7 @@ msgstr ""
 msgid "Very large files (> 50 MB)"
 msgstr ""
 
-#: admin/class-dashboard.php:332
+#: admin/class-dashboard.php:341
 msgid "View all logs"
 msgstr ""
 
@@ -4880,11 +4944,11 @@ msgstr ""
 msgid "Visit the author’s website"
 msgstr ""
 
-#: admin/class-dashboard.php:263
+#: admin/class-dashboard.php:272
 msgid "WARNING"
 msgstr ""
 
-#: core/class-job.php:1017
+#: core/class-job.php:1019
 msgid "Warning: persistent cache drop-ins found (%s) — if the restored site misbehaves, rename them in wp-content and clear the cache."
 msgstr ""
 
@@ -4904,7 +4968,7 @@ msgstr ""
 msgid "wc_orders, wc_order_addresses and wc_order_operational_data are in place."
 msgstr ""
 
-#: admin/class-dashboard.php:225 admin/class-tools.php:94
+#: admin/class-dashboard.php:234 admin/class-tools.php:94
 msgid "Web server"
 msgstr ""
 
@@ -4912,7 +4976,7 @@ msgstr ""
 msgid "Webhooks"
 msgstr ""
 
-#: admin/class-checkout.php:216
+#: admin/class-checkout.php:221
 msgid "Website"
 msgstr ""
 
@@ -4920,7 +4984,7 @@ msgstr ""
 msgid "Website — derouicheoussama.com"
 msgstr ""
 
-#: admin/class-settings.php:282
+#: admin/class-settings.php:290
 msgid "Weekly"
 msgstr ""
 
@@ -4940,7 +5004,7 @@ msgstr ""
 msgid "What should be migrated?"
 msgstr ""
 
-#: admin/class-checkout.php:212
+#: admin/class-checkout.php:217
 msgid "WhatsApp (optional)"
 msgstr ""
 
@@ -5044,7 +5108,7 @@ msgstr ""
 msgid "WordPress needs your FTP credentials for this update — use the Plugins page once, then this button will work directly."
 msgstr ""
 
-#: admin/class-dashboard.php:222 includes/compatibility.php:179
+#: admin/class-dashboard.php:231 includes/compatibility.php:179
 msgid "WordPress version"
 msgstr ""
 
@@ -5100,7 +5164,7 @@ msgstr ""
 msgid "Wrong decryption password (or altered file) — decrypt failed. Nothing was restored."
 msgstr ""
 
-#: core/class-job.php:1583
+#: core/class-job.php:1585
 msgid "Wrong decryption password or altered file."
 msgstr ""
 
@@ -5116,11 +5180,11 @@ msgstr ""
 msgid "You are not allowed to update plugins."
 msgstr ""
 
-#: admin/class-dashboard.php:140
+#: admin/class-dashboard.php:149
 msgid "You are on the FREE edition — unlock the full suite"
 msgstr ""
 
-#: admin/class-settings.php:611
+#: admin/class-settings.php:619
 msgid "You are up to date. Updates are served from official GitHub releases (no data is sent anywhere)."
 msgstr ""
 
@@ -5140,7 +5204,7 @@ msgstr ""
 msgid "You will need this password to restore. It is never stored in the backup."
 msgstr ""
 
-#: admin/class-checkout.php:209
+#: admin/class-checkout.php:214
 msgid "you@example.com"
 msgstr ""
 
@@ -5148,11 +5212,11 @@ msgstr ""
 msgid "Your backups are never deleted — not even on uninstall."
 msgstr ""
 
-#: admin/class-checkout.php:201
+#: admin/class-checkout.php:206
 msgid "Your license key and receipt are sent to this e-mail address."
 msgstr ""
 
-#: core/class-job.php:1532
+#: core/class-job.php:1534
 msgid "Your session or permissions expired — reload the page."
 msgstr ""
 
