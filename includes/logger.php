@@ -362,3 +362,5 @@ final class IMP_Logger {
 		$wpdb->query( $wpdb->prepare( "DELETE FROM {$table} WHERE created < %s", $limit ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

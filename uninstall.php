@@ -112,3 +112,5 @@ $options = array(
 foreach ( $options as $option ) {
 	delete_option( $option );
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

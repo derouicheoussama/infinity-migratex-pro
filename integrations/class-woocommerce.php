@@ -322,3 +322,5 @@ final class IMP_Integrations_WooCommerce {
 		return true;
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

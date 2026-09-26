@@ -203,3 +203,5 @@ function imp_scrub_settings_for_report() {
 	);
 	return $settings;
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

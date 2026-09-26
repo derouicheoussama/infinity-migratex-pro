@@ -651,3 +651,5 @@ final class IMP_Database {
 		return $db;
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

@@ -474,3 +474,5 @@ final class IMP_Scanner {
 		return is_array( $report ) && ! empty( $report['completed'] ) ? $report : null;
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

@@ -202,3 +202,5 @@ final class IMP_Integrity {
 		return compact( 'checked', 'ok', 'mismatched', 'missing' );
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

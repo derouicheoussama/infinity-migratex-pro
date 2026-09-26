@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.11.0
+Stable tag: 3.12.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,12 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.12.0 =
+
+* Robustness: every one of the 46 code files now carries an executable author watermark (∞ INFINITY CODER) — verifiable at runtime from the Security page, with a visible notice if any file has been stripped of its signature.
+* Robustness: Google Sheets logging rows are defensively sanitized and length-limited — a malformed operation can never corrupt the tracking spreadsheet.
+* Strict coding pass across the engine (typed sanitization, bounded values, silent-failure policies documented where chosen).
 
 = 3.11.0 =
 

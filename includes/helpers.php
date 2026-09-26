@@ -1066,3 +1066,5 @@ final class IMP_Site_Stats {
 		return ( false === $free || $free < 0 ) ? 0 : (int) $free;
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

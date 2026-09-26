@@ -48,18 +48,27 @@ final class IMP_Sheets {
 			if ( ! self::enabled() ) {
 				return;
 			}
+			/* Défensive : valeurs tronquées/typées — une ligne malformée ne
+			 * doit jamais refuser les suivantes ni corrompre la Sheet. */
 			$duration = isset( $job['finished_at'], $job['started_at'] )
 				? max( 1, (int) round( (float) $job['finished_at'] - (float) $job['started_at'] ) )
 				: 0;
+			$rows     = 0;
+			if ( isset( $job['state']['meta']['dump']['db_rows'] ) ) {
+				$rows = (int) $job['state']['meta']['dump']['db_rows'];
+			} elseif ( isset( $job['state']['meta']['db_rows'] ) ) {
+				$rows = (int) $job['state']['meta']['db_rows'];
+			}
+			$bytes = isset( $job['result']['sizes']['total'] ) ? (int) $job['result']['sizes']['total'] : 0;
 
 			$row = array(
 				gmdate( 'Y-m-d H:i:s', time() + (int) ( (float) get_option( 'gmt_offset', 0 ) * HOUR_IN_SECONDS ) ),
-				(string) ( $job['title'] ?? '' ),
-				(string) ( $job['type'] ?? '' ),
-				(string) ( $job['data']['name'] ?? '' ),
+				substr( sanitize_text_field( (string) ( $job['title'] ?? '' ) ), 0, 120 ),
+				substr( sanitize_key( (string) ( $job['type'] ?? '' ) ), 0, 20 ),
+				substr( sanitize_text_field( (string) ( $job['data']['name'] ?? '' ) ), 0, 120 ),
 				(string) home_url(),
-				(string) ( $job['state']['meta']['dump']['db_rows'] ?? $job['state']['meta']['db_rows'] ?? '' ),
-				isset( $job['result']['sizes']['total'] ) ? imp_format_bytes( (int) $job['result']['sizes']['total'] ) : '',
+				(string) $rows,
+				$bytes > 0 ? imp_format_bytes( $bytes ) : '',
 				$duration ? imp_human_duration( $duration ) : '',
 				(string) IMP_VERSION,
 				'OK',
@@ -190,3 +199,5 @@ final class IMP_Sheets {
 		return rtrim( strtr( base64_encode( (string) $data ), '+/', '-_' ), '=' );
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

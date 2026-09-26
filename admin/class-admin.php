@@ -1135,3 +1135,5 @@ final class IMP_Admin {
 /* L'initialisation (IMP_Admin::init) est faite dans le fichier principal
  * après le chargement de toutes les classes admin — jamais ici, pour
  * éviter une double initialisation des hooks et du menu. */
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

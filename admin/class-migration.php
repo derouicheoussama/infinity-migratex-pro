@@ -334,3 +334,5 @@ final class IMP_Admin_Migration {
 		return $config;
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

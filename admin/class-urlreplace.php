@@ -137,3 +137,5 @@ final class IMP_Admin_URLReplace {
 		wp_send_json_success( array( 'status' => IMP_Job::public_status() ) );
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

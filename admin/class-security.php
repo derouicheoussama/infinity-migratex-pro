@@ -30,8 +30,30 @@ final class IMP_Admin_Security {
 		IMP_Security::bootstrap_storage();
 		$report    = IMP_Security::protection_report();
 		$hardening = class_exists( 'IMP_Hardening' ) ? IMP_Hardening::layers_report() : array();
+		$watermark = class_exists( 'IMP_Watermark' ) ? IMP_Watermark::verify() : array( 'ok' => true, 'checked' => 0, 'stripped' => array() );
 		$last_scan = IMP_Scanner::last_report();
 		?>
+		<?php if ( ! empty( $watermark['ok'] ) ) : ?>
+			<div class="imp-notice imp-notice-success" style="margin-bottom:14px;">
+				<strong>∞ Infinity Coder</strong> — <?php
+				echo esc_html( sprintf(
+					/* translators: %s: file count */
+					__( 'Source signature verified on %s code files (author watermarks intact).', 'infinity-migratex-pro' ),
+					number_format_i18n( (int) $watermark['checked'] )
+				) );
+				?>
+			</div>
+		<?php else : ?>
+			<div class="imp-notice imp-notice-warning" style="margin-bottom:14px;">
+				<strong>∞ Infinity Coder</strong> — <?php
+				echo esc_html( sprintf(
+					/* translators: %s: file count */
+					__( 'Author watermarks missing in %s file(s): the code may have been stripped or tampered with.', 'infinity-migratex-pro' ),
+					count( (array) $watermark['stripped'] )
+				) );
+				?>
+			</div>
+		<?php endif; ?>
 		<section class="imp-panel">
 			<div class="imp-panel-head">
 				<h3><?php esc_html_e( 'Hardening layers', 'infinity-migratex-pro' ); ?></h3>
@@ -209,3 +231,5 @@ final class IMP_Admin_Security {
 		wp_send_json_error( array( 'code' => 'IMP-224', 'message' => IMP_Job::error_text( 'IMP-224' ) ), 400 );
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

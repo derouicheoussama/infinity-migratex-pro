@@ -322,3 +322,5 @@ add_action(
 		}
 	}
 );
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

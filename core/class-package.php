@@ -387,3 +387,5 @@ final class IMP_Package {
 		return $count;
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

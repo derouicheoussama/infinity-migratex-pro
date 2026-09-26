@@ -96,3 +96,5 @@ final class IMP_Upgrade_Guard {
 		return $reply; // Jamais bloquer la mise à jour de l'utilisateur.
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

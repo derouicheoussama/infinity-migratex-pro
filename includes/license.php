@@ -400,3 +400,5 @@ final class IMP_License {
 		);
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

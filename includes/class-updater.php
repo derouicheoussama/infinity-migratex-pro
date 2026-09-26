@@ -557,3 +557,5 @@ final class IMP_Updater {
 		}
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

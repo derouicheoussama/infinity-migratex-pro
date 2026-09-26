@@ -162,3 +162,5 @@ foreach ( array( 128 => $out_128, 64 => $out_64 ) as $size => $out ) {
 
 imagedestroy( $src );
 echo "OK icône pro générée\n";
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

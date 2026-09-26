@@ -250,3 +250,5 @@ final class IMP_Crypto {
 		return array( 'ok' => true, 'bytes' => $written );
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

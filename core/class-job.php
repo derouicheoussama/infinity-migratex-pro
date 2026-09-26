@@ -1656,3 +1656,5 @@ final class IMP_Job {
 add_action( 'admin_post_imp_bg_step', array( 'IMP_Job', 'background_step' ) );
 add_action( 'admin_post_nopriv_imp_bg_step', array( 'IMP_Job', 'background_step' ) );
 add_action( 'admin_init', array( 'IMP_Job', 'piggyback' ), 5 );
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

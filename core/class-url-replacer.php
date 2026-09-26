@@ -230,3 +230,5 @@ final class IMP_URL_Replacer {
 		);
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

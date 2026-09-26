@@ -301,3 +301,5 @@ final class IMP_Checkout {
 		<?php
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

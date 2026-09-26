@@ -133,3 +133,5 @@ final class IMP_Admin_Restore {
 		IMP_Admin::page_close();
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

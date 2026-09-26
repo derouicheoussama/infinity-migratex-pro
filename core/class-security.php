@@ -433,3 +433,5 @@ final class IMP_Security {
 		return $oldest > 0 ? max( 0, (int) ( ( time() - $oldest ) / HOUR_IN_SECONDS ) ) : 0;
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

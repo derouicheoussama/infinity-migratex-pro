@@ -146,3 +146,5 @@ final class IMP_Admin_Scanner {
 		<?php endif;
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

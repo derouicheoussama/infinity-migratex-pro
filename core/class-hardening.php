@@ -424,3 +424,5 @@ final class IMP_Hardening {
 		);
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

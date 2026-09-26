@@ -390,3 +390,5 @@ final class IMP_Admin_Plugins_Page {
 		exit;
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

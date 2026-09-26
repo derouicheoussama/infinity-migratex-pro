@@ -920,3 +920,5 @@ final class IMP_Migrator {
 		return ( $free > $site_bytes * 2 ) ? 'pass' : ( $free > $site_bytes ? 'warn' : 'error' );
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com

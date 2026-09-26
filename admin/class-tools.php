@@ -222,3 +222,5 @@ final class IMP_Admin_Tools {
 		);
 	}
 }
+
+// ∞ INFINITY CODER — Derouiche Oussama · https://www.derouicheoussama.com
