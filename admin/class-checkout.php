@@ -248,7 +248,20 @@ final class IMP_Checkout {
 							<a class="imp-btn imp-btn-primary imp-co-pay" href="<?php echo esc_url( INFINITY_MIGRATEX_PRO_CHECKOUT_URL ); ?>" target="_blank" rel="noopener noreferrer">🔒 <?php esc_html_e( 'Pay securely online', 'infinity-migratex-pro' ); ?></a>
 							<p class="imp-co-note"><?php esc_html_e( 'After payment, come back here and activate the license key you received by e-mail.', 'infinity-migratex-pro' ); ?></p>
 						<?php else : ?>
-							<p class="imp-co-note"><?php esc_html_e( 'Online checkout is being set up. Meanwhile: copy your order details below and send them via the author’s website — or continue to activation if you already have a key.', 'infinity-migratex-pro' ); ?></p>
+							<div class="imp-co-order">
+								<p class="imp-co-note" style="margin-top:0;"><?php esc_html_e( 'Pay by order — send your order details with one click and receive your license key by e-mail:', 'infinity-migratex-pro' ); ?></p>
+								<div class="imp-co-pay-alt">
+									<?php if ( '' !== INFINITY_MIGRATEX_PRO_SALES_EMAIL ) : ?>
+										<button type="button" class="imp-btn imp-btn-primary" data-imp-order-channel="email" data-sales="<?php echo esc_attr( INFINITY_MIGRATEX_PRO_SALES_EMAIL ); ?>">✉ <?php esc_html_e( 'Order by e-mail', 'infinity-migratex-pro' ); ?></button>
+									<?php endif; ?>
+									<?php if ( '' !== INFINITY_MIGRATEX_PRO_SALES_WHATSAPP ) : ?>
+										<button type="button" class="imp-btn imp-btn-primary" data-imp-order-channel="whatsapp" data-sales="<?php echo esc_attr( INFINITY_MIGRATEX_PRO_SALES_WHATSAPP ); ?>">💬 <?php esc_html_e( 'Order by WhatsApp', 'infinity-migratex-pro' ); ?></button>
+									<?php endif; ?>
+								</div>
+								<?php if ( '' === INFINITY_MIGRATEX_PRO_SALES_EMAIL && '' === INFINITY_MIGRATEX_PRO_SALES_WHATSAPP ) : ?>
+									<p class="imp-co-note"><?php esc_html_e( 'Online checkout is being set up. Meanwhile: copy your order details below and send them via the author’s website — or continue to activation if you already have a key.', 'infinity-migratex-pro' ); ?></p>
+								<?php endif; ?>
+							</div>
 						<?php endif; ?>
 
 						<div class="imp-co-pay-alt">

@@ -200,7 +200,19 @@ final class IMP_License {
 		$key = trim( sanitize_text_field( (string) $key ) );
 
 		if ( '' === INFINITY_MIGRATEX_PRO_LICENSE_API ) {
-			// Mode développement local : accepté sans serveur distant.
+			// COMMERCIALISATION — verrou anti-piratage : sans serveur de
+			// licences, l'acceptation locale de n'importe quelle clé de
+			// 8 caractères est une porte ouverte. Elle n'existe que si le
+			// développeur l'active explicitement sur UN site de test :
+			//   define( 'INFINITY_MIGRATEX_PRO_DEV_LICENSES', true );
+			// Les clients, eux, passent par l'essai 14 jours ou par une
+			// clé réelle validée par le serveur de licences.
+			if ( ! defined( 'INFINITY_MIGRATEX_PRO_DEV_LICENSES' ) || ! INFINITY_MIGRATEX_PRO_DEV_LICENSES ) {
+				return array(
+					'ok'      => false,
+					'message' => __( 'License keys are validated by our license server. Start the 14-day free trial from the Go Pro wizard, or contact support if your key is refused.', 'infinity-migratex-pro' ),
+				);
+			}
 			if ( strlen( $key ) < 8 ) {
 				return array(
 					'ok'      => false,

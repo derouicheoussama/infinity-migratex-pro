@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.9.1
+Stable tag: 3.10.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,12 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.10.0 =
+
+* Commercialization hardening: license keys can no longer be guessed — without a license server, activation is refused unless the developer explicitly enables dev licenses on a test site (INFINITY_MIGRATEX_PRO_DEV_LICENSES). Clients use the 14-day trial or a real server-validated key.
+* New: order-by-e-mail and order-by-WhatsApp channels in the purchase wizard (developer configures INFINITY_MIGRATEX_PRO_SALES_EMAIL / _SALES_WHATSAPP in the distributed build) — the order details are pre-filled automatically.
+* Ships with a ready-to-deploy license server (HMAC-signed responses, domain binding, key generation/revocation admin) closing the payment → license → activation loop.
 
 = 3.9.1 =
 

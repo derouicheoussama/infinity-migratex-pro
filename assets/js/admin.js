@@ -2115,6 +2115,21 @@
 			copyBtn.addEventListener('click', function () { coCopy(coOrderText()); });
 		}
 
+		/* Canaux de commande manuelle (e-mail / WhatsApp) — les
+		 * coordonnées de vente viennent des constantes du build. */
+		co$$('[data-imp-order-channel]').forEach(function (btn) {
+			btn.addEventListener('click', function () {
+				var channel = btn.getAttribute('data-imp-order-channel');
+				var sales = (btn.getAttribute('data-sales') || '').replace(/[^0-9@\.\-a-zA-Z]/g, '');
+				var text = coOrderText();
+				if (channel === 'email' && sales) {
+					window.location.href = 'mailto:' + sales + '?subject=' + encodeURIComponent('Infinity MigrateX Pro — order') + '&body=' + encodeURIComponent(text);
+				} else if (channel === 'whatsapp' && sales) {
+					window.open('https://wa.me/' + sales.replace(/[^0-9]/g, '') + '?text=' + encodeURIComponent(text), '_blank');
+				}
+			});
+		});
+
 		co$('[data-imp-co-activate]').addEventListener('click', function () {
 			var btn = this;
 			var input = co$('[name="imp_co_key"]');
