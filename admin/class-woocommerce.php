@@ -78,10 +78,10 @@ final class IMP_Admin_WooCommerce {
 							<span class="imp-xfer-node"><?php esc_html_e( 'Export file', 'infinity-migratex-pro' ); ?><br><em class="description" style="font-size:11px;"><?php esc_html_e( 'download & transfer', 'infinity-migratex-pro' ); ?></em></span>
 						</p>
 						<ul>
-							<li><?php echo esc_html( sprintf( /* translators: %s: count */ __( '%s products (+ %s variations)', 'infinity-migratex-pro' ), number_format_i18n( $inventory['products'] ), number_format_i18n( $inventory['variations'] ) ) ); ?></li>
-							<li><?php echo esc_html( sprintf( /* translators: %s: count */ __( '%s orders (%s)', 'infinity-migratex-pro' ), number_format_i18n( $inventory['orders'] ), $inventory['orders_hpos'] ? 'HPOS' : 'posts' ) ); ?></li>
+							<li><?php echo esc_html( sprintf( /* translators: 1: products 2: variations */ __( '%1$s products (+ %2$s variations)', 'infinity-migratex-pro' ), number_format_i18n( $inventory['products'] ), number_format_i18n( $inventory['variations'] ) ) ); ?></li>
+							<li><?php echo esc_html( sprintf( /* translators: 1: orders 2: storage mode */ __( '%1$s orders (%2$s)', 'infinity-migratex-pro' ), number_format_i18n( $inventory['orders'] ), $inventory['orders_hpos'] ? 'HPOS' : 'posts' ) ); ?></li>
 							<li><?php echo esc_html( sprintf( /* translators: %s: count */ __( '%s customers', 'infinity-migratex-pro' ), number_format_i18n( $inventory['customers'] ) ) ); ?></li>
-							<li><?php echo esc_html( sprintf( /* translators: %s: count */ __( '%s coupons · %s webhooks', 'infinity-migratex-pro' ), number_format_i18n( $inventory['coupons'] ), number_format_i18n( $inventory['webhooks'] ) ) ); ?></li>
+							<li><?php echo esc_html( sprintf( /* translators: 1: coupons 2: webhooks */ __( '%1$s coupons · %2$s webhooks', 'infinity-migratex-pro' ), number_format_i18n( $inventory['coupons'] ), number_format_i18n( $inventory['webhooks'] ) ) ); ?></li>
 							<li><?php echo esc_html( sprintf( /* translators: %s: count */ __( '%s WooCommerce tables + settings', 'infinity-migratex-pro' ), number_format_i18n( $inventory['tables'] ) ) ); ?></li>
 						</ul>
 						<p style="display:flex;gap:10px;flex-wrap:wrap;margin:0;">
@@ -253,6 +253,9 @@ final class IMP_Admin_WooCommerce {
 	 */
 	public static function ajax_action() {
 		IMP_Security::ajax_guard( 'manage' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		if ( ! IMP_Integrations_WooCommerce::is_active() ) {
 			wp_send_json_error( array( 'code' => 'IMP-224', 'message' => __( 'WooCommerce is not active on this site.', 'infinity-migratex-pro' ) ), 422 );

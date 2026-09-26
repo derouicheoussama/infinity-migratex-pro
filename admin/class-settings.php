@@ -804,6 +804,9 @@ final class IMP_Admin_Settings {
 	 */
 	public static function ajax_save() {
 		IMP_Security::ajax_guard( 'settings' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		$key = isset( $_POST['license_key'] ) ? trim( sanitize_text_field( wp_unslash( (string) $_POST['license_key'] ) ) ) : '';
 		if ( '' === $key ) {
@@ -825,6 +828,9 @@ final class IMP_Admin_Settings {
 	 */
 	public static function ajax_save_all() {
 		IMP_Security::ajax_guard( 'settings' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		$raw   = isset( $_POST['imp_settings_json'] ) ? wp_unslash( $_POST['imp_settings_json'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- json_decode puis sanitize() complet.
 		$input = json_decode( (string) $raw, true );
@@ -846,6 +852,9 @@ final class IMP_Admin_Settings {
 	 */
 	public static function ajax_sheets_test() {
 		IMP_Security::ajax_guard( 'settings' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		if ( ! IMP_License::is_pro() ) {
 			wp_send_json_error( array( 'code' => 'IMP-241', 'message' => IMP_Job::error_text( 'IMP-241' ) ), 402 );
@@ -875,6 +884,9 @@ final class IMP_Admin_Settings {
 	 */
 	public static function ajax_start_trial() {
 		IMP_Security::ajax_guard( 'settings' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		$result = IMP_License::start_trial();
 		if ( ! $result['ok'] ) {
@@ -906,6 +918,9 @@ final class IMP_Admin_Settings {
 	 */
 	public static function ajax_settings_export() {
 		IMP_Security::ajax_guard( 'settings' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		$settings = imp_settings();
 		foreach ( self::secret_keys() as $secret_key ) {
@@ -935,6 +950,9 @@ final class IMP_Admin_Settings {
 	 */
 	public static function ajax_settings_import() {
 		IMP_Security::ajax_guard( 'settings' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		$raw   = isset( $_POST['imp_settings_json'] ) ? wp_unslash( $_POST['imp_settings_json'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- json_decode puis sanitize() complet.
 		$doc   = json_decode( (string) $raw, true );
@@ -962,6 +980,9 @@ final class IMP_Admin_Settings {
 	 */
 	public static function ajax_settings_reset() {
 		IMP_Security::ajax_guard( 'settings' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		update_option( self::OPTION, imp_default_settings(), false );
 		IMP_Plugin::flush_settings();
@@ -995,6 +1016,9 @@ final class IMP_Admin_Settings {
 	 */
 	public static function ajax_cloud_test() {
 		IMP_Security::ajax_guard( 'settings' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		if ( ! IMP_License::is_pro() ) {
 			wp_send_json_error( array( 'code' => 'IMP-241', 'message' => IMP_Job::error_text( 'IMP-241' ) ), 402 );

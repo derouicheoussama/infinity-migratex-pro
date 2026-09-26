@@ -226,6 +226,9 @@ final class IMP_Admin_Backup {
 	 */
 	public static function ajax_action() {
 		IMP_Security::ajax_guard( 'backup' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		$do = isset( $_POST['do'] ) ? sanitize_key( wp_unslash( $_POST['do'] ) ) : '';
 		$id = isset( $_POST['id'] ) ? IMP_Backup_Engine::sanitize_id( wp_unslash( $_POST['id'] ) ) : '';

@@ -272,9 +272,11 @@ final class IMP_Admin_Dashboard {
 										'warn' => __( 'WARNING', 'infinity-migratex-pro' ),
 										'error' => __( 'ERROR', 'infinity-migratex-pro' ),
 									);
-									echo IMP_Admin::badge(
-										'error' === $check['status'] ? 'fail' : ( 'warn' === $check['status'] ? 'warn' : 'pass' ),
-										esc_html( $labels[ $check['status'] ] )
+									echo wp_kses_post( // Sortie contrôlée : badge construit en interne (span + texte échappé).
+										IMP_Admin::badge(
+											'error' === $check['status'] ? 'fail' : ( 'warn' === $check['status'] ? 'warn' : 'pass' ),
+											esc_html( $labels[ $check['status'] ] )
+										)
 									);
 									?>
 									<span class="imp-health-value"><?php echo esc_html( $check['value'] ); ?></span>
@@ -392,6 +394,9 @@ final class IMP_Admin_Dashboard {
 	 */
 	public static function ajax_health_refresh() {
 		IMP_Security::ajax_guard( 'manage' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		// Bouton explicite : l'utilisateur DEMANDE des données fraîches —
 		// on force le recalcul complet (l'affichage, lui, n'attend jamais).

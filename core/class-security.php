@@ -180,7 +180,7 @@ final class IMP_Security {
 
 		$ok = check_ajax_referer( $nonce_action, 'nonce', false )
 			&& IMP_Capabilities::user_can( $capability_action )
-			&& ( 'POST' === strtoupper( isset( $_SERVER['REQUEST_METHOD'] ) ? (string) $_SERVER['REQUEST_METHOD'] : '' ) );
+			&& ( 'POST' === strtoupper( isset( $_SERVER['REQUEST_METHOD'] ) ? sanitize_text_field( wp_unslash( (string) $_SERVER['REQUEST_METHOD'] ) ) : '' ) );
 
 		if ( ! $ok ) {
 			if ( class_exists( 'IMP_Hardening' ) ) {

@@ -142,6 +142,9 @@ final class IMP_Admin_Import {
 	 */
 	public static function ajax_upload() {
 		IMP_Security::ajax_guard( 'restore' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		if ( empty( $_FILES['package_file']['name'] ) ) {
 			wp_send_json_error( array( 'code' => 'IMP-301', 'message' => IMP_Job::error_text( 'IMP-301' ) ), 400 );
@@ -186,6 +189,9 @@ final class IMP_Admin_Import {
 	 */
 	public static function ajax_start() {
 		IMP_Security::ajax_guard( 'restore' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		$token = isset( $_POST['token'] ) ? preg_replace( '/[^a-zA-Z0-9]/', '', (string) wp_unslash( $_POST['token'] ) ) : '';
 		$info  = $token ? get_transient( 'imp_import_' . $token ) : false;

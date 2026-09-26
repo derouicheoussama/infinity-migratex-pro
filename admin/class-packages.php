@@ -148,6 +148,9 @@ final class IMP_Admin_Packages {
 	 */
 	public static function ajax_scan() {
 		IMP_Security::ajax_guard( 'restore' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		$upload_ok = false;
 
@@ -210,6 +213,9 @@ final class IMP_Admin_Packages {
 	 */
 	public static function ajax_start_import() {
 		IMP_Security::ajax_guard( 'restore' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		$file = isset( $_POST['file'] ) ? basename( sanitize_file_name( wp_unslash( (string) $_POST['file'] ) ) ) : '';
 		if ( '' === $file ) {
@@ -241,6 +247,9 @@ final class IMP_Admin_Packages {
 	 */
 	public static function ajax_action() {
 		IMP_Security::ajax_guard( 'restore' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		$do   = isset( $_POST['do'] ) ? sanitize_key( wp_unslash( $_POST['do'] ) ) : '';
 		$file = isset( $_POST['file'] ) ? basename( sanitize_file_name( wp_unslash( (string) $_POST['file'] ) ) ) : '';

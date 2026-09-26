@@ -68,6 +68,9 @@ final class IMP_Admin {
 	 */
 	public static function ajax_update_run() {
 		IMP_Security::ajax_guard( 'manage' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 		if ( ! current_user_can( 'update_plugins' ) ) {
 			wp_send_json_error( array( 'message' => __( 'You are not allowed to update plugins.', 'infinity-migratex-pro' ) ), 403 );
 		}
@@ -166,6 +169,9 @@ final class IMP_Admin {
 	 */
 	public static function ajax_update_check() {
 		IMP_Security::ajax_guard( 'manage' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		$status = array(
 			'installed' => IMP_VERSION,
@@ -860,6 +866,9 @@ final class IMP_Admin {
 	 */
 	public static function ajax_job_start() {
 		IMP_Security::ajax_guard( 'manage' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		$type = isset( $_POST['type'] ) ? sanitize_key( wp_unslash( $_POST['type'] ) ) : '';
 		$data = isset( $_POST['data'] ) ? json_decode( wp_unslash( (string) $_POST['data'] ), true ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- JSON structuré validé ensuite.
@@ -912,6 +921,9 @@ final class IMP_Admin {
 	 */
 	public static function ajax_job_step() {
 		IMP_Security::ajax_guard( 'manage' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 		wp_send_json_success( array( 'status' => IMP_Job::step() ) );
 	}
 
@@ -922,6 +934,9 @@ final class IMP_Admin {
 	 */
 	public static function ajax_job_throttle() {
 		IMP_Security::ajax_guard( 'manage' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		$factor = isset( $_POST['factor'] ) ? (float) wp_unslash( $_POST['factor'] ) : 1.0; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- borné ci-dessous.
 		wp_send_json_success( array( 'status' => IMP_Job::throttle( $factor ) ) );
@@ -932,6 +947,9 @@ final class IMP_Admin {
 	 */
 	public static function ajax_job_cancel() {
 		IMP_Security::ajax_guard( 'manage' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 		wp_send_json_success( array( 'status' => IMP_Job::cancel() ) );
 	}
 
@@ -940,6 +958,9 @@ final class IMP_Admin {
 	 */
 	public static function ajax_job_status() {
 		IMP_Security::ajax_guard( 'manage' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 		wp_send_json_success( array( 'status' => IMP_Job::public_status() ) );
 	}
 
@@ -1087,7 +1108,7 @@ final class IMP_Admin {
 				(string) $row['size_bytes'],
 				(string) $row['message'],
 			);
-			echo implode( ',', array_map( array( __CLASS__, 'csv_field' ), $fields ) ) . "\r\n";
+				echo implode( ',', array_map( array( __CLASS__, 'csv_field' ), $fields ) ) . "\r\n"; // phpcs:ignore WordPress.Security.EscapeOutput -- export CSV brut (attachment/nosniff), esc_html corromprait les données.
 		}
 		exit;
 	}

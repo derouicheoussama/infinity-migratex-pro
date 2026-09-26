@@ -1384,8 +1384,8 @@ final class IMP_Job {
 			wp_die( 'no job', '', array( 'response' => 204 ) );
 		}
 
-		$job_id = isset( $_GET['job'] ) ? sanitize_text_field( (string) $_GET['job'] ) : '';
-		$token  = isset( $_GET['token'] ) ? preg_replace( '/[^a-zA-Z0-9]/', '', (string) $_GET['token'] ) : '';
+		$job_id = isset( $_GET['job'] ) ? sanitize_text_field( wp_unslash( (string) $_GET['job'] ) ) : '';
+		$token  = isset( $_GET['token'] ) ? preg_replace( '/[^a-zA-Z0-9]/', '', (string) wp_unslash( $_GET['token'] ) ) : '';
 
 		if ( $job_id !== $job['id'] || ! hash_equals( (string) $job['token'], $token ) ) {
 			wp_die( 'forbidden', '', array( 'response' => 403 ) );

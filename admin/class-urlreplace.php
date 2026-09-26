@@ -84,9 +84,12 @@ final class IMP_Admin_URLReplace {
 	 */
 	public static function ajax_preview() {
 		IMP_Security::ajax_guard( 'manage' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
 
-		$from = isset( $_POST['from'] ) ? trim( (string) wp_unslash( $_POST['from'] ) ) : '';
-		$to   = isset( $_POST['to'] ) ? trim( (string) wp_unslash( $_POST['to'] ) ) : '';
+
+		$from = isset( $_POST['from'] ) ? sanitize_text_field( wp_unslash( $_POST['from'] ) ) : '';
+		$to   = isset( $_POST['to'] ) ? sanitize_text_field( wp_unslash( $_POST['to'] ) ) : '';
 
 		if ( strlen( $from ) < 3 || '' === $to || $from === $to ) {
 			wp_send_json_error( array( 'code' => 'IMP-210', 'message' => IMP_Job::error_text( 'IMP-210' ) ), 422 );
@@ -109,9 +112,12 @@ final class IMP_Admin_URLReplace {
 	 */
 	public static function ajax_start() {
 		IMP_Security::ajax_guard( 'manage' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
 
-		$from = isset( $_POST['from'] ) ? trim( (string) wp_unslash( $_POST['from'] ) ) : '';
-		$to   = isset( $_POST['to'] ) ? trim( (string) wp_unslash( $_POST['to'] ) ) : '';
+
+		$from = isset( $_POST['from'] ) ? sanitize_text_field( wp_unslash( $_POST['from'] ) ) : '';
+		$to   = isset( $_POST['to'] ) ? sanitize_text_field( wp_unslash( $_POST['to'] ) ) : '';
 		$json = empty( $_POST['json'] ) ? 0 : 1;
 		$dry  = empty( $_POST['dry_run'] ) ? 0 : 1;
 

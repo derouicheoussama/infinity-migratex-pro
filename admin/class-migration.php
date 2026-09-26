@@ -226,6 +226,9 @@ final class IMP_Admin_Migration {
 	 */
 	public static function ajax_preflight() {
 		IMP_Security::ajax_guard( 'manage' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		$config = self::collect_config();
 		$result = IMP_Migrator::preflight( $config );
@@ -238,6 +241,9 @@ final class IMP_Admin_Migration {
 	 */
 	public static function ajax_start() {
 		IMP_Security::ajax_guard( 'manage' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		$config = self::collect_config();
 

@@ -29,7 +29,7 @@ final class IMP_Admin_Restore {
 		IMP_Admin::page_open( 'restore' );
 
 		$backups = IMP_Backup_Engine::all();
-		$preselect = isset( $_GET['backup'] ) ? IMP_Backup_Engine::sanitize_id( wp_unslash( $_GET['backup'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- navigation.
+		$preselect = isset( $_GET['backup'] ) ? IMP_Backup_Engine::sanitize_id( sanitize_text_field( wp_unslash( $_GET['backup'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- navigation.
 		?>
 		<section class="imp-panel">
 			<div class="imp-panel-head"><h3><?php esc_html_e( 'Restore assistant', 'infinity-migratex-pro' ); ?></h3></div>

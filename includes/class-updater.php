@@ -12,6 +12,14 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * ⚠️ PLUGIN CHECK — ce fichier est VOLONTAIREMENT exclu du paquet
+ * WordPress.org (build-zips.php le retire du zip wporg, vérifié par les
+ * checks « sans updater »). Les sniffs plugin_updater_detected /
+ * update_modification_detected ne s'appliquent donc qu'au scan du
+ * dossier de développement, pas au paquet soumis.
+ */
+
+/**
  * Mises à jour automatiques depuis GitHub Releases.
  *
  * - Vérifie la dernière release (cache 12 h, uniquement en admin).

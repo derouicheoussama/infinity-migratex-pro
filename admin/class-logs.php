@@ -186,6 +186,9 @@ final class IMP_Admin_Logs {
 	 */
 	public static function ajax_action() {
 		IMP_Security::ajax_guard( 'logs' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		$do = isset( $_POST['do'] ) ? sanitize_key( wp_unslash( $_POST['do'] ) ) : '';
 

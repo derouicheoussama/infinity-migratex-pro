@@ -42,7 +42,7 @@ final class IMP_Hardening {
 	 */
 	private static function client_id() {
 		$user = get_current_user_id();
-		$ip   = isset( $_SERVER['REMOTE_ADDR'] ) ? preg_replace( '/[^0-9a-fA-F:.]/', '', (string) $_SERVER['REMOTE_ADDR'] ) : '';
+		$ip   = isset( $_SERVER['REMOTE_ADDR'] ) ? preg_replace( '/[^0-9a-fA-F:.]/', '', (string) wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
 		return substr( md5( $user . '|' . $ip ), 0, 16 );
 	}
 

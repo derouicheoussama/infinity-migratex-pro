@@ -128,6 +128,9 @@ final class IMP_Admin_Tools {
 	 */
 	public static function ajax_action() {
 		IMP_Security::ajax_guard( 'manage' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		$do = isset( $_POST['do'] ) ? sanitize_key( wp_unslash( $_POST['do'] ) ) : '';
 
@@ -209,6 +212,9 @@ final class IMP_Admin_Tools {
 	 */
 	public static function ajax_system_check() {
 		IMP_Security::ajax_guard( 'manage' );
+		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		check_ajax_referer( 'imp-admin', 'nonce', false );
+
 
 		delete_transient( 'imp_site_stats' );
 		$checks = IMP_Compatibility::health_checks();

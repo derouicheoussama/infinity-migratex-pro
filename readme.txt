@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.12.0
+Stable tag: 3.12.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,12 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.12.1 =
+
+* Plugin Check: all 17 errors fixed — ordered translation placeholders (WooCommerce inventory), development tools moved out of the plugin folder, .gitignore removed (rules kept in local git excludes), CSV export and health badges properly escaped.
+* Plugin Check: explicit nonce verification added to all 34 AJAX handlers; every flagged input (REMOTE_ADDR, REQUEST_METHOD, job id/token, backup preselect, from/to) is now unslashed and sanitized.
+* The remaining "plugin updater" notice only concerns the development copy of the updater module, which is still excluded from the WordPress.org package.
 
 = 3.12.0 =
 
