@@ -230,45 +230,58 @@ final class IMP_Checkout {
 						<p class="imp-co-note"><?php esc_html_e( 'No account needed — the license is delivered by e-mail right after payment.', 'infinity-migratex-pro' ); ?></p>
 					</section>
 
-					<!-- Étape 3 : paiement. -->
-					<section data-imp-co-step="3" hidden>
-						<div class="imp-co-summary">
-							<h3><?php esc_html_e( 'Order summary', 'infinity-migratex-pro' ); ?></h3>
-							<dl>
-								<div><dt><?php esc_html_e( 'Plan', 'infinity-migratex-pro' ); ?></dt><dd data-imp-co-sum-plan>—</dd></div>
-								<div><dt><?php esc_html_e( 'Billing', 'infinity-migratex-pro' ); ?></dt><dd data-imp-co-sum-billing>—</dd></div>
-								<div><dt><?php esc_html_e( 'Sites', 'infinity-migratex-pro' ); ?></dt><dd data-imp-co-sum-sites>—</dd></div>
-								<div><dt><?php esc_html_e( 'Name', 'infinity-migratex-pro' ); ?></dt><dd data-imp-co-sum-name>—</dd></div>
-								<div><dt><?php esc_html_e( 'E-mail', 'infinity-migratex-pro' ); ?></dt><dd data-imp-co-sum-email>—</dd></div>
-								<div class="imp-co-total"><dt><?php esc_html_e( 'Total', 'infinity-migratex-pro' ); ?></dt><dd data-imp-co-sum-total>—</dd></div>
-							</dl>
-						</div>
+						<!-- Étape 3 : paiement. -->
+						<section data-imp-co-step="3" hidden>
+							<div class="imp-co-summary">
+								<h3><?php esc_html_e( 'Order summary', 'infinity-migratex-pro' ); ?></h3>
+								<dl>
+									<div><dt><?php esc_html_e( 'Plan', 'infinity-migratex-pro' ); ?></dt><dd data-imp-co-sum-plan>—</dd></div>
+									<div><dt><?php esc_html_e( 'Billing', 'infinity-migratex-pro' ); ?></dt><dd data-imp-co-sum-billing>—</dd></div>
+									<div><dt><?php esc_html_e( 'Sites', 'infinity-migratex-pro' ); ?></dt><dd data-imp-co-sum-sites>—</dd></div>
+									<div><dt><?php esc_html_e( 'Name', 'infinity-migratex-pro' ); ?></dt><dd data-imp-co-sum-name>—</dd></div>
+									<div><dt><?php esc_html_e( 'E-mail', 'infinity-migratex-pro' ); ?></dt><dd data-imp-co-sum-email>—</dd></div>
+									<div class="imp-co-total"><dt><?php esc_html_e( 'Total', 'infinity-migratex-pro' ); ?></dt><dd data-imp-co-sum-total>—</dd></div>
+								</dl>
+							</div>
 
-						<?php if ( '' !== INFINITY_MIGRATEX_PRO_CHECKOUT_URL ) : ?>
-							<a class="imp-btn imp-btn-primary imp-co-pay" href="<?php echo esc_url( INFINITY_MIGRATEX_PRO_CHECKOUT_URL ); ?>" target="_blank" rel="noopener noreferrer">🔒 <?php esc_html_e( 'Pay securely online', 'infinity-migratex-pro' ); ?></a>
-							<p class="imp-co-note"><?php esc_html_e( 'After payment, come back here and activate the license key you received by e-mail.', 'infinity-migratex-pro' ); ?></p>
-						<?php else : ?>
-							<div class="imp-co-order">
-								<p class="imp-co-note" style="margin-top:0;"><?php esc_html_e( 'Pay by order — send your order details with one click and receive your license key by e-mail:', 'infinity-migratex-pro' ); ?></p>
-								<div class="imp-co-pay-alt">
-									<?php if ( '' !== INFINITY_MIGRATEX_PRO_SALES_EMAIL ) : ?>
-										<button type="button" class="imp-btn imp-btn-primary" data-imp-order-channel="email" data-sales="<?php echo esc_attr( INFINITY_MIGRATEX_PRO_SALES_EMAIL ); ?>">✉ <?php esc_html_e( 'Order by e-mail', 'infinity-migratex-pro' ); ?></button>
-									<?php endif; ?>
-									<?php if ( '' !== INFINITY_MIGRATEX_PRO_SALES_WHATSAPP ) : ?>
-										<button type="button" class="imp-btn imp-btn-primary" data-imp-order-channel="whatsapp" data-sales="<?php echo esc_attr( INFINITY_MIGRATEX_PRO_SALES_WHATSAPP ); ?>">💬 <?php esc_html_e( 'Order by WhatsApp', 'infinity-migratex-pro' ); ?></button>
+							<?php /* Bureau de commandes : envoi de la commande au
+							 * serveur de licences + suivi automatique — quand
+							 * l'admin approuve le paiement, PRO s'active ici. */ ?>
+							<?php if ( '' !== INFINITY_MIGRATEX_PRO_LICENSE_API ) : ?>
+								<div class="imp-co-order" style="background:#eef3ff;border:1px solid #c4d3f6;border-radius:10px;padding:12px 14px;margin-bottom:12px;">
+									<p style="margin:0 0 8px;display:flex;gap:10px;flex-wrap:wrap;">
+										<button type="button" class="imp-btn imp-btn-primary" data-imp-order-send>📨 <?php esc_html_e( 'Send my order', 'infinity-migratex-pro' ); ?></button>
+										<button type="button" class="imp-btn imp-btn-primary" data-imp-order-check hidden>💳 <?php esc_html_e( 'I have paid - check', 'infinity-migratex-pro' ); ?></button>
+									</p>
+									<p class="description" style="margin:0;" data-imp-order-status><?php esc_html_e( 'Send your order - you receive an order reference - then pay. Once your payment is approved, click the check button and PRO activates by itself.', 'infinity-migratex-pro' ); ?></p>
+								</div>
+							<?php endif; ?>
+
+							<?php if ( '' !== INFINITY_MIGRATEX_PRO_CHECKOUT_URL ) : ?>
+								<a class="imp-btn imp-btn-primary imp-co-pay" href="<?php echo esc_url( INFINITY_MIGRATEX_PRO_CHECKOUT_URL ); ?>" target="_blank" rel="noopener noreferrer">🔒 <?php esc_html_e( 'Pay securely online', 'infinity-migratex-pro' ); ?></a>
+								<p class="imp-co-note"><?php esc_html_e( 'After payment, come back here and activate the license key you received by e-mail.', 'infinity-migratex-pro' ); ?></p>
+							<?php else : ?>
+								<div class="imp-co-order">
+									<p class="imp-co-note" style="margin-top:0;"><?php esc_html_e( 'Pay by order - send your order details with one click and receive your license key by e-mail:', 'infinity-migratex-pro' ); ?></p>
+									<div class="imp-co-pay-alt">
+										<?php if ( '' !== INFINITY_MIGRATEX_PRO_SALES_EMAIL ) : ?>
+											<button type="button" class="imp-btn imp-btn-primary" data-imp-order-channel="email" data-sales="<?php echo esc_attr( INFINITY_MIGRATEX_PRO_SALES_EMAIL ); ?>">✉ <?php esc_html_e( 'Order by e-mail', 'infinity-migratex-pro' ); ?></button>
+										<?php endif; ?>
+										<?php if ( '' !== INFINITY_MIGRATEX_PRO_SALES_WHATSAPP ) : ?>
+											<button type="button" class="imp-btn imp-btn-primary" data-imp-order-channel="whatsapp" data-sales="<?php echo esc_attr( INFINITY_MIGRATEX_PRO_SALES_WHATSAPP ); ?>">💬 <?php esc_html_e( 'Order by WhatsApp', 'infinity-migratex-pro' ); ?></button>
+										<?php endif; ?>
+									</div>
+									<?php if ( '' === INFINITY_MIGRATEX_PRO_SALES_EMAIL && '' === INFINITY_MIGRATEX_PRO_SALES_WHATSAPP ) : ?>
+										<p class="imp-co-note"><?php esc_html_e( 'Online checkout is being set up. Meanwhile: copy your order details below and send them via the author website - or continue to activation if you already have a key.', 'infinity-migratex-pro' ); ?></p>
 									<?php endif; ?>
 								</div>
-								<?php if ( '' === INFINITY_MIGRATEX_PRO_SALES_EMAIL && '' === INFINITY_MIGRATEX_PRO_SALES_WHATSAPP ) : ?>
-									<p class="imp-co-note"><?php esc_html_e( 'Online checkout is being set up. Meanwhile: copy your order details below and send them via the author’s website — or continue to activation if you already have a key.', 'infinity-migratex-pro' ); ?></p>
-								<?php endif; ?>
-							</div>
-						<?php endif; ?>
+							<?php endif; ?>
 
-						<div class="imp-co-pay-alt">
-							<button type="button" class="imp-btn imp-btn-ghost" data-imp-co-copy>⧉ <?php esc_html_e( 'Copy order details', 'infinity-migratex-pro' ); ?></button>
-							<a class="imp-btn imp-btn-ghost" href="<?php echo esc_url( IMP_License::checkout_url() ); ?>" target="_blank" rel="noopener noreferrer">↗ <?php esc_html_e( 'Open the order page', 'infinity-migratex-pro' ); ?></a>
-						</div>
-					</section>
+							<div class="imp-co-pay-alt">
+								<button type="button" class="imp-btn imp-btn-ghost" data-imp-co-copy>⧉ <?php esc_html_e( 'Copy order details', 'infinity-migratex-pro' ); ?></button>
+								<a class="imp-btn imp-btn-ghost" href="<?php echo esc_url( IMP_License::checkout_url() ); ?>" target="_blank" rel="noopener noreferrer">↗ <?php esc_html_e( 'Open the order page', 'infinity-migratex-pro' ); ?></a>
+							</div>
+						</section>
 
 					<!-- Étape 4 : activation. -->
 					<section data-imp-co-step="4" hidden>

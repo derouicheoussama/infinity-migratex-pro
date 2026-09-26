@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.13.0
+Stable tag: 3.14.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,11 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.14.0 =
+
+* New: complete self-service purchase procedure — the wizard's payment step can send your order to the license desk (you receive an order reference), and once the payment is approved the "I have paid — check" button fetches your license key and activates PRO automatically, without leaving the page.
+* The order reference is remembered on the site, so you can come back later and check again.
 
 = 3.13.0 =
 

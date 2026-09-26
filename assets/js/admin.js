@@ -2135,6 +2135,61 @@
 			copyBtn.addEventListener('click', function () { coCopy(coOrderText()); });
 		}
 
+		/* Bureau de commandes : envoi + suivi automatique jusqu'à
+		 * l'activation (quand le serveur de licences est branché). */
+		var orderSend = co$('[data-imp-order-send]');
+		var orderCheck = co$('[data-imp-order-check]');
+		var orderStatus = co$('[data-imp-order-status]');
+
+		function orderStep1() {
+			if (!coValidate()) { return; }
+			var f = coFields();
+			orderSend.disabled = true;
+			ajax('imp_license_order', {
+				plan: coState.plan,
+				billing: coState.billing,
+				name: f.name,
+				email: f.email
+			}).then(function (json) {
+				orderSend.disabled = false;
+				if (json && json.success) {
+					if (orderCheck) { orderCheck.hidden = false; }
+					if (orderStatus) { orderStatus.textContent = json.data.message; }
+					toast(json.data.message, 'success');
+				} else {
+					toast((json && json.data && json.data.message) || i18n.error, 'error');
+				}
+			}).catch(function () {
+				orderSend.disabled = false;
+				toast(i18n.networkError, 'error');
+			});
+		}
+		if (orderSend) {
+			orderSend.addEventListener('click', orderStep1);
+		}
+
+		function orderPoll() {
+			if (orderCheck) { orderCheck.disabled = true; }
+			ajax('imp_license_order_check', {}).then(function (json) {
+				if (orderCheck) { orderCheck.disabled = false; }
+				var d = json && json.data ? json.data : {};
+				if (json && json.success && d.status === 'paid') {
+					toast(d.message, 'success');
+					impConfetti('order-pro');
+					coShowSuccess();
+					return;
+				}
+				if (orderStatus) { orderStatus.textContent = d.message || i18n.error; }
+				toast(d.message || i18n.error, 'warning');
+			}).catch(function () {
+				if (orderCheck) { orderCheck.disabled = false; }
+				toast(i18n.networkError, 'error');
+			});
+		}
+		if (orderCheck) {
+			orderCheck.addEventListener('click', orderPoll);
+		}
+
 		/* Canaux de commande manuelle (e-mail / WhatsApp) — les
 		 * coordonnées de vente viennent des constantes du build. */
 		co$$('[data-imp-order-channel]').forEach(function (btn) {

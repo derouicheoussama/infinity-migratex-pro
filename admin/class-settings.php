@@ -880,6 +880,110 @@ final class IMP_Admin_Settings {
 	}
 
 	/**
+	 * AJAX : envoie la commande au bureau de commandes du serveur de
+	 * licences (renvoie une référence de suivi, ex : ORD-XXXXXXXX).
+	 */
+	public static function ajax_license_order() {
+		IMP_Security::ajax_guard( 'settings' );
+
+		if ( '' === INFINITY_MIGRATEX_PRO_LICENSE_API ) {
+			wp_send_json_error( array( 'message' => __( 'The license desk is not configured on this build.', 'infinity-migratex-pro' ) ), 409 );
+		}
+
+		$plan    = ( isset( $_POST['plan'] ) && 'business' === $_POST['plan'] ) ? 'business' : 'personal'; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- whitelist ci-dessus.
+		$billing = ( isset( $_POST['billing'] ) && in_array( $_POST['billing'], array( 'yearly', 'lifetime' ), true ) ) ? sanitize_key( $_POST['billing'] ) : 'yearly';
+		$name    = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( (string) $_POST['name'] ) ) : '';
+		$email   = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( (string) $_POST['email'] ) ) : '';
+		$site    = home_url();
+
+		if ( '' === $name || '' === $email ) {
+			wp_send_json_error( array( 'message' => __( 'Name and e-mail are required.', 'infinity-migratex-pro' ) ), 422 );
+		}
+
+		$response = wp_remote_post(
+			INFINITY_MIGRATEX_PRO_LICENSE_API,
+			array(
+				'timeout' => 15,
+				'body'    => array(
+					'do'     => 'order',
+					'plan'   => $plan,
+					'billing' => $billing,
+					'name'   => $name,
+					'email'  => $email,
+					'site'   => $site,
+				),
+			)
+		);
+		$body = is_wp_error( $response ) ? null : json_decode( wp_remote_retrieve_body( $response ), true );
+		if ( is_wp_error( $response ) || ! is_array( $body ) || empty( $body['order'] ) ) {
+			wp_send_json_error( array( 'message' => __( 'The license desk is unreachable — use the e-mail or WhatsApp order buttons instead.', 'infinity-migratex-pro' ) ), 502 );
+		}
+
+		set_transient( 'imp_order_ref', (string) $body['order'], 30 * DAY_IN_SECONDS );
+		wp_send_json_success( array(
+			'message' => sprintf(
+				/* translators: %s: order reference */
+				__( 'Order %s sent. After payment, click “I have paid — check” to activate automatically.', 'infinity-migratex-pro' ),
+				(string) $body['order']
+			),
+			'ref' => (string) $body['order'],
+		) );
+	}
+
+	/**
+	 * AJAX : vérifie le statut de la commande — si l'admin l'a approuvée
+	 * (paiement reçu), la clé est récupérée et ACTIVÉE immédiatement :
+	 * le site bascule en Pro sans quitter la page.
+	 */
+	public static function ajax_license_order_check() {
+		IMP_Security::ajax_guard( 'settings' );
+
+		if ( '' === INFINITY_MIGRATEX_PRO_LICENSE_API ) {
+			wp_send_json_error( array( 'message' => __( 'The license desk is not configured on this build.', 'infinity-migratex-pro' ) ), 409 );
+		}
+
+		$ref = get_transient( 'imp_order_ref' );
+		if ( ! is_string( $ref ) || '' === $ref ) {
+			wp_send_json_error( array( 'message' => __( 'No pending order — send your order first.', 'infinity-migratex-pro' ) ), 409 );
+		}
+
+		$response = wp_remote_post(
+			INFINITY_MIGRATEX_PRO_LICENSE_API,
+			array(
+				'timeout' => 15,
+				'body'    => array(
+					'do'  => 'order_status',
+					'ref' => $ref,
+				),
+			)
+		);
+		$body = is_wp_error( $response ) ? null : json_decode( wp_remote_retrieve_body( $response ), true );
+		if ( is_wp_error( $response ) || ! is_array( $body ) || empty( $body['status'] ) ) {
+			wp_send_json_error( array( 'message' => __( 'License desk unreachable — try again shortly.', 'infinity-migratex-pro' ) ), 502 );
+		}
+
+		if ( 'paid' !== $body['status'] || empty( $body['key'] ) ) {
+			wp_send_json_success( array(
+				'status'  => 'pending',
+				'message' => __( 'Payment not confirmed yet — we will keep checking. The reference is saved on this site.', 'infinity-migratex-pro' ),
+			) );
+		}
+
+		// Paiement confirmé : activer la clé délivrée (validation serveur
+		// + liaison de domaine via le canal activate standard).
+		$result = IMP_License::activate( (string) $body['key'] );
+		if ( ! $result['ok'] ) {
+			wp_send_json_error( array( 'message' => $result['message'] ), 422 );
+		}
+
+		delete_transient( 'imp_order_ref' );
+		wp_send_json_success( array(
+			'status'  => 'paid',
+			'message' => __( 'Payment confirmed — PRO is now active on this site!', 'infinity-migratex-pro' ),
+		) );
+	}
+
+	/**
 	 * AJAX : démarre l'essai PRO de 14 jours (une seule fois par site).
 	 */
 	public static function ajax_start_trial() {
