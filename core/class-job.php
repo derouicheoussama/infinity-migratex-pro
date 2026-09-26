@@ -248,6 +248,12 @@ final class IMP_Job {
 		self::$job = $job;
 		delete_transient( 'imp_job_lock' );
 
+		// Journal Google Sheets (Pro) : l'opération terminée est ajoutée
+		// comme ligne dans la Sheet de suivi — non bloquant, silencieux.
+		if ( self::STATUS_COMPLETED === $job['status'] && class_exists( 'IMP_Sheets' ) ) {
+			IMP_Sheets::log_job( $job );
+		}
+
 		// Job en arrière-plan (cron) : relancer la chaîne asynchrone.
 		if ( 'cron' === $job['origin'] && self::STATUS_RUNNING === $job['status'] ) {
 			self::kick_background( $job );

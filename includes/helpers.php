@@ -782,6 +782,12 @@ function imp_default_settings() {
 		// Sauvegarde de sécurité automatique avant mise à jour WP (Pro).
 		'preupdate_backup'             => 1,
 
+		// Google Sheets (Pro) — journal automatique des opérations.
+		'sheets_enabled'               => 0,
+		'sheets_id'                    => '',
+		'sheets_name'                  => 'Backups',
+		'sheets_json'                  => '',
+
 		// WooCommerce : tables éphémères exclues des dumps.
 		'wc_skip_sessions'             => 1,
 		'wc_skip_scheduler'            => 1,

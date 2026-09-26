@@ -34,7 +34,7 @@ final class IMP_Admin_Settings {
 
 		$settings = imp_settings();
 		$tab      = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'general'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( ! in_array( $tab, array( 'general', 'migration', 'backup', 'cloud', 'security', 'performance', 'logs', 'advanced' ), true ) ) {
+		if ( ! in_array( $tab, array( 'general', 'migration', 'backup', 'cloud', 'sheets', 'security', 'performance', 'logs', 'advanced' ), true ) ) {
 			$tab = 'general';
 		}
 
@@ -43,6 +43,7 @@ final class IMP_Admin_Settings {
 			'migration'   => __( 'Migration', 'infinity-migratex-pro' ),
 			'backup'      => __( 'Backup', 'infinity-migratex-pro' ),
 			'cloud'       => __( 'Cloud (Pro)', 'infinity-migratex-pro' ),
+			'sheets'      => __( 'Google Sheets (Pro)', 'infinity-migratex-pro' ),
 			'security'    => __( 'Security', 'infinity-migratex-pro' ),
 			'performance' => __( 'Performance', 'infinity-migratex-pro' ),
 			'logs'        => __( 'Logs', 'infinity-migratex-pro' ),
@@ -54,6 +55,7 @@ final class IMP_Admin_Settings {
 			'migration'   => 'tab_migration',
 			'backup'      => 'tab_backup',
 			'cloud'       => 'tab_cloud',
+			'sheets'      => 'tab_sheets',
 			'security'    => 'tab_security',
 			'performance' => 'tab_performance',
 			'logs'        => 'tab_logs',
@@ -472,6 +474,56 @@ final class IMP_Admin_Settings {
 	}
 
 	/**
+	 * Onglet Google Sheets (Pro) — journal automatique des opérations.
+	 */
+	private static function tab_sheets( $settings ) {
+		$is_pro = IMP_License::is_pro();
+		?>
+		<?php if ( ! $is_pro ) : ?>
+			<div class="imp-notice imp-notice-info">
+				<strong>★ <?php esc_html_e( 'Pro feature', 'infinity-migratex-pro' ); ?></strong> —
+				<?php esc_html_e( 'Track every backup, restore, migration and import automatically in a Google Sheet. Set it up in two minutes with a free Google service account.', 'infinity-migratex-pro' ); ?>
+				<button type="button" class="imp-btn imp-btn-primary" style="margin-left:8px;" data-imp-checkout="personal">★ <?php esc_html_e( 'Go Pro', 'infinity-migratex-pro' ); ?></button>
+			</div>
+		<?php endif; ?>
+		<table class="form-table imp-form" role="presentation">
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Google Sheets tracking', 'infinity-migratex-pro' ); ?></th>
+				<td>
+					<label class="imp-switch"><input type="checkbox" name="imp_settings[sheets_enabled]" value="1" <?php checked( ! empty( $settings['sheets_enabled'] ) ); ?> <?php disabled( ! $is_pro ); ?>><span class="imp-switch-slider"></span></label>
+					<p class="description"><?php esc_html_e( 'Adds a row to your spreadsheet after every completed operation: date, type, name, site, files, size, duration, status.', 'infinity-migratex-pro' ); ?></p>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Spreadsheet ID', 'infinity-migratex-pro' ); ?></th>
+				<td>
+					<input type="text" class="regular-text" name="imp_settings[sheets_id]" value="<?php echo esc_attr( $settings['sheets_id'] ); ?>" autocomplete="off" <?php disabled( ! $is_pro ); ?>>
+					<p class="description"><?php esc_html_e( 'The long ID in the sheet URL: docs.google.com/spreadsheets/d/THIS_ID/edit — share the sheet with the service account e-mail (Editor).', 'infinity-migratex-pro' ); ?></p>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Sheet (tab) name', 'infinity-migratex-pro' ); ?></th>
+				<td><input type="text" class="regular-text" name="imp_settings[sheets_name]" value="<?php echo esc_attr( $settings['sheets_name'] ); ?>" <?php disabled( ! $is_pro ); ?>></td>
+			</tr>
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Service account JSON', 'infinity-migratex-pro' ); ?></th>
+				<td>
+					<textarea class="imp-textarea" rows="6" name="imp_settings[sheets_json]" autocomplete="off" <?php disabled( ! $is_pro ); ?>><?php echo esc_textarea( $settings['sheets_json'] ); ?></textarea>
+					<p class="description"><?php esc_html_e( 'Google Cloud → Service account → Keys → JSON. Stored encrypted; never leaves this site. Share the target sheet with the service account e-mail.', 'infinity-migratex-pro' ); ?></p>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Connection', 'infinity-migratex-pro' ); ?></th>
+				<td>
+					<button type="button" class="imp-btn imp-btn-ghost" data-imp-action="sheets-test" <?php disabled( ! $is_pro ); ?>>⟳ <?php esc_html_e( 'Send a test row', 'infinity-migratex-pro' ); ?></button>
+					<span data-imp-sheets-test-result class="imp-muted"></span>
+				</td>
+			</tr>
+		</table>
+		<?php
+	}
+
+	/**
 	 * Onglet sécurité.
 	 */
 	private static function tab_security( $settings ) {
@@ -669,7 +721,7 @@ final class IMP_Admin_Settings {
 		$clean['default_exclusions'] = implode( "\n", $clean['default_exclusions'] );
 
 		// Bascules.
-		foreach ( array( 'auto_cleanup', 'confirm_destructive', 'compression', 'backup_schedule_enabled', 'urlreplace_in_json', 'secure_tmp', 'admin_notifications', 'debug_mode', 'delete_data_on_uninstall', 'preupdate_backup' ) as $flag ) {
+		foreach ( array( 'auto_cleanup', 'confirm_destructive', 'compression', 'backup_schedule_enabled', 'urlreplace_in_json', 'secure_tmp', 'admin_notifications', 'debug_mode', 'delete_data_on_uninstall', 'preupdate_backup', 'sheets_enabled' ) as $flag ) {
 			$clean[ $flag ] = empty( $input[ $flag ] ) ? 0 : 1;
 		}
 
@@ -722,9 +774,17 @@ final class IMP_Admin_Settings {
 		$clean['cloud_ftp_ssl']         = empty( $input['cloud_ftp_ssl'] ) ? 0 : 1;
 		$clean['cloud_ftp_passive']     = empty( $input['cloud_ftp_passive'] ) ? 0 : 1;
 
+		// Google Sheets (Pro).
+		$clean['sheets_id']   = sanitize_text_field( isset( $input['sheets_id'] ) ? (string) $input['sheets_id'] : '' );
+		$clean['sheets_name'] = sanitize_text_field( isset( $input['sheets_name'] ) ? (string) $input['sheets_name'] : 'Backups' );
+		if ( '' === $clean['sheets_name'] ) {
+			$clean['sheets_name'] = 'Backups';
+		}
+
 		// Secrets : si le champ soumis est vide → conserver l'ancien ;
 		// sinon chiffrer la nouvelle valeur.
-		foreach ( array( 'cloud_drive_client_secret', 'cloud_drive_refresh', 'cloud_dropbox_token', 'cloud_ftp_pass' ) as $secret_key ) {
+		// Secrets chiffrés + JSON du compte de service Google Sheets.
+		foreach ( array( 'cloud_drive_client_secret', 'cloud_drive_refresh', 'cloud_dropbox_token', 'cloud_ftp_pass', 'sheets_json' ) as $secret_key ) {
 			$submitted = isset( $input[ $secret_key ] ) ? trim( (string) $input[ $secret_key ] ) : '';
 			if ( '' === $submitted ) {
 				$clean[ $secret_key ] = isset( $clean[ $secret_key ] ) ? $clean[ $secret_key ] : '';
@@ -782,6 +842,35 @@ final class IMP_Admin_Settings {
 	}
 
 	/**
+	 * AJAX : ajoute une ligne de test dans la Google Sheet (Pro).
+	 */
+	public static function ajax_sheets_test() {
+		IMP_Security::ajax_guard( 'settings' );
+
+		if ( ! IMP_License::is_pro() ) {
+			wp_send_json_error( array( 'code' => 'IMP-241', 'message' => IMP_Job::error_text( 'IMP-241' ) ), 402 );
+		}
+
+		$result = IMP_Sheets::append_row( array(
+			gmdate( 'Y-m-d H:i:s' ),
+			__( 'Connection test', 'infinity-migratex-pro' ),
+			'test',
+			'—',
+			(string) home_url(),
+			'',
+			'',
+			'',
+			(string) IMP_VERSION,
+			'OK',
+		) );
+
+		if ( ! $result['ok'] ) {
+			wp_send_json_error( array( 'message' => $result['message'] ), 422 );
+		}
+		wp_send_json_success( array( 'message' => $result['message'] ) );
+	}
+
+	/**
 	 * AJAX : démarre l'essai PRO de 14 jours (une seule fois par site).
 	 */
 	public static function ajax_start_trial() {
@@ -806,6 +895,7 @@ final class IMP_Admin_Settings {
 			'cloud_drive_refresh',
 			'cloud_dropbox_token',
 			'cloud_ftp_pass',
+			'sheets_json',
 		);
 	}
 

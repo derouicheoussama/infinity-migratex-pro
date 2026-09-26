@@ -955,6 +955,26 @@
 			return;
 		}
 
+		/* ---- Google Sheets : test de connexion ---- */
+		if (action === 'sheets-test') {
+			busy(btn, true);
+			ajax('imp_sheets_test', {}).then(function (json) {
+				busy(btn, false);
+				var out = $('[data-imp-sheets-test-result]');
+				if (json && json.success) {
+					toast(json.data.message, 'success');
+					if (out) { out.textContent = '✓'; }
+				} else {
+					toast((json && json.data && json.data.message) || i18n.error, 'error');
+					if (out) { out.textContent = '✗'; }
+				}
+			}).catch(function () {
+				busy(btn, false);
+				toast(i18n.networkError, 'error');
+			});
+			return;
+		}
+
 		/* ---- WooCommerce : export depuis→vers ---- */
 		if (action === 'wc-export-snapshot' || action === 'wc-export-package') {
 			var what = action === 'wc-export-package' ? 'full site package (.infinitymigrate)' : 'database snapshot (all tables)';

@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.10.1
+Stable tag: 3.11.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,11 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.11.0 =
+
+* New (Pro): Google Sheets tracking — every completed backup, restore, migration and import is logged as a row in your Google Sheet (date, type, name, site, files, size, duration, status). Native Google API with a service account (JWT RS256), no Apps Script; the service account JSON is stored encrypted and the sheet is shared with the service account e-mail. Test-row button included.
+* The integration never breaks an operation: a Sheets failure is logged silently.
 
 = 3.10.1 =
 

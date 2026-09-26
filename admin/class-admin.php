@@ -812,6 +812,7 @@ final class IMP_Admin {
 			'imp_settings_save'        => array( 'IMP_Admin_Settings', 'ajax_save' ),
 			'imp_settings_save_all'    => array( 'IMP_Admin_Settings', 'ajax_save_all' ),
 			'imp_license_trial'        => array( 'IMP_Admin_Settings', 'ajax_start_trial' ),
+			'imp_sheets_test'          => array( 'IMP_Admin_Settings', 'ajax_sheets_test' ),
 			'imp_settings_export'      => array( 'IMP_Admin_Settings', 'ajax_settings_export' ),
 			'imp_settings_import'      => array( 'IMP_Admin_Settings', 'ajax_settings_import' ),
 			'imp_settings_reset'       => array( 'IMP_Admin_Settings', 'ajax_settings_reset' ),
