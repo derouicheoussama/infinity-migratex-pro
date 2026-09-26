@@ -163,7 +163,7 @@
 	/**
 	 * POST admin-ajax avec nonce + FormData.
 	 */
-	function ajax(action, data) {
+	function ajax(action, data, timeoutMs) {
 		var form = new FormData();
 		form.append('action', action);
 		form.append('nonce', cfg.nonce);
@@ -175,14 +175,25 @@
 				}
 			});
 		}
+		/* Timeout client : une requête suspendue (hébergeur qui coupe sans
+		 * répondre) doit échouer proprement vers la logique de reprise au
+		 * lieu de rester pendue indéfiniment. */
+		var controller = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+		var tid = controller ? window.setTimeout(function () { controller.abort(); }, timeoutMs || 120000) : null;
+		var cleanup = function () { if (tid) { window.clearTimeout(tid); } };
 		return fetch(cfg.ajaxUrl, {
 			method: 'POST',
 			credentials: 'same-origin',
-			body: form
+			body: form,
+			signal: controller ? controller.signal : undefined
 		}).then(function (response) {
+			cleanup();
 			return response.json().catch(function () {
 				throw new Error('bad-json');
 			});
+		}, function (err) {
+			cleanup();
+			throw err;
 		});
 	}
 
@@ -224,6 +235,8 @@
 		this.stopped = true;
 		this.onDone = null;
 		this.consecutiveErrors = 0;
+		this.probing = false;
+		this.throttleLevel = 0;
 	}
 
 	JobRunner.prototype.render = function (status) {
@@ -392,6 +405,7 @@
 			ajax('imp_job_step').then(function (json) {
 				if (self.stopped) { return; }
 				self.consecutiveErrors = 0;
+				self.probing = false;
 
 				if (json && json.success && json.data && json.data.status) {
 					self.render(json.data.status);
@@ -412,11 +426,71 @@
 					self.fail(json);
 				}
 			}).catch(function () {
-				self.fail(null);
+				self.transportFailure();
 			});
 		};
 
 		step();
+	};
+
+	/**
+	 * Échec de transport (requête tuée / réseau). AUTO-RÉPARATION :
+	 * après 2 échecs, on sonde avec une requête légère (imp_job_status) —
+	 * si elle répond, la connexion est vivante mais l'ÉTAPE est trop
+	 * lourde pour le timeout de l'hébergeur → on réduit l'effort par
+	 * requête (auto-throttle serveur : budget + taille des lots) et on
+	 * reprend. Sinon backoff exponentiel jusqu'à 5 essais avant pause.
+	 */
+	JobRunner.prototype.transportFailure = function () {
+		var self = this;
+		this.consecutiveErrors++;
+
+		if (this.consecutiveErrors === 1) {
+			toast(i18n.reconnecting || 'Connection unstable — retrying automatically…', 'info');
+		}
+
+		if (this.consecutiveErrors === 2 && !this.probing) {
+			this.probing = true;
+			ajax('imp_job_status', {}, 15000).then(function (json) {
+				self.probing = false;
+				var s = json && json.data && json.data.status;
+				if (s && s.status === 'running' && self.throttleLevel < 2) {
+					self.throttleLevel++;
+					var factor = self.throttleLevel === 1 ? 0.35 : 0.12;
+					ajax('imp_job_throttle', { factor: factor }, 15000).then(function () {
+						self.consecutiveErrors = 0;
+						if (!self.stopped) {
+							toast(self.throttleLevel === 1 ? 'Slow hosting detected — the operation adapts automatically.' : 'Reduced to minimum load — continuing.', 'info');
+							self.timer = window.setTimeout(function () { self.startLoop(); }, 1500);
+						}
+					}).catch(function () {
+						self.scheduleRetry();
+					});
+					return;
+				}
+				self.scheduleRetry();
+			}).catch(function () {
+				self.probing = false;
+				self.scheduleRetry();
+			});
+			return;
+		}
+
+		if (this.consecutiveErrors >= 5) {
+			this.stopped = true;
+			this.pause();
+			toast(i18n.networkError, 'warning');
+		} else {
+			this.scheduleRetry();
+		}
+	};
+
+	JobRunner.prototype.scheduleRetry = function () {
+		var self = this;
+		var backoff = Math.min(20000, 2500 * Math.pow(2, Math.max(0, this.consecutiveErrors - 1)));
+		this.timer = window.setTimeout(function () {
+			if (!self.stopped) { self.startLoop(); }
+		}, backoff);
 	};
 
 	JobRunner.prototype.fail = function (json) {
@@ -430,14 +504,12 @@
 			return;
 		}
 
-		if (this.consecutiveErrors >= 4) {
+		if (this.consecutiveErrors >= 5) {
 			this.stopped = true;
 			this.pause();
 			toast(i18n.networkError, 'warning');
 		} else {
-			this.timer = window.setTimeout(function () {
-				if (!self.stopped) { self.startLoop(); }
-			}, 2500);
+			this.scheduleRetry();
 		}
 	};
 

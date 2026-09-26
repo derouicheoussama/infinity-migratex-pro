@@ -444,6 +444,7 @@ final class IMP_Admin {
 					'close'           => __( 'Close', 'infinity-migratex-pro' ),
 					'error'           => __( 'Error', 'infinity-migratex-pro' ),
 					'networkError'    => __( 'Connection lost — the operation is paused automatically. Click Resume to continue.', 'infinity-migratex-pro' ),
+					'reconnecting'    => __( 'Unstable connection — the operation is retrying automatically…', 'infinity-migratex-pro' ),
 					'jobRunningOther' => __( 'Another operation is in progress on this site.', 'infinity-migratex-pro' ),
 					'starting'        => __( 'Starting…', 'infinity-migratex-pro' ),
 				),
@@ -721,6 +722,7 @@ final class IMP_Admin {
 		$actions = array(
 			'imp_job_start'            => array( __CLASS__, 'ajax_job_start' ),
 			'imp_job_step'             => array( __CLASS__, 'ajax_job_step' ),
+			'imp_job_throttle'         => array( __CLASS__, 'ajax_job_throttle' ),
 			'imp_job_cancel'           => array( __CLASS__, 'ajax_job_cancel' ),
 			'imp_job_status'           => array( __CLASS__, 'ajax_job_status' ),
 			'imp_migration_preflight'  => array( 'IMP_Admin_Migration', 'ajax_preflight' ),
@@ -840,6 +842,18 @@ final class IMP_Admin {
 	public static function ajax_job_step() {
 		IMP_Security::ajax_guard( 'manage' );
 		wp_send_json_success( array( 'status' => IMP_Job::step() ) );
+	}
+
+	/**
+	 * Auto-throttle : le runner réduit l'effort par requête quand
+	 * l'hébergeur tue les étapes trop lourdes (connexion coupée alors
+	 * que le site répond). Appelé par le JobRunner uniquement.
+	 */
+	public static function ajax_job_throttle() {
+		IMP_Security::ajax_guard( 'manage' );
+
+		$factor = isset( $_POST['factor'] ) ? (float) wp_unslash( $_POST['factor'] ) : 1.0; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- borné ci-dessous.
+		wp_send_json_success( array( 'status' => IMP_Job::throttle( $factor ) ) );
 	}
 
 	/**

@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.5.0
+Stable tag: 3.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,12 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.6.0 =
+
+* Fixed: "Connection lost" pauses on slow hosting — the runner now self-heals. After two dropped requests it probes with a lightweight status call: if the site answers, the connection is alive and the STEP was too heavy for the hosting timeout, so the runner automatically reduces the work per request (smaller time budget AND smaller batch sizes) and resumes by itself.
+* Resilience: exponential backoff between retries (2.5 s → 20 s, five attempts), a visible "retrying automatically" notice, and a client-side timeout so a hung request flows into the retry logic instead of hanging forever.
+* The pause message now only appears after five real failures — transient host blips and killed requests no longer stop operations.
 
 = 3.5.0 =
 

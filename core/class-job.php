@@ -166,9 +166,27 @@ final class IMP_Job {
 		}
 		set_transient( 'imp_job_lock', time(), 180 );
 
-		$budget = null === $budget ? self::budget() : (float) $budget;
+		$budget = null === $budget ? self::budget( $job ) : (float) $budget;
 		$step_start = microtime( true );
 		$messages   = array();
+
+		// Auto-throttle actif : réduire aussi la taille des lots lus dans
+		// les réglages (chunk_files / chunk_rows / chunk_db_rows) pour que
+		// chaque unité atomique repasse sous le timeout de l'hébergeur.
+		if ( isset( $job['state']['_budget_factor'] ) && (float) $job['state']['_budget_factor'] < 1 ) {
+			$throttle_factor = max( 0.1, min( 1.0, (float) $job['state']['_budget_factor'] ) );
+			add_filter(
+				'imp_setting_value',
+				static function ( $value, $key ) use ( $throttle_factor ) {
+					if ( in_array( $key, array( 'chunk_files', 'chunk_rows', 'chunk_db_rows' ), true ) ) {
+						$value = max( 10, (int) round( (int) $value * $throttle_factor ) );
+					}
+					return $value;
+				},
+				10,
+				2
+			);
+		}
 
 		try {
 			while ( ( microtime( true ) - $step_start ) <= $budget ) {
@@ -323,7 +341,7 @@ final class IMP_Job {
 	 * @return array{done?:bool,percent?:float,message?:string,error?:string}
 	 */
 	private static function run_phase_step( array &$job, $phase_key ) {
-		$budget = self::budget();
+		$budget = self::budget( $job );
 
 		switch ( $job['type'] . '/' . $phase_key ) {
 			/* ---------- Backup ---------- */
@@ -1313,11 +1331,40 @@ final class IMP_Job {
 	 *
 	 * @return float
 	 */
-	public static function budget() {
+	public static function budget( $job = null ) {
 		$setting = (int) imp_setting( 'max_execution', 20 );
 		$ini     = (int) ini_get( 'max_execution_time' );
 		$limit   = ( $ini > 0 ) ? max( 5, $ini - 5 ) : $setting;
-		return (float) max( 3, min( $setting, $limit, 25 ) );
+		$budget  = (float) max( 3, min( $setting, $limit, 25 ) );
+
+		// Auto-throttle : quand le runner détecte des requêtes tuées par
+		// l'hébergeur (connexion coupée alors que le site répond), il
+		// réduit l'effort PAR REQUÊTE — moins de travail par appel, donc
+		// chaque appel repasse sous le timeout de l'hébergement.
+		if ( is_array( $job ) && isset( $job['state']['_budget_factor'] ) ) {
+			$factor = max( 0.1, min( 1.0, (float) $job['state']['_budget_factor'] ) );
+			$budget = max( 2, $budget * $factor );
+		}
+		return $budget;
+	}
+
+	/**
+	 * Réduit l'effort par requête du job actif (auto-throttle du runner).
+	 * Le facteur réduit aussi les tailles de lots via le filtre
+	 * imp_setting_value (posé au début de step()).
+	 *
+	 * @param float $factor 0.1 → 1.0.
+	 * @return array Statut public.
+	 */
+	public static function throttle( $factor ) {
+		$job = self::get_active();
+		if ( null === $job ) {
+			return self::public_status();
+		}
+		$job['state']['_budget_factor'] = max( 0.1, min( 1.0, (float) $factor ) );
+		update_option( self::OPTION, $job, false );
+		self::$job = $job;
+		return self::public_status();
 	}
 
 	/**
@@ -1341,7 +1388,7 @@ final class IMP_Job {
 			wp_die( 'not allowed', '', array( 'response' => 403 ) );
 		}
 
-		self::step( self::budget() );
+		self::step( self::budget( $job ) );
 		wp_die( 'ok', '', array( 'response' => 204 ) );
 	}
 

@@ -15,7 +15,7 @@
  * Plugin Name:       Infinity MigrateX Pro
  * Plugin URI:        https://github.com/derouicheoussama/infinity-migratex-pro
  * Description:       Migrer, sauvegarder et restaurer un site WordPress sans timeout : changement de domaine avec URLs réécrites sans casser les données sérialisées, clonage staging, sauvegardes automatiques avec rétention, restauration vérifiée par checksums, scanner de sécurité et journal détaillé. Moteur par chunks avec reprise après interruption — WooCommerce et Elementor inclus.
- * Version:           3.5.0
+ * Version:           3.6.0
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Tested up to:      7.1
@@ -31,7 +31,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'IMP_VERSION', '3.5.0' );
+define( 'IMP_VERSION', '3.6.0' );
 define( 'IMP_DB_VERSION', '1.0.0' );
 define( 'IMP_FILE', __FILE__ );
 define( 'IMP_DIR', plugin_dir_path( __FILE__ ) );
@@ -735,5 +735,15 @@ function imp_settings() {
  */
 function imp_setting( $key, $fallback = null ) {
 	$settings = imp_settings();
-	return array_key_exists( $key, $settings ) ? $settings[ $key ] : $fallback;
+	$value    = array_key_exists( $key, $settings ) ? $settings[ $key ] : $fallback;
+
+	/**
+	 * Filtre une valeur de réglage à l'exécution — utilisé par
+	 * l'auto-throttle du moteur (réduction des lots sous le timeout
+	 * de l'hébergeur quand des requêtes d'étape sont tuées).
+	 *
+	 * @param mixed  $value Valeur courante.
+	 * @param string $key   Clé du réglage.
+	 */
+	return apply_filters( 'imp_setting_value', $value, $key );
 }
