@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.6.0
+Stable tag: 3.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,12 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.7.0 =
+
+* Fixed: a "Connection lost" pause is no longer terminal — after the pause, the runner probes the server every 45 seconds for up to 9 minutes and RESUMES the operation automatically (in conservative mode) as soon as the connection returns. The Resume button remains available for immediate manual resumption.
+* Resilience: retries now tolerate longer host shields (8 attempts, up to 30 s apart) — hosts that temporarily refuse requests after killing a long one no longer stop operations.
+* Fixed (SPA): navigating between pages no longer leaves duplicate background pollers behind, which could multiply request rates and trigger hosting rate limits.
 
 = 3.6.0 =
 

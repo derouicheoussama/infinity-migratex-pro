@@ -443,7 +443,7 @@ final class IMP_Admin {
 					'pause'           => __( 'Pause', 'infinity-migratex-pro' ),
 					'close'           => __( 'Close', 'infinity-migratex-pro' ),
 					'error'           => __( 'Error', 'infinity-migratex-pro' ),
-					'networkError'    => __( 'Connection lost — the operation is paused automatically. Click Resume to continue.', 'infinity-migratex-pro' ),
+					'networkError'    => __( 'Connection lost — the operation paused, but it will try to resume by itself every 45 seconds. You can also click Resume now.', 'infinity-migratex-pro' ),
 					'reconnecting'    => __( 'Unstable connection — the operation is retrying automatically…', 'infinity-migratex-pro' ),
 					'jobRunningOther' => __( 'Another operation is in progress on this site.', 'infinity-migratex-pro' ),
 					'starting'        => __( 'Starting…', 'infinity-migratex-pro' ),

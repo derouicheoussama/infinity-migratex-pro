@@ -232,6 +232,7 @@
 	function JobRunner(box) {
 		this.box = box;
 		this.timer = null;
+		this.recoveryTimer = null;
 		this.stopped = true;
 		this.onDone = null;
 		this.consecutiveErrors = 0;
@@ -398,6 +399,18 @@
 	JobRunner.prototype.startLoop = function () {
 		var self = this;
 		this.stopped = false;
+		if (this.recoveryTimer) {
+			window.clearTimeout(this.recoveryTimer);
+			this.recoveryTimer = null;
+		}
+		/* Registre global : la navigation SPA doit pouvoir stopper les
+		 * runners des pages remplacées (sinon les boucles s'accumulent et
+		 * font exploser le taux de requêtes / le rate-limit). */
+		if (!window.__impRunners) { window.__impRunners = []; }
+		if (window.__impRunners.indexOf(this) === -1) { window.__impRunners.push(this); }
+		window.__impRunners = window.__impRunners.filter(function (r) {
+			return r === self || (r.box && r.box.isConnected);
+		});
 		this.box.dispatchEvent(new CustomEvent('imp:jobstart'));
 
 		var step = function () {
@@ -476,7 +489,7 @@
 			return;
 		}
 
-		if (this.consecutiveErrors >= 5) {
+		if (this.consecutiveErrors >= 8) {
 			this.stopped = true;
 			this.pause();
 			toast(i18n.networkError, 'warning');
@@ -487,7 +500,7 @@
 
 	JobRunner.prototype.scheduleRetry = function () {
 		var self = this;
-		var backoff = Math.min(20000, 2500 * Math.pow(2, Math.max(0, this.consecutiveErrors - 1)));
+		var backoff = Math.min(30000, 2500 * Math.pow(2, Math.max(0, this.consecutiveErrors - 1)));
 		this.timer = window.setTimeout(function () {
 			if (!self.stopped) { self.startLoop(); }
 		}, backoff);
@@ -504,7 +517,7 @@
 			return;
 		}
 
-		if (this.consecutiveErrors >= 5) {
+		if (this.consecutiveErrors >= 8) {
 			this.stopped = true;
 			this.pause();
 			toast(i18n.networkError, 'warning');
@@ -519,6 +532,58 @@
 			window.clearTimeout(this.timer);
 			this.timer = null;
 		}
+		this.startRecovery();
+	};
+
+	/**
+	 * Boucle de récupération post-pause : LA PAUSE N'EST PAS TERMINALE.
+	 * Toutes les 45 s (jusqu'à ~9 min), on sonde le serveur — dès que la
+	 * connexion revient, l'opération reprend TOUTE SEULE en mode
+	 * conservateur (throttle maximal). Le bouton Resume reste disponible.
+	 */
+	JobRunner.prototype.startRecovery = function () {
+		var self = this;
+		if (this.recoveryTimer) { return; }
+		var attempt = 0;
+		var schedule = function () {
+			if (attempt >= 12 || !self.stopped) { return; }
+			self.recoveryTimer = window.setTimeout(function () {
+				self.recoveryTimer = null;
+				probe();
+			}, 45000);
+		};
+		var probe = function () {
+			if (!self.stopped) { return; }
+			attempt++;
+			ajax('imp_job_status', {}, 15000).then(function (json) {
+				if (!self.stopped) { return; }
+				var s = json && json.data && json.data.status;
+				if (s && s.status === 'running') {
+					self.throttleLevel = Math.max(self.throttleLevel, 2);
+					ajax('imp_job_throttle', { factor: 0.12 }, 15000).then(function () {
+						if (!self.stopped) { return; }
+						toast('Connection restored — the operation resumes automatically.', 'success');
+						self.startLoop();
+					}).catch(schedule);
+				} else if (s) {
+					// Le job s'est terminé/arrêté côté serveur pendant la coupure.
+					self.stop();
+					window.location.reload();
+				} else {
+					schedule();
+				}
+			}).catch(function () { schedule(); });
+		};
+		probe();
+	};
+
+	/**
+	 * Arrêt dur (navigation SPA) : aucune boucle résiduelle.
+	 */
+	JobRunner.prototype.stop = function () {
+		this.stopped = true;
+		if (this.timer) { window.clearTimeout(this.timer); this.timer = null; }
+		if (this.recoveryTimer) { window.clearTimeout(this.recoveryTimer); this.recoveryTimer = null; }
 	};
 
 	JobRunner.prototype.refreshOnce = function () {
@@ -725,6 +790,14 @@
 			var newWrap = doc.querySelector('.imp-wrap');
 			var cur = document.querySelector('.imp-wrap');
 			if (!newWrap || !cur) { window.location.href = url; return; }
+
+			/* Stop dur des runners actifs : leurs boîtes vont être
+			 * remplacées — toute boucle résiduelle pollerait les
+			 * requêtes (doublons + rate-limit). */
+			if (window.__impRunners) {
+				window.__impRunners.forEach(function (r) { r.stop(); });
+				window.__impRunners = [];
+			}
 
 			/* Éléments body-level périmés (FAB des vagues précédentes). */
 			Array.prototype.forEach.call(document.querySelectorAll('body > .imp-fab'), function (el) { el.remove(); });
