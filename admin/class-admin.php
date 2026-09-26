@@ -131,10 +131,29 @@ final class IMP_Admin {
 			wp_send_json_error( array( 'message' => __( 'The update failed — open the Plugins page to retry with the full screen.', 'infinity-migratex-pro' ) ), 500 );
 		}
 
-		// upgrader_process_complete a déjà re-scellé le code et purgé les
-		// caches (IMP_Updater::after_update). La version exécutée en mémoire
-		// reste l'ancienne : le rechargement côté navigateur la ramène.
-		wp_send_json_success( array( 'message' => __( 'Update installed — reloading…', 'infinity-migratex-pro' ) ) );
+		// upgrader_process_complete a déjà re-scellé le code, purgé les
+		// caches et RÉACTIVÉ la copie canonique si le dossier a changé
+		// (IMP_Updater::after_update). On calcule une redirection SÛRE :
+		// la page À propos si le plugin est actif (nouveau ou ancien
+		// chemin), sinon la page Extensions — jamais une page 403.
+		$redirect = admin_url( 'plugins.php' );
+		if ( is_plugin_active( $basename ) ) {
+			$redirect = admin_url( 'admin.php?page=infinity-migratex-pro-about' );
+		} elseif ( function_exists( 'get_plugins' ) ) {
+			foreach ( array_keys( get_plugins() ) as $file ) {
+				if ( 'infinity-migratex-pro.php' === basename( (string) $file )
+					&& 0 === strpos( strtolower( (string) $file ), 'infinity-migratex-pro/' )
+					&& is_plugin_active( $file ) ) {
+					$redirect = admin_url( 'admin.php?page=infinity-migratex-pro-about' );
+					break;
+				}
+			}
+		}
+
+		wp_send_json_success( array(
+			'message'  => __( 'Update installed — reloading…', 'infinity-migratex-pro' ),
+			'redirect' => $redirect,
+		) );
 	}
 
 	/**

@@ -358,6 +358,10 @@ final class IMP_Admin_About {
 			<section class="imp-panel">
 				<div class="imp-panel-head"><h3><?php esc_html_e( 'Changelog', 'infinity-migratex-pro' ); ?></h3></div>
 				<div class="imp-panel-body">
+					<h4>3.9.1</h4>
+					<ul class="imp-changelog">
+						<li><?php esc_html_e( 'Fixed: after an update you always land on a valid page (About or Plugins list) — never the "not allowed" error.', 'infinity-migratex-pro' ); ?></li>
+					</ul>
 					<h4>3.9.0</h4>
 					<ul class="imp-changelog">
 						<li><?php esc_html_e( 'Performance (ultra fast): micro-bundle on the Plugins screen, cached dashboard counters, adaptive job polling.', 'infinity-migratex-pro' ); ?></li>

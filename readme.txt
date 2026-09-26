@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.9.0
+Stable tag: 3.9.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,10 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.9.1 =
+
+* Fixed: after an update installed from the Update Center, the browser now lands on a SAFE page — the About page when the plugin is active, or the Plugins list otherwise — instead of reloading a page that could answer "Sorry, you are not allowed to access this page" if the plugin had been deactivated during the update.
 
 = 3.9.0 =
 

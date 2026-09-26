@@ -2299,7 +2299,12 @@
 				ajax('imp_update_run', {}).then(function (json) {
 					if (json && json.success) {
 						toast(json.data.message, 'success');
-						window.setTimeout(function () { window.location.reload(); }, 1200);
+						/* Redirection sûre calculée côté serveur : À propos si
+						 * le plugin est actif après l'update, sinon Extensions
+						 * (jamais une page invalide → "pas l'autorisation"). */
+						window.setTimeout(function () {
+							window.location.href = (json.data && json.data.redirect) ? json.data.redirect : window.location.href;
+						}, 1200);
 					} else {
 						runBtn.disabled = false;
 						runBtn.textContent = label;
