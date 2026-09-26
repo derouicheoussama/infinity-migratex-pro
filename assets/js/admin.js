@@ -420,13 +420,23 @@
 				self.consecutiveErrors = 0;
 				self.probing = false;
 
-				if (json && json.success && json.data && json.data.status) {
-					self.render(json.data.status);
-					var status = json.data.status;
+			if (json && json.success && json.data && json.data.status) {
+				self.render(json.data.status);
+				var status = json.data.status;
 
-					if (status.status === 'running') {
-						self.timer = window.setTimeout(step, 700);
-					} else {
+				/* Polling adaptatif : 700 ms tant que le pourcentage
+				 * évolue, 1400 ms sur les phases calmes (zip finalisation,
+				 * dump SQL d'une grosse table) — moins d'appels, même
+				 * réactivité visuelle. */
+				var interval = 700;
+				if (typeof status.percent === 'number' && status.percent === self.lastPercent) {
+					interval = 1400;
+				}
+				self.lastPercent = typeof status.percent === 'number' ? status.percent : null;
+
+				if (status.status === 'running') {
+					self.timer = window.setTimeout(step, interval);
+				} else {
 						self.stopped = true;
 						self.box.dispatchEvent(new CustomEvent('imp:jobdone', { detail: status }));
 						if (self.onDone) { self.onDone(status); }

@@ -154,6 +154,7 @@ final class IMP_Logger {
 	 * @return void
 	 */
 	public static function finish( $id, $status, $message = '', array $stats = array() ) {
+		delete_transient( 'imp_dash_stats' ); // Les compteurs dashboard changent.
 		$data = array( 'status' => $status );
 		if ( '' !== $message ) {
 			$data['message'] = sanitize_text_field( $message );
@@ -282,6 +283,13 @@ final class IMP_Logger {
 	 * @return array{migrations:int,backups:int,restores:int,packages:int,scans:int,last_migration:?array,last_backup:?array}
 	 */
 	public static function dashboard_stats() {
+		// PERFORMANCE : 7 requêtes SQL (5 COUNT + 2 dernières entrées) à
+		// chaque vue dashboard — cachées 60 s, invalidées dans finish().
+		$cached = get_transient( 'imp_dash_stats' );
+		if ( is_array( $cached ) ) {
+			return $cached;
+		}
+
 		global $wpdb;
 		$table = self::table();
 
@@ -299,6 +307,7 @@ final class IMP_Logger {
 		$stats['last_migration'] = $wpdb->get_row( "SELECT * FROM {$table} WHERE type = 'migration' ORDER BY id DESC LIMIT 1", ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$stats['last_backup']    = $wpdb->get_row( "SELECT * FROM {$table} WHERE type = 'backup' ORDER BY id DESC LIMIT 1", ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
+		set_transient( 'imp_dash_stats', $stats, 60 );
 		return $stats;
 	}
 

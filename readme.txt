@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.8.0
+Stable tag: 3.9.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,12 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.9.0 =
+
+* Performance (ultra fast): the Plugins screen now loads a dedicated ~18 Ko micro-bundle for the purchase wizard instead of the full admin pack (~95 Ko) — CSS rules are extracted automatically from the main stylesheet (no drift) and the wizard JS is standalone.
+* Performance: dashboard log counters are cached 60 s (7 SQL queries per view removed) and refreshed on every operation completion.
+* Performance: job polling is adaptive — 700 ms while progress moves, 1400 ms during quiet phases.
 
 = 3.8.0 =
 

@@ -59,11 +59,16 @@ final class IMP_Checkout {
 		if ( ! IMP_Capabilities::user_can( 'manage' ) && ! current_user_can( 'activate_plugins' ) ) {
 			return;
 		}
+		// PERFORMANCE — micro-bundle dédié (~18 Ko) au lieu du pack admin
+		// complet (~95 Ko) : uniquement les styles et le JS du tunnel
+		// d'achat, extraits automatiquement de admin.css/admin.js par
+		// tools/build-plugins-bundle.mjs (régénérer après modification
+		// de ces fichiers). SCRIPT_DEBUG sert les sources lisibles.
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-		wp_enqueue_style( 'imp-admin', IMP_URL . "assets/css/admin{$suffix}.css", array(), IMP_VERSION );
-		wp_enqueue_script( 'imp-admin', IMP_URL . "assets/js/admin{$suffix}.js", array(), IMP_VERSION, true );
+		wp_enqueue_style( 'imp-checkout', IMP_URL . "assets/css/imp-checkout{$suffix}.css", array(), IMP_VERSION );
+		wp_enqueue_script( 'imp-checkout', IMP_URL . "assets/js/imp-checkout{$suffix}.js", array(), IMP_VERSION, true );
 		wp_localize_script(
-			'imp-admin',
+			'imp-checkout',
 			'IMP_Admin',
 			array(
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
