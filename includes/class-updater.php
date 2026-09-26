@@ -46,7 +46,7 @@ final class IMP_Updater {
 
 		add_filter( 'pre_set_site_transient_update_plugins', array( __CLASS__, 'filter_update_transient' ) );
 		add_filter( 'plugins_api', array( __CLASS__, 'filter_plugins_api' ), 20, 3 );
-		add_filter( 'upgrader_source_selection', array( __CLASS__, 'filter_source_name' ), 10, 4 );
+		add_filter( 'upgrader_source_selection', array( __CLASS__, 'filter_source_selection' ), 10, 4 );
 		add_action( 'upgrader_process_complete', array( __CLASS__, 'after_update' ), 10, 2 );
 		add_action( 'admin_post_imp_proxy_update', array( __CLASS__, 'proxy_download' ) );
 	}
@@ -462,10 +462,15 @@ final class IMP_Updater {
 		// On rafraîchit l'état du plugin et on journalise l'événement réel.
 		IMP_Plugin::flush_settings();
 		IMP_Security::bootstrap_storage();
-		// Resceller le code après une mise à jour officielle (nouvelle baseline).
-		if ( class_exists( 'IMP_Hardening' ) ) {
+		// Resceller le code après une mise à jour officielle (nouvelle
+		// baseline) — uniquement si le dossier courant existe encore
+		// (un changement de dossier est géré par restore_activation
+		// ci-dessous, et la nouvelle copie se scellera à son 1er check).
+		if ( class_exists( 'IMP_Hardening' ) && is_dir( IMP_DIR ) ) {
 			IMP_Hardening::rebuild_baseline();
 		}
+
+		self::restore_activation();
 
 		$log_id = IMP_Logger::start(
 			sprintf(
@@ -478,5 +483,77 @@ final class IMP_Updater {
 		IMP_Logger::finish( $log_id, IMP_Logger::STATUS_COMPLETED, __( 'Plugin updated successfully.', 'infinity-migratex-pro' ) );
 
 		set_transient( 'imp_updated_notice', 1, 60 );
+	}
+
+	/**
+	 * GARANTIE : après une mise à jour, le plugin est ACTIF. Si le paquet
+	 * a été extrait dans un dossier différent (suffixe -1/-2, nom
+	 * versionné…), WordPress désactive l'ancien chemin — on trouve la
+	 * copie canonique (dossier infinity-migratex-pro/ + fichier principal
+	 * infinity-migratex-pro.php), on la réactive, on retire les entrées
+	 * parasites de active_plugins, et on journalise tout.
+	 *
+	 * @return void
+	 */
+	public static function restore_activation() {
+		if ( ! function_exists( 'get_plugins' ) || ! function_exists( 'activate_plugin' ) ) {
+			if ( ! function_exists( 'get_plugins' ) ) {
+				include_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+			if ( ! function_exists( 'get_plugins' ) ) {
+				return; // Contexte inattendu : rien à faire sans l'API plugins.
+			}
+		}
+
+		$active = (array) get_option( 'active_plugins', array() );
+		$canonical = null;
+		$stray = array();
+
+		foreach ( array_keys( (array) get_plugins() ) as $file ) {
+			if ( 'infinity-migratex-pro.php' !== basename( (string) $file ) ) {
+				continue;
+			}
+			if ( 0 === strpos( strtolower( (string) $file ), 'infinity-migratex-pro/' ) ) {
+				$canonical = (string) $file; // Copie canonique (dossier officiel).
+				break;
+			}
+			$stray[] = (string) $file;
+		}
+
+		if ( null === $canonical ) {
+			return; // Aucune copie canonique détectée : ne rien inventer.
+		}
+
+		$changed = false;
+
+		// Réactiver la copie canonique si elle est inactive.
+		if ( ! in_array( $canonical, $active, true ) ) {
+			$result = activate_plugin( $canonical );
+			if ( ! is_wp_error( $result ) ) {
+				$active[] = $canonical;
+				$changed  = true;
+				set_transient( 'imp_updated_notice', 1, 60 );
+				if ( class_exists( 'IMP_Logger' ) ) {
+					IMP_Logger::finish(
+						IMP_Logger::start( __( 'Auto re-activation', 'infinity-migratex-pro' ), IMP_Logger::TYPE_SYSTEM ),
+						IMP_Logger::STATUS_COMPLETED,
+						__( 'The plugin was re-activated automatically after its update.', 'infinity-migratex-pro' )
+					);
+				}
+			}
+		}
+
+		// Retirer les doublons (autres dossiers du même plugin) de la
+		// liste des plugins actifs — jamais voulu, source de conflits.
+		foreach ( $active as $i => $file ) {
+			if ( (string) $file !== $canonical && 'infinity-migratex-pro.php' === basename( (string) $file ) ) {
+				unset( $active[ $i ] );
+				$changed = true;
+			}
+		}
+
+		if ( $changed ) {
+			update_option( 'active_plugins', array_values( $active ), false );
+		}
 	}
 }

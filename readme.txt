@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.7.0
+Stable tag: 3.8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,12 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.8.0 =
+
+* Fixed (important): the plugin no longer deactivates itself after an update. The folder-rename filter during updates was registered with a wrong method name (a typo since early versions) so a package extracted under a variant folder name left the active path invalid — WordPress then auto-deactivated the plugin and you had to reactivate manually.
+* The folder-rename filter now works, AND a new safety net guarantees the plugin is re-activated automatically after any update: the canonical copy (infinity-migratex-pro/ folder) is re-activated, duplicate entries are cleaned from the active list, and the whole thing is logged.
+* The source-code seal rebuild was guarded against a moved folder (the new copy seals itself on its first integrity check).
 
 = 3.7.0 =
 

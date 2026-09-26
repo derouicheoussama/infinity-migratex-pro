@@ -358,6 +358,10 @@ final class IMP_Admin_About {
 			<section class="imp-panel">
 				<div class="imp-panel-head"><h3><?php esc_html_e( 'Changelog', 'infinity-migratex-pro' ); ?></h3></div>
 				<div class="imp-panel-body">
+					<h4>3.8.0</h4>
+					<ul class="imp-changelog">
+						<li><?php esc_html_e( 'Fixed (important): no more automatic deactivation after updates — folder rename filter repaired + guaranteed automatic re-activation with duplicate cleanup.', 'infinity-migratex-pro' ); ?></li>
+					</ul>
 					<h4>3.7.0</h4>
 					<ul class="imp-changelog">
 						<li><?php esc_html_e( 'Fixed: a connection-lost pause now self-resumes — the runner probes every 45 s and continues the operation conservatively once the connection returns.', 'infinity-migratex-pro' ); ?></li>

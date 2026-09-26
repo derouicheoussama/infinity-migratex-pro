@@ -470,6 +470,10 @@ msgstr ""
 msgid "Auto — follow my system"
 msgstr ""
 
+#: includes/class-updater.php:538
+msgid "Auto re-activation"
+msgstr ""
+
 #: admin/class-backup.php:114 admin/class-plugins-page.php:343 admin/class-settings.php:271
 msgid "Automatic backups"
 msgstr ""
@@ -602,7 +606,7 @@ msgstr ""
 msgid "Backups that actually finish"
 msgstr ""
 
-#: admin/class-about.php:490
+#: admin/class-about.php:494
 msgid "Backups with manifest, SHA-256 checksums, scheduled backups and retention."
 msgstr ""
 
@@ -798,7 +802,7 @@ msgstr ""
 msgid "Chunked operations: no PHP timeout, pause / resume / cancel everywhere, real progress."
 msgstr ""
 
-#: admin/class-about.php:489
+#: admin/class-about.php:493
 msgid "Chunked, resumable engine — no PHP timeouts, pause/resume/cancel on every operation."
 msgstr ""
 
@@ -1804,35 +1808,39 @@ msgstr ""
 msgid "Fix the reported problems (destination path, database connection…) and run the preflight again."
 msgstr ""
 
-#: admin/class-about.php:483
+#: admin/class-about.php:363
+msgid "Fixed (important): no more automatic deactivation after updates — folder rename filter repaired + guaranteed automatic re-activation with duplicate cleanup."
+msgstr ""
+
+#: admin/class-about.php:487
 msgid "Fixed a fatal error at installation on PHP 7.4/8.0 (octal literal)."
 msgstr ""
 
-#: admin/class-about.php:363
+#: admin/class-about.php:367
 msgid "Fixed: a connection-lost pause now self-resumes — the runner probes every 45 s and continues the operation conservatively once the connection returns."
 msgstr ""
 
-#: admin/class-about.php:427
+#: admin/class-about.php:431
 msgid "Fixed: no more \"unexpected output\" at activation; admin menu icon and sidebar logo sized correctly on every admin theme."
 msgstr ""
 
-#: admin/class-about.php:436
+#: admin/class-about.php:440
 msgid "Fixed: no more false \"SECURITY ALERT\" after a legitimate update — the source seal rebuilds itself automatically when the sealed version differs from the installed one."
 msgstr ""
 
-#: admin/class-about.php:367
+#: admin/class-about.php:371
 msgid "Fixed: self-healing operations on slow hosting — automatic request-throttling and exponential-backoff retries instead of \"Connection lost\" pauses."
 msgstr ""
 
-#: admin/class-about.php:393
+#: admin/class-about.php:397
 msgid "Fixed: stale backup name after rename; encrypted-backup-without-password is now refused server-side (IMP-258)."
 msgstr ""
 
-#: admin/class-about.php:422
+#: admin/class-about.php:426
 msgid "Fixed: the Database \"Repair\" action ran \"Optimize\" (operator precedence) — Repair repairs again."
 msgstr ""
 
-#: admin/class-about.php:375
+#: admin/class-about.php:379
 msgid "Fixed: updates now detected automatically — the GitHub channel is active by default on this edition and both channels are checked passively every day."
 msgstr ""
 
@@ -1992,7 +2000,7 @@ msgstr ""
 msgid "Guided restore from a backup"
 msgstr ""
 
-#: admin/class-about.php:491
+#: admin/class-about.php:495
 msgid "Guided restore with pre-restore integrity verification."
 msgstr ""
 
@@ -2120,11 +2128,11 @@ msgstr ""
 msgid "Imports run in the resumable engine — no timeout, pause / resume at any step."
 msgstr ""
 
-#: admin/class-about.php:442
+#: admin/class-about.php:446
 msgid "Improved: every Go Pro button opens the same unified wizard — About, Import, Plugins page and Turbo upsells."
 msgstr ""
 
-#: admin/class-about.php:397
+#: admin/class-about.php:401
 msgid "Improved: the inactive GitHub channel now shows a full activation guide with a Copy button; channel errors display the repo and expected asset."
 msgstr ""
 
@@ -2156,7 +2164,7 @@ msgstr ""
 msgid "Informational"
 msgstr ""
 
-#: admin/class-about.php:488
+#: admin/class-about.php:492
 msgid "Initial release: full & partial migration assistant (domain, folder clone, package export)."
 msgstr ""
 
@@ -2576,31 +2584,31 @@ msgstr ""
 msgid "Never remind"
 msgstr ""
 
-#: admin/class-about.php:418
+#: admin/class-about.php:422
 msgid "New (GitHub): ETag conditional requests, compatibility metadata, icons in the update dialog, structured errors."
 msgstr ""
 
-#: admin/class-about.php:468
+#: admin/class-about.php:472
 msgid "New (Pro): cloud backup destinations — Google Drive, Dropbox, FTP/FTPS, with resumable uploads and connection test."
 msgstr ""
 
-#: admin/class-about.php:464
+#: admin/class-about.php:468
 msgid "New (Pro): HMAC-signed license with domain binding, private GitHub update channel with authenticated proxy."
 msgstr ""
 
-#: admin/class-about.php:371
+#: admin/class-about.php:375
 msgid "New (Pro): safety backup before every WordPress update; new 14-day free PRO trial; license state memoized per request."
 msgstr ""
 
-#: admin/class-about.php:484
+#: admin/class-about.php:488
 msgid "New clean light dashboard with reinforced contrast."
 msgstr ""
 
-#: admin/class-about.php:446
+#: admin/class-about.php:450
 msgid "New identity: Infinity MigrateX Pro — official neon logo in the plugin and WordPress.org assets generated."
 msgstr ""
 
-#: admin/class-about.php:452
+#: admin/class-about.php:456
 msgid "New pricing panel in About: Personal (1 site) and Business (5 sites) plans."
 msgstr ""
 
@@ -2608,63 +2616,63 @@ msgstr ""
 msgid "New URL"
 msgstr ""
 
-#: admin/class-about.php:477
+#: admin/class-about.php:481
 msgid "New: About page with full product tour and direct download links."
 msgstr ""
 
-#: admin/class-about.php:469
+#: admin/class-about.php:473
 msgid "New: automatic cloud sending after every backup, or one-click per backup."
 msgstr ""
 
-#: admin/class-about.php:383
+#: admin/class-about.php:387
 msgid "New: clear edition identity — golden PRO pill and tags everywhere, dashboard edition banner, persistent upgrade entry points on the Free edition."
 msgstr ""
 
-#: admin/class-about.php:417
+#: admin/class-about.php:421
 msgid "New: dual update system — official WordPress.org channel and direct GitHub Releases channel, with a one-click check on the About page."
 msgstr ""
 
-#: admin/class-about.php:473
+#: admin/class-about.php:477
 msgid "New: enriched Plugins page — version status, full details & history modal, Go Pro banner."
 msgstr ""
 
-#: admin/class-about.php:440
+#: admin/class-about.php:444
 msgid "New: in-plugin purchase wizard — Go Pro in 4 steps (plan, details, payment, activation) without leaving WordPress."
 msgstr ""
 
-#: admin/class-about.php:478
+#: admin/class-about.php:482
 msgid "New: instant navigation — pages are prefetched while you hover the menu."
 msgstr ""
 
-#: admin/class-about.php:463
+#: admin/class-about.php:467
 msgid "New: multi-layer hardening — rate limiting, security journal, source code seal with daily integrity checks."
 msgstr ""
 
-#: admin/class-about.php:441
+#: admin/class-about.php:445
 msgid "New: Personal / Business with yearly & lifetime pricing, order summary and instant license activation."
 msgstr ""
 
-#: admin/class-about.php:450
+#: admin/class-about.php:454
 msgid "New: Safe / Balanced / Turbo speed presets — Turbo (Pro) uses 3× bigger batches for 30-50% faster operations."
 msgstr ""
 
-#: admin/class-about.php:431
+#: admin/class-about.php:435
 msgid "New: Settings in ONE screen — instant tabs, sticky save bar, AJAX saving with unsaved-changes protection."
 msgstr ""
 
-#: admin/class-about.php:401
+#: admin/class-about.php:405
 msgid "New: settings search, JSON export/import of the configuration, default restore, adjustable smart reminders, Ctrl+S to save."
 msgstr ""
 
-#: admin/class-about.php:479
+#: admin/class-about.php:483
 msgid "New: smooth page transitions (respects reduced-motion preferences)."
 msgstr ""
 
-#: admin/class-about.php:409
+#: admin/class-about.php:413
 msgid "New: Update Center — automatic background check, cached statuses on open, and one-click \"Update to X\" without leaving the page."
 msgstr ""
 
-#: admin/class-about.php:388
+#: admin/class-about.php:392
 msgid "New: WooCommerce Import & Export panel — from → to flow with a detailed live inventory."
 msgstr ""
 
@@ -2948,7 +2956,7 @@ msgstr ""
 msgid "Operation failed."
 msgstr ""
 
-#: admin/class-about.php:459
+#: admin/class-about.php:463
 msgid "Operations keep progressing when the browser tab is closed; scheduled backup e-mail notifications."
 msgstr ""
 
@@ -3140,23 +3148,23 @@ msgstr ""
 msgid "Performance"
 msgstr ""
 
-#: admin/class-about.php:379
+#: admin/class-about.php:383
 msgid "Performance (major): the dashboard never waits on the full-site scan anymore — stale-while-revalidate statistics, cached health checks and cached packages list."
 msgstr ""
 
-#: admin/class-about.php:413
+#: admin/class-about.php:417
 msgid "Performance: instant page-to-page navigation (SPA) — no more full admin reloads; zero plugin code on public pages; backups list cached."
 msgstr ""
 
-#: admin/class-about.php:405
+#: admin/class-about.php:409
 msgid "Performance: minified assets (JS −41%), session pre-warm of Dashboard & Settings, lighter locked Cloud tab."
 msgstr ""
 
-#: admin/class-about.php:387
+#: admin/class-about.php:391
 msgid "Performance: targeted update detection (one API call) + passive daily cron detection with a topbar update badge."
 msgstr ""
 
-#: admin/class-about.php:432
+#: admin/class-about.php:436
 msgid "Performance: ThickBox dropped from plugin pages; lighter admin assets."
 msgstr ""
 
@@ -3216,7 +3224,7 @@ msgstr ""
 msgid "Plugin storage"
 msgstr ""
 
-#: includes/class-updater.php:478
+#: includes/class-updater.php:483
 msgid "Plugin updated successfully."
 msgstr ""
 
@@ -3344,7 +3352,7 @@ msgstr ""
 msgid "PRO is already active on this site — the trial is not needed."
 msgstr ""
 
-#: admin/class-about.php:451
+#: admin/class-about.php:455
 msgid "Pro sharpened: scheduled backups, e-mail alerts and cross-site URL rewrite are now Pro features (server-enforced)."
 msgstr ""
 
@@ -3404,7 +3412,7 @@ msgstr ""
 msgid "Put the site in maintenance mode during the restore (recommended)"
 msgstr ""
 
-#: admin/class-about.php:423
+#: admin/class-about.php:427
 msgid "Quality: full wp.org-style compliance audit — 0 errors across all PHP files."
 msgstr ""
 
@@ -3492,11 +3500,11 @@ msgstr ""
 msgid "Regeneration could not be scheduled — try WooCommerce → Status → Tools."
 msgstr ""
 
-#: admin/class-about.php:457
+#: admin/class-about.php:461
 msgid "Reliability: comment-aware SQL parsing with strict verb allowlist, disk watchdog, zip self-verification, backup ID collision guard."
 msgstr ""
 
-#: admin/class-about.php:456
+#: admin/class-about.php:460
 msgid "Reliability: SQL import failures are now detected, reported and stop the import to protect data."
 msgstr ""
 
@@ -3600,7 +3608,7 @@ msgstr ""
 msgid "Restore now"
 msgstr ""
 
-#: admin/class-about.php:458
+#: admin/class-about.php:462
 msgid "Restore: optional maintenance mode, WP version mismatch warning, stale cache drop-in detection."
 msgstr ""
 
@@ -3904,7 +3912,7 @@ msgstr ""
 msgid "Security scanner"
 msgstr ""
 
-#: admin/class-about.php:493
+#: admin/class-about.php:497
 msgid "Security scanner, database manager, detailed logs, WooCommerce & Elementor integrations."
 msgstr ""
 
@@ -4000,7 +4008,7 @@ msgstr ""
 msgid "Signed license API active: keys are HMAC-verified and bound to the licensed domain — a key copied to another site loses Pro features."
 msgstr ""
 
-#: admin/class-about.php:392
+#: admin/class-about.php:396
 msgid "Simplified backup form: name + contents + one button, everything else in a collapsible Advanced options section."
 msgstr ""
 
@@ -4432,6 +4440,10 @@ msgstr ""
 msgid "The PHP zip extension is required to build downloadable archives."
 msgstr ""
 
+#: includes/class-updater.php:540
+msgid "The plugin was re-activated automatically after its update."
+msgstr ""
+
 #: admin/class-about.php:93
 msgid "The secure checkout opens in a window inside this plugin — you never leave WordPress."
 msgstr ""
@@ -4744,7 +4756,7 @@ msgstr ""
 msgid "Update now"
 msgstr ""
 
-#: includes/class-updater.php:473
+#: includes/class-updater.php:478
 msgid "Update to %s"
 msgstr ""
 
@@ -4904,7 +4916,7 @@ msgstr ""
 msgid "VERIFIED"
 msgstr ""
 
-#: admin/class-about.php:492
+#: admin/class-about.php:496
 msgid "Verified .infinitymigrate packages (Zip Slip protection) and serialized-safe URL replacement."
 msgstr ""
 
