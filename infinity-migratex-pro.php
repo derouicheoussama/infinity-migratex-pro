@@ -15,7 +15,7 @@
  * Plugin Name:       Infinity MigrateX Pro
  * Plugin URI:        https://github.com/derouicheoussama/infinity-migratex-pro
  * Description:       Migrer, sauvegarder et restaurer un site WordPress sans timeout : changement de domaine avec URLs réécrites sans casser les données sérialisées, clonage staging, sauvegardes automatiques avec rétention, restauration vérifiée par checksums, scanner de sécurité et journal détaillé. Moteur par chunks avec reprise après interruption — WooCommerce et Elementor inclus.
- * Version:           3.3.0
+ * Version:           3.4.0
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Tested up to:      7.1
@@ -31,7 +31,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'IMP_VERSION', '3.3.0' );
+define( 'IMP_VERSION', '3.4.0' );
 define( 'IMP_DB_VERSION', '1.0.0' );
 define( 'IMP_FILE', __FILE__ );
 define( 'IMP_DIR', plugin_dir_path( __FILE__ ) );
@@ -184,16 +184,22 @@ require_once IMP_DIR . 'includes/license.php';
 
 /**
  * Canal de mise à jour « direct GitHub » (édition distribuée hors wp.org).
- * Le paquet officiel WordPress.org n'inclut PAS ce module : les mises à
- * jour y sont servies par le dépôt officiel. Pour l'édition GitHub,
- * définir INFINITY_MIGRATEX_PRO_GH_UPDATES = true dans wp-config.php.
+ * Le paquet officiel WordPress.org n'inclut PAS ce module (règle Plugin
+ * Check respectée par exclusion du fichier) : les mises à jour de cette
+ * édition passent par le dépôt officiel.
+ *
+ * DÉFAUT INTELLIGENT : le canal GitHub est ACTIF dès que le module
+ * updater est présent (édition GitHub téléchargée depuis les releases) —
+ * plus aucune constante à ajouter pour recevoir les mises à jour.
+ * La constante reste disponible pour le DÉSACTIVER explicitement :
+ *   define( 'INFINITY_MIGRATEX_PRO_GH_UPDATES', false );
  *
  * La CLASSE est chargée dès que le fichier existe (le panneau « Mises à
  * jour » affiche l'état des deux canaux) ; seuls les HOOKS d'update sont
  * branchés quand le canal GitHub est actif.
  */
 if ( ! defined( 'INFINITY_MIGRATEX_PRO_GH_UPDATES' ) ) {
-	define( 'INFINITY_MIGRATEX_PRO_GH_UPDATES', false );
+	define( 'INFINITY_MIGRATEX_PRO_GH_UPDATES', file_exists( IMP_DIR . 'includes/class-updater.php' ) );
 }
 if ( file_exists( IMP_DIR . 'includes/class-updater.php' ) ) {
 	require_once IMP_DIR . 'includes/class-updater.php';
@@ -527,6 +533,8 @@ final class IMP_Cron {
 		$basename = plugin_basename( IMP_FILE );
 		$updates  = get_site_transient( 'update_plugins' );
 
+		/* --- Canal 1 : WordPress.org (ciblé, une requête) --- */
+		$update = null;
 		$response = wp_remote_post(
 			'https://api.wordpress.org/plugins/update-check/1.1/',
 			array(
@@ -546,62 +554,72 @@ final class IMP_Cron {
 				),
 			)
 		);
-		if ( is_wp_error( $response ) || 200 !== (int) wp_remote_retrieve_response_code( $response ) ) {
-			return null; // Réseau indisponible : on garde l'existant.
+		if ( ! is_wp_error( $response ) && 200 === (int) wp_remote_retrieve_response_code( $response ) ) {
+			$parsed = json_decode( wp_remote_retrieve_body( $response ), true );
+			if ( is_array( $parsed ) && isset( $parsed['plugins'][ $basename ] ) && is_array( $parsed['plugins'][ $basename ] ) ) {
+				$candidate = $parsed['plugins'][ $basename ];
+				if ( ! empty( $candidate['new_version'] ) && version_compare( (string) $candidate['new_version'], IMP_VERSION, '>' ) ) {
+					$update = array(
+						'source'     => 'wporg',
+						'new_version' => (string) $candidate['new_version'],
+						'package'    => isset( $candidate['package'] ) ? (string) $candidate['package'] : '',
+						'url'        => isset( $candidate['url'] ) ? (string) $candidate['url'] : '',
+						'requires'   => isset( $candidate['requires'] ) ? (string) $candidate['requires'] : '5.8',
+						'requires_php' => isset( $candidate['requires_php'] ) ? (string) $candidate['requires_php'] : '7.4',
+						'tested'     => isset( $candidate['tested'] ) ? (string) $candidate['tested'] : '7.1',
+					);
+				}
+			}
 		}
 
-		$parsed = json_decode( wp_remote_retrieve_body( $response ), true );
-		$update = ( is_array( $parsed ) && isset( $parsed['plugins'][ $basename ] ) && is_array( $parsed['plugins'][ $basename ] ) )
-			? $parsed['plugins'][ $basename ]
-			: null;
+		/* --- Canal 2 : GitHub Releases (édition complète, passif) --- */
+		if ( null === $update && class_exists( 'IMP_Updater' ) && INFINITY_MIGRATEX_PRO_GH_UPDATES ) {
+			$release = IMP_Updater::force_check(); // 1 requête ETag/jour.
+			if ( is_array( $release ) && '' !== $release['download']
+				&& version_compare( (string) $release['tag'], IMP_VERSION, '>' ) ) {
+				$update = array(
+					'source'       => 'github',
+					'new_version'  => (string) $release['tag'],
+					'package'      => (string) $release['download'],
+					'url'          => (string) $release['url'],
+					'requires'     => '5.8',
+					'requires_php' => '7.4',
+					'tested'       => '7.1',
+				);
+			}
+		}
 
-		$is_newer = is_array( $update ) && ! empty( $update['new_version'] )
-			&& version_compare( (string) $update['new_version'], IMP_VERSION, '>' );
-
-		// Offre persistée (alimente le badge, « Update now », l'Update
-		// Center) — indépendante du transient core, purgable à tout instant.
-		if ( $is_newer ) {
-			set_transient(
-				'imp_update_offer',
-				array(
-					'source'  => 'wporg',
-					'tag'     => (string) $update['new_version'],
-					'package' => isset( $update['package'] ) ? (string) $update['package'] : '',
-					'url'     => isset( $update['url'] ) ? (string) $update['url'] : '',
-				),
-				12 * HOUR_IN_SECONDS
-			);
+		/* --- Offre persistée (badge, « Update now », Update Center) ---
+		 * priorité wp.org ; purgée si elle n'est plus plus récente. */
+		if ( null !== $update ) {
+			set_transient( 'imp_update_offer', $update, 12 * HOUR_IN_SECONDS );
 		} else {
 			$offer = get_transient( 'imp_update_offer' );
-			if ( is_array( $offer ) && isset( $offer['source'] ) && 'wporg' === $offer['source'] ) {
+			if ( is_array( $offer ) && ! empty( $offer['tag'] ) && version_compare( (string) $offer['tag'], IMP_VERSION, '<=' ) ) {
 				delete_transient( 'imp_update_offer' );
 			}
 		}
 
-		// Injection PRÉSERVATIF : uniquement si le transient existe déjà —
-		// ne jamais en créer un vide (masquerait les updates des autres
-		// extensions pendant 12 h). Sinon le cœur fera son scan normal.
-		if ( is_object( $updates ) ) {
+		/* --- Injection PRÉSERVATIVE dans le transient core --- : jamais
+		 * de création d'un transient vide, jamais d'effacement de notre
+		 * entrée (le canal GitHub peut l'avoir posée juste avant). */
+		if ( is_object( $updates ) && null !== $update && '' !== $update['package'] ) {
 			$response_map = ( isset( $updates->response ) && is_array( $updates->response ) ) ? $updates->response : array();
-			if ( $is_newer ) {
-				$response_map[ $basename ] = (object) array(
-					'slug'         => dirname( $basename ),
-					'plugin'       => $basename,
-					'new_version'  => (string) $update['new_version'],
-					'url'          => isset( $update['url'] ) ? (string) $update['url'] : '',
-					'package'      => isset( $update['package'] ) ? (string) $update['package'] : '',
-					'requires'     => isset( $update['requires'] ) ? (string) $update['requires'] : '5.8',
-					'requires_php' => isset( $update['requires_php'] ) ? (string) $update['requires_php'] : '7.4',
-					'tested'       => isset( $update['tested'] ) ? (string) $update['tested'] : '7.1',
-				);
-			} else {
-				unset( $response_map[ $basename ] );
-			}
+			$response_map[ $basename ] = (object) array(
+				'slug'         => dirname( $basename ),
+				'plugin'       => $basename,
+				'new_version'  => (string) $update['new_version'],
+				'url'          => (string) $update['url'],
+				'package'      => (string) $update['package'],
+				'requires'     => (string) $update['requires'],
+				'requires_php' => (string) $update['requires_php'],
+				'tested'       => (string) $update['tested'],
+			);
 			$updates->response = $response_map;
 			set_site_transient( 'update_plugins', $updates );
 		}
 
-		return $is_newer ? $update : null;
+		return $update;
 	}
 }
 IMP_Cron::hooks();

@@ -159,9 +159,11 @@ final class IMP_Admin {
 		);
 
 		// Canal GitHub : classe absente du paquet wp.org (canal natif).
-		// Inactif => aucun appel API, simple constat d'état.
+		// Inactif => aucun appel API, simple constat d'état. La valeur
+		// fraîche vient du cache ETag (le check forcé unique est fait
+		// dans IMP_Cron::detect_update ci-dessous).
 		if ( class_exists( 'IMP_Updater' ) && INFINITY_MIGRATEX_PRO_GH_UPDATES ) {
-			$release = IMP_Updater::force_check();
+			$release = IMP_Updater::latest_release();
 			$gh      = array(
 				'active'    => true,
 				'latest'    => '',
@@ -186,20 +188,24 @@ final class IMP_Admin {
 			);
 		}
 
-		// Canal WordPress.org natif : vérification CIBLÉE (une requête
-		// pour ce plugin) — purger le transient global déclencherait un
-		// re-scan de toutes les extensions. L'offre est fusionnée sans
-		// effacer les données des autres plugins ; si le réseau échoue,
-		// on retombe sur le dernier état connu (transient / offre).
+		// Détection CIBLÉE des deux canaux (une requête chacun max) —
+		// le résultat est routé selon sa source réelle.
 		$basename = plugin_basename( IMP_FILE );
 		$check    = class_exists( 'IMP_Cron' ) ? IMP_Cron::detect_update() : null;
 		$updates  = get_site_transient( 'update_plugins' );
 
 		if ( is_array( $check ) && ! empty( $check['new_version'] ) ) {
-			$status['wporg'] = array(
+			$slot = ( isset( $check['source'] ) && 'github' === $check['source'] ) ? 'github' : 'wporg';
+			$status[ $slot ] = array(
 				'available' => true,
 				'latest'    => (string) $check['new_version'],
 			);
+			if ( 'github' === $slot && is_array( $status['github'] ) ) {
+				$status['github']['active']    = true;
+				$status['github']['latest']    = (string) $check['new_version'];
+				$status['github']['available'] = true;
+				$status['github']['error']     = '';
+			}
 		} elseif ( is_object( $updates ) && ! empty( $updates->response[ $basename ]->new_version ) ) {
 			$status['wporg'] = array(
 				'available' => true,
@@ -207,9 +213,10 @@ final class IMP_Admin {
 			);
 		} else {
 			$cached_offer = get_transient( 'imp_update_offer' );
-			if ( is_array( $cached_offer ) && 'wporg' === ( $cached_offer['source'] ?? '' ) && ! empty( $cached_offer['tag'] ) ) {
-				$status['wporg'] = array(
-					'available' => version_compare( (string) $cached_offer['tag'], IMP_VERSION, '>' ),
+			if ( is_array( $cached_offer ) && ! empty( $cached_offer['tag'] ) && version_compare( (string) $cached_offer['tag'], IMP_VERSION, '>' ) ) {
+				$slot = ( isset( $cached_offer['source'] ) && 'github' === $cached_offer['source'] ) ? 'github' : 'wporg';
+				$status[ $slot ] = array(
+					'available' => true,
 					'latest'    => (string) $cached_offer['tag'],
 				);
 			}

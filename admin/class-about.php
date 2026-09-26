@@ -137,14 +137,14 @@ final class IMP_Admin_About {
 								<?php if ( null === $upd_gh ) : ?>
 									<?php esc_html_e( 'Channel inactive on this edition (official WordPress.org channel).', 'infinity-migratex-pro' ); ?>
 								<?php elseif ( empty( $upd_gh['active'] ) ) : ?>
-									<?php /* Canal volontairement désactivé par défaut : l'édition
-									 * officielle wp.org ne doit JAMAIS embarquer d'updater
-									 * custom (règle Plugin Check). Guide d'activation. */ ?>
+									<?php /* Désactivé explicitement (le défaut de cette
+									 * édition est ACTIF — règle Plugin Check respectée
+									 * par exclusion du module du paquet wp.org). */ ?>
 									<div class="imp-notice imp-notice-info" style="margin:0;">
-										<strong><?php esc_html_e( 'Channel inactive — activate it in one line:', 'infinity-migratex-pro' ); ?></strong><br>
-										<?php esc_html_e( 'Add this line in wp-config.php, just above “/* That’s all, stop editing! */” :', 'infinity-migratex-pro' ); ?><br>
-										<code>define( 'INFINITY_MIGRATEX_PRO_GH_UPDATES', true );</code>
-										<button type="button" class="imp-btn imp-btn-ghost imp-btn-small" style="margin-left:6px;" data-imp-copy="define( 'INFINITY_MIGRATEX_PRO_GH_UPDATES', true );">⧉ <?php esc_html_e( 'Copy', 'infinity-migratex-pro' ); ?></button><br>
+										<strong><?php esc_html_e( 'Channel disabled — re-enable it in one line:', 'infinity-migratex-pro' ); ?></strong><br>
+										<?php esc_html_e( 'Remove this line from wp-config.php (or set it to true), just above “/* That’s all, stop editing! */” :', 'infinity-migratex-pro' ); ?><br>
+										<code>define( 'INFINITY_MIGRATEX_PRO_GH_UPDATES', false );</code>
+										<button type="button" class="imp-btn imp-btn-ghost imp-btn-small" style="margin-left:6px;" data-imp-copy="define( 'INFINITY_MIGRATEX_PRO_GH_UPDATES', true );">⧉ <?php esc_html_e( 'Copy true version', 'infinity-migratex-pro' ); ?></button><br>
 										<span class="description">
 											<?php
 											echo esc_html( sprintf(
@@ -358,6 +358,10 @@ final class IMP_Admin_About {
 			<section class="imp-panel">
 				<div class="imp-panel-head"><h3><?php esc_html_e( 'Changelog', 'infinity-migratex-pro' ); ?></h3></div>
 				<div class="imp-panel-body">
+					<h4>3.4.0</h4>
+					<ul class="imp-changelog">
+						<li><?php esc_html_e( 'Fixed: updates now detected automatically — the GitHub channel is active by default on this edition and both channels are checked passively every day.', 'infinity-migratex-pro' ); ?></li>
+					</ul>
 					<h4>3.3.0</h4>
 					<ul class="imp-changelog">
 						<li><?php esc_html_e( 'Performance (major): the dashboard never waits on the full-site scan anymore — stale-while-revalidate statistics, cached health checks and cached packages list.', 'infinity-migratex-pro' ); ?></li>
