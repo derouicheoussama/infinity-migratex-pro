@@ -265,7 +265,7 @@ final class IMP_Admin_Settings {
 			<div class="imp-notice imp-notice-info">
 				<strong>★ <?php esc_html_e( 'Pro feature', 'infinity-migratex-pro' ); ?></strong> —
 				<?php esc_html_e( 'Scheduled & automatic backups are part of the Pro edition (with cloud destinations, Turbo speed and cross-site URL rewrite).', 'infinity-migratex-pro' ); ?>
-				<a class="imp-btn imp-btn-primary" style="margin-left:8px;" href="<?php echo esc_url( IMP_License::checkout_url() ); ?>" target="_blank" rel="noopener noreferrer">★ <?php esc_html_e( 'Go Pro', 'infinity-migratex-pro' ); ?></a>
+				<button type="button" class="imp-btn imp-btn-primary" style="margin-left:8px;" data-imp-checkout="personal">★ <?php esc_html_e( 'Go Pro', 'infinity-migratex-pro' ); ?></button>
 			</div>
 		<?php endif; ?>
 		<table class="form-table imp-form" role="presentation">
@@ -352,7 +352,7 @@ final class IMP_Admin_Settings {
 			<div class="imp-notice imp-notice-info">
 				<strong>★ <?php esc_html_e( 'Pro feature', 'infinity-migratex-pro' ); ?></strong> —
 				<?php esc_html_e( 'Send every backup to Google Drive, Dropbox or an FTP server. The engine below is fully implemented (resumable uploads, connection test) and unlocks with your Pro license. Everything is tested locally in development mode: activate any key in the Advanced tab to try it now.', 'infinity-migratex-pro' ); ?>
-				<a class="imp-btn imp-btn-primary" style="margin-left:8px;" href="<?php echo esc_url( $pro_url ); ?>" target="_blank" rel="noopener noreferrer">★ <?php esc_html_e( 'Go Pro', 'infinity-migratex-pro' ); ?></a>
+				<button type="button" class="imp-btn imp-btn-primary" style="margin-left:8px;" data-imp-checkout="personal">★ <?php esc_html_e( 'Go Pro', 'infinity-migratex-pro' ); ?></button>
 			</div>
 		<?php endif; ?>
 

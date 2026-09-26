@@ -90,7 +90,7 @@ final class IMP_Admin_Backup {
 								<?php elseif ( ! IMP_Crypto::available() ) : ?>
 									<p class="description" style="margin-bottom:12px;">🔒 <?php esc_html_e( 'Backup encryption requires the PHP OpenSSL extension.', 'infinity-migratex-pro' ); ?></p>
 								<?php else : ?>
-									<p class="description" style="margin-bottom:12px;">🔒 <?php esc_html_e( 'AES-256 backup encryption is a Pro feature.', 'infinity-migratex-pro' ); ?> <a href="<?php echo esc_url( IMP_License::checkout_url() ); ?>" target="_blank" rel="noopener noreferrer">★ <?php esc_html_e( 'Go Pro', 'infinity-migratex-pro' ); ?></a></p>
+									<p class="description" style="margin-bottom:12px;">🔒 <?php esc_html_e( 'AES-256 backup encryption is a Pro feature.', 'infinity-migratex-pro' ); ?> <button type="button" class="imp-btn imp-btn-small imp-btn-primary" data-imp-checkout="personal" style="margin-left:6px;">★ <?php esc_html_e( 'Go Pro', 'infinity-migratex-pro' ); ?></button></p>
 								<?php endif; ?>
 							</div>
 						</details>

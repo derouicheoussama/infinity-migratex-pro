@@ -181,7 +181,7 @@ final class IMP_Admin_WooCommerce {
 					<?php if ( ! $is_pro ) : ?>
 						<div class="imp-notice imp-notice-info" style="margin:14px 0 0;">
 							★ <?php esc_html_e( 'Sessions, lookup regeneration and term recount are Pro tools.', 'infinity-migratex-pro' ); ?>
-							<a href="<?php echo esc_url( IMP_License::checkout_url() ); ?>" target="_blank" rel="noopener noreferrer">★ <?php esc_html_e( 'Go Pro', 'infinity-migratex-pro' ); ?></a>
+							<button type="button" class="imp-btn imp-btn-small imp-btn-primary" style="margin-left:6px;" data-imp-checkout="personal">★ <?php esc_html_e( 'Go Pro', 'infinity-migratex-pro' ); ?></button>
 						</div>
 					<?php endif; ?>
 				</div>

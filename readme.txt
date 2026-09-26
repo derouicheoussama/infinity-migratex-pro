@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.12.1
+Stable tag: 3.13.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,11 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.13.0 =
+
+* New: every "Go Pro" button in the plugin (backup encryption, scheduled backups, cloud destinations, WooCommerce Pro tools) now opens the in-plugin purchase wizard instead of an external site — the full Go Pro journey never leaves WordPress.
+* The external link remains only on the standalone details page (opened in a small popup) where the wizard cannot fit.
 
 = 3.12.1 =
 
