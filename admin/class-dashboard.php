@@ -103,6 +103,50 @@ final class IMP_Admin_Dashboard {
 		</section>
 		<?php endif; ?>
 
+		<?php /* ⚠️ NOTE POUR DEROUICHE : bannière d'édition du dashboard —
+		       * PRO = vitrine dorée avec la licence ; FREE = upsell majeur
+		       * avec les gains concrets et ouverture du tunnel d'achat. */
+		if ( IMP_License::is_pro() ) :
+			$dash_license = IMP_License::get();
+			$dash_until   = (int) $dash_license['expires'] > 0
+				? mysql2date( get_option( 'date_format' ), gmdate( 'Y-m-d H:i:s', (int) $dash_license['expires'] ) )
+				: '';
+			?>
+		<section class="imp-edition-banner imp-edition-banner-pro">
+			<span class="imp-edition-banner-star" aria-hidden="true">★</span>
+			<div class="imp-edition-banner-main">
+				<strong><?php esc_html_e( 'PRO edition active', 'infinity-migratex-pro' ); ?></strong>
+				<p><?php
+				echo esc_html( sprintf(
+					/* translators: 1: plan 2: sites limit or unlimited */
+					__( 'Plan: %1$s · Cloud destinations, scheduled backups, AES-256 encryption, turbo speed and priority support unlocked.', 'infinity-migratex-pro' ),
+					(string) $dash_license['plan']
+				) );
+				?></p>
+			</div>
+			<div class="imp-edition-banner-side">
+				<?php if ( '' !== $dash_until ) : ?>
+					<span class="imp-edition-valid"><?php echo esc_html( sprintf( /* translators: %s: date */ __( 'Valid until %s', 'infinity-migratex-pro' ), $dash_until ) ); ?></span>
+				<?php else : ?>
+					<span class="imp-edition-valid"><?php esc_html_e( 'Lifetime license', 'infinity-migratex-pro' ); ?></span>
+				<?php endif; ?>
+				<a class="imp-btn imp-btn-small imp-btn-ghost" href="<?php echo esc_url( admin_url( 'admin.php?page=infinity-migratex-pro-settings' ) ); ?>#advanced"><?php esc_html_e( 'Manage license', 'infinity-migratex-pro' ); ?></a>
+			</div>
+		</section>
+		<?php else : ?>
+		<section class="imp-edition-banner imp-edition-banner-free">
+			<span class="imp-edition-banner-star" aria-hidden="true">★</span>
+			<div class="imp-edition-banner-main">
+				<strong><?php esc_html_e( 'You are on the FREE edition — unlock the full suite', 'infinity-migratex-pro' ); ?></strong>
+				<p><?php esc_html_e( 'Cloud backups (Google Drive, Dropbox, FTP) · scheduled backups with e-mail alerts · AES-256 archive encryption · turbo speed · priority support.', 'infinity-migratex-pro' ); ?></p>
+			</div>
+			<div class="imp-edition-banner-side">
+				<button type="button" class="imp-btn imp-btn-primary" data-imp-checkout="personal"><?php esc_html_e( 'Upgrade to PRO', 'infinity-migratex-pro' ); ?></button>
+				<span class="imp-edition-note"><?php esc_html_e( 'from 39€/year — 14-day money-back', 'infinity-migratex-pro' ); ?></span>
+			</div>
+		</section>
+		<?php endif; ?>
+
 		<div class="imp-cards imp-cards-4">
 			<div class="imp-card">
 				<span class="imp-card-label"><?php esc_html_e( 'Site size', 'infinity-migratex-pro' ); ?></span>

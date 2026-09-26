@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.1.0
+Stable tag: 3.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,12 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.2.0 =
+
+* New: clear edition identity — a golden "★ PRO" pill in the topbar, a "PRO EDITION" tag in the sidebar, and a gold "PRO active" dashboard banner showing the plan and validity when Pro is active.
+* New (Free edition): a persistent "Upgrade to PRO" button in the topbar and sidebar plus a prominent dashboard banner listing the concrete Pro benefits — the in-plugin purchase wizard opens from anywhere.
+* The license plan and validity are shown in the sidebar footer when Pro is active.
 
 = 3.1.0 =
 

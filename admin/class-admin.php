@@ -549,6 +549,11 @@ final class IMP_Admin {
 						<div class="imp-brand-text">
 							<strong>Infinity MigrateX Pro</strong>
 							<em>Migration &amp; Backup Suite</em>
+							<?php /* Identité d'édition : PRO affiché en or, Free en
+							 * neutre — visible en permanence dans la navigation. */ ?>
+							<span class="imp-edition-tag<?php echo IMP_License::is_pro() ? ' is-pro' : ''; ?>">
+								<?php echo IMP_License::is_pro() ? '★ ' . esc_html__( 'PRO EDITION', 'infinity-migratex-pro' ) : esc_html__( 'FREE EDITION', 'infinity-migratex-pro' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+							</span>
 					</div>
 				</div>
 				<nav class="imp-nav" aria-label="<?php esc_attr_e( 'Infinity MigrateX Pro menu', 'infinity-migratex-pro' ); ?>">
@@ -570,8 +575,24 @@ final class IMP_Admin {
 					<?php endforeach; ?>
 				</nav>
 				<div class="imp-sidebar-footer">
-					<span class="imp-byline">∞ Infinity Coder</span>
-					<span class="imp-byline-sub"><?php esc_html_e( 'by Derouiche Oussama', 'infinity-migratex-pro' ); ?></span>
+					<?php if ( IMP_License::is_pro() ) : ?>
+						<?php
+						$pro_license = IMP_License::get();
+						$pro_until   = (int) $pro_license['expires'] > 0
+							? mysql2date( get_option( 'date_format' ), gmdate( 'Y-m-d H:i:s', (int) $pro_license['expires'] ) )
+							: '';
+						?>
+						<span class="imp-edition-license">★ <?php echo esc_html( sprintf( /* translators: %s: plan */ __( 'PRO — %s', 'infinity-migratex-pro' ), (string) $pro_license['plan'] ) ); ?></span>
+						<?php if ( '' !== $pro_until ) : ?>
+							<span class="imp-byline-sub"><?php echo esc_html( sprintf( /* translators: %s: date */ __( 'valid until %s', 'infinity-migratex-pro' ), $pro_until ) ); ?></span>
+						<?php else : ?>
+							<span class="imp-byline-sub"><?php esc_html_e( 'lifetime license', 'infinity-migratex-pro' ); ?></span>
+						<?php endif; ?>
+					<?php else : ?>
+						<button type="button" class="imp-gopro-side" data-imp-checkout="personal">★ <?php esc_html_e( 'Upgrade to PRO', 'infinity-migratex-pro' ); ?></button>
+						<span class="imp-byline">∞ Infinity Coder</span>
+						<span class="imp-byline-sub"><?php esc_html_e( 'by Derouiche Oussama', 'infinity-migratex-pro' ); ?></span>
+					<?php endif; ?>
 				</div>
 			</aside>
 			<div class="imp-backdrop" data-imp-backdrop aria-hidden="true"></div>
@@ -593,6 +614,12 @@ final class IMP_Admin {
 						<span class="imp-version">v<?php echo esc_html( IMP_VERSION ); ?></span>
 					</div>
 					<div class="imp-topbar-right">
+						<?php if ( IMP_License::is_pro() ) : ?>
+							<span class="imp-pill imp-edition-pill-pro" title="<?php esc_attr_e( 'PRO edition active on this site', 'infinity-migratex-pro' ); ?>">★ PRO</span>
+						<?php else : ?>
+							<span class="imp-pill imp-edition-pill-free">FREE</span>
+							<button type="button" class="imp-pill imp-pill-upgrade" data-imp-checkout="personal">★ <?php esc_html_e( 'Go Pro', 'infinity-migratex-pro' ); ?></button>
+						<?php endif; ?>
 						<?php
 						// Badge de mise à jour : alimenté par la détection
 						// passive (cron) ou le dernier check — visible sur
