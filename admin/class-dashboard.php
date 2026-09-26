@@ -384,10 +384,13 @@ final class IMP_Admin_Dashboard {
 	public static function ajax_health_refresh() {
 		IMP_Security::ajax_guard( 'manage' );
 
+		// Bouton explicite : l'utilisateur DEMANDE des données fraîches —
+		// on force le recalcul complet (l'affichage, lui, n'attend jamais).
 		delete_transient( 'imp_site_stats' );
+		delete_transient( 'imp_health_checks' );
 		IMP_Site_Stats::get( true );
 
-		$checks = IMP_Compatibility::health_checks();
+		$checks = IMP_Compatibility::health_checks( true );
 
 		wp_send_json_success(
 			array(

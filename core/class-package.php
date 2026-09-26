@@ -37,6 +37,15 @@ final class IMP_Package {
 	 * @return array[] {file,name,size,modified,manifest,verified}
 	 */
 	public static function all() {
+		if ( null !== self::$pkg_cache ) {
+			return self::$pkg_cache;
+		}
+		$cached = get_transient( 'imp_packages_list' );
+		if ( is_array( $cached ) ) {
+			self::$pkg_cache = $cached;
+			return $cached;
+		}
+
 		$out     = array();
 		$dir     = self::dir();
 		$entries = @scandir( $dir ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
@@ -85,7 +94,26 @@ final class IMP_Package {
 				return $b['modified'] <=> $a['modified'];
 			}
 		);
+
+		// Chaque entrée ouvre un zip pour lire son manifest — coûteux sur
+		// une grosse bibliothèque : caché 60 s comme la liste des backups.
+		set_transient( 'imp_packages_list', $out, 60 );
+		self::$pkg_cache = $out;
 		return $out;
+	}
+
+	/** @var array|null Cache statique de la liste (durée de la requête). */
+	private static $pkg_cache = null;
+
+	/**
+	 * Invalide le cache de la liste des packages (création, suppression,
+	 * purge de rétention).
+	 *
+	 * @return void
+	 */
+	public static function flush_cache() {
+		self::$pkg_cache = null;
+		delete_transient( 'imp_packages_list' );
 	}
 
 	/**
@@ -144,6 +172,8 @@ final class IMP_Package {
 			'',
 			array( 'size_bytes' => (int) @filesize( $file ) ) // phpcs:ignore WordPress.PHP.NoSilencedErrors
 		);
+
+		self::flush_cache();
 
 		return array(
 			'ok'   => true,
@@ -330,7 +360,9 @@ final class IMP_Package {
 		if ( ! is_file( $path ) ) {
 			return false;
 		}
-		return wp_delete_file( $path );
+		$deleted = wp_delete_file( $path );
+		self::flush_cache();
+		return $deleted;
 	}
 
 	/**

@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.2.0
+Stable tag: 3.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,12 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.3.0 =
+
+* Performance (major): the dashboard no longer waits on the full-site scan. Site statistics (files, bytes, database) are valid for 6 hours; when they expire they are served instantly from the previous snapshot and recomputed AFTER the page is sent (stale-while-revalidate) — the only full synchronous scan is the plugin's very first run.
+* Performance: the system health checks are cached 10 minutes and shared between the header badge and the dashboard (previously computed twice per view).
+* Performance: the packages list no longer opens every archive on every view — cached 60 s and invalidated on create/delete/retention. The "Refresh" button still forces fresh data.
 
 = 3.2.0 =
 

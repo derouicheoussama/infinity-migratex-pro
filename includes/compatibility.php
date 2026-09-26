@@ -130,10 +130,33 @@ final class IMP_Compatibility {
 
 	/**
 	 * Vérifications de santé (dashboard + diagnostic). 100% réelles.
+	 * PERFORMANCE : résultat caché 10 min — page_open (badge) et le
+	 * dashboard partagent la même instance sans recalcul ; $force pour
+	 * le bouton « Refresh » (AJAX).
 	 *
+	 * @param bool $force Forcer le recalcul immédiat.
 	 * @return array[] Chaque item : {id,label,status:pass|warn|error,value,hint}
 	 */
-	public static function health_checks() {
+	public static function health_checks( $force = false ) {
+		if ( ! $force ) {
+			$cached = get_transient( 'imp_health_checks' );
+			if ( is_array( $cached ) && ! empty( $cached ) ) {
+				return $cached;
+			}
+		}
+
+		$checks = self::run_health_checks();
+		set_transient( 'imp_health_checks', $checks, 10 * MINUTE_IN_SECONDS );
+		return $checks;
+	}
+
+	/**
+	 * Exécute réellement les vérifications (coût : ms une fois les
+	 * statistiques site en cache).
+	 *
+	 * @return array[]
+	 */
+	private static function run_health_checks() {
 		$checks   = array();
 		$limits   = self::php_limits();
 		$modules  = self::php_modules();

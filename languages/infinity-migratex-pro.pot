@@ -90,7 +90,7 @@ msgstr ""
 msgid "%1$s plugin file(s) modified and %2$d missing versus the sealed baseline. This can be an attack or a manual patch — reinstall the plugin from the official source and check the Security page."
 msgstr ""
 
-#: admin/class-migration.php:59 includes/compatibility.php:212
+#: admin/class-migration.php:59 includes/compatibility.php:235
 msgid "%1$s tables — %2$s"
 msgstr ""
 
@@ -198,7 +198,7 @@ msgstr ""
 msgid "100% compatible:"
 msgstr ""
 
-#: includes/compatibility.php:170
+#: includes/compatibility.php:193
 msgid "128M or more recommended for large sites. The plugin works by small chunks to stay within limits."
 msgstr ""
 
@@ -494,7 +494,7 @@ msgstr ""
 msgid "Automatically upload each new backup (manual and scheduled) to the destination below."
 msgstr ""
 
-#: admin/class-about.php:347 core/class-migrator.php:59 includes/compatibility.php:194 includes/compatibility.php:202
+#: admin/class-about.php:347 core/class-migrator.php:59 includes/compatibility.php:217 includes/compatibility.php:225
 msgid "Available"
 msgstr ""
 
@@ -574,7 +574,7 @@ msgstr ""
 msgid "Backup parts encrypted (AES-256-GCM)."
 msgstr ""
 
-#: includes/compatibility.php:232
+#: includes/compatibility.php:255
 msgid "Backup storage writable"
 msgstr ""
 
@@ -586,7 +586,7 @@ msgstr ""
 msgid "Backups → Create Backup. Files, database or both, with SHA-256 checksums. Schedule it daily and let retention keep the last N copies automatically — optionally uploaded to Google Drive, Dropbox or FTP (Pro)."
 msgstr ""
 
-#: includes/compatibility.php:236
+#: includes/compatibility.php:259
 msgid "Backups and packages can be written here."
 msgstr ""
 
@@ -598,7 +598,7 @@ msgstr ""
 msgid "Backups that actually finish"
 msgstr ""
 
-#: admin/class-about.php:470
+#: admin/class-about.php:474
 msgid "Backups with manifest, SHA-256 checksums, scheduled backups and retention."
 msgstr ""
 
@@ -658,11 +658,11 @@ msgstr ""
 msgid "Blocked download attempt (nonce/capability failed)."
 msgstr ""
 
-#: core/class-package.php:207
+#: core/class-package.php:237
 msgid "Blocked unsafe entry: “%s” (path traversal attempt)."
 msgstr ""
 
-#: core/class-package.php:253
+#: core/class-package.php:283
 msgid "Blocked unsafe file inside the package: “%s” (path traversal attempt)."
 msgstr ""
 
@@ -790,7 +790,7 @@ msgstr ""
 msgid "Chunked operations: no PHP timeout, pause / resume / cancel everywhere, real progress."
 msgstr ""
 
-#: admin/class-about.php:469
+#: admin/class-about.php:473
 msgid "Chunked, resumable engine — no PHP timeouts, pause/resume/cancel on every operation."
 msgstr ""
 
@@ -944,11 +944,11 @@ msgstr ""
 msgid "Compatibility check — verified live"
 msgstr ""
 
-#: includes/compatibility.php:160
+#: includes/compatibility.php:183
 msgid "Compatible (5.8 or newer)."
 msgstr ""
 
-#: includes/compatibility.php:149
+#: includes/compatibility.php:172
 msgid "Compatible (7.4 or newer)."
 msgstr ""
 
@@ -1792,23 +1792,23 @@ msgstr ""
 msgid "Fix the reported problems (destination path, database connection…) and run the preflight again."
 msgstr ""
 
-#: admin/class-about.php:463
+#: admin/class-about.php:467
 msgid "Fixed a fatal error at installation on PHP 7.4/8.0 (octal literal)."
 msgstr ""
 
-#: admin/class-about.php:407
+#: admin/class-about.php:411
 msgid "Fixed: no more \"unexpected output\" at activation; admin menu icon and sidebar logo sized correctly on every admin theme."
 msgstr ""
 
-#: admin/class-about.php:416
+#: admin/class-about.php:420
 msgid "Fixed: no more false \"SECURITY ALERT\" after a legitimate update — the source seal rebuilds itself automatically when the sealed version differs from the installed one."
 msgstr ""
 
-#: admin/class-about.php:373
+#: admin/class-about.php:377
 msgid "Fixed: stale backup name after rename; encrypted-backup-without-password is now refused server-side (IMP-258)."
 msgstr ""
 
-#: admin/class-about.php:402
+#: admin/class-about.php:406
 msgid "Fixed: the Database \"Repair\" action ran \"Optimize\" (operator precedence) — Repair repairs again."
 msgstr ""
 
@@ -1832,7 +1832,7 @@ msgstr ""
 msgid "Free"
 msgstr ""
 
-#: admin/class-dashboard.php:231 core/class-migrator.php:43 includes/compatibility.php:221
+#: admin/class-dashboard.php:231 core/class-migrator.php:43 includes/compatibility.php:244
 msgid "Free disk space"
 msgstr ""
 
@@ -1968,7 +1968,7 @@ msgstr ""
 msgid "Guided restore from a backup"
 msgstr ""
 
-#: admin/class-about.php:471
+#: admin/class-about.php:475
 msgid "Guided restore with pre-restore integrity verification."
 msgstr ""
 
@@ -2096,11 +2096,11 @@ msgstr ""
 msgid "Imports run in the resumable engine — no timeout, pause / resume at any step."
 msgstr ""
 
-#: admin/class-about.php:422
+#: admin/class-about.php:426
 msgid "Improved: every Go Pro button opens the same unified wizard — About, Import, Plugins page and Turbo upsells."
 msgstr ""
 
-#: admin/class-about.php:377
+#: admin/class-about.php:381
 msgid "Improved: the inactive GitHub channel now shows a full activation guide with a Copy button; channel errors display the repo and expected asset."
 msgstr ""
 
@@ -2132,7 +2132,7 @@ msgstr ""
 msgid "Informational"
 msgstr ""
 
-#: admin/class-about.php:468
+#: admin/class-about.php:472
 msgid "Initial release: full & partial migration assistant (domain, folder clone, package export)."
 msgstr ""
 
@@ -2192,7 +2192,7 @@ msgstr ""
 msgid "Integrity: %1$d files verified, %2$d identical."
 msgstr ""
 
-#: core/class-package.php:305
+#: core/class-package.php:335
 msgid "Internal checksums do not match — this package is corrupted or has been altered. Import refused."
 msgstr ""
 
@@ -2352,7 +2352,7 @@ msgstr ""
 msgid "Light (default)"
 msgstr ""
 
-#: includes/compatibility.php:187
+#: includes/compatibility.php:210
 msgid "Limits the size of packages you can upload for import. Use “Import from server storage” for very large packages."
 msgstr ""
 
@@ -2392,7 +2392,7 @@ msgstr ""
 msgid "Logs pagination"
 msgstr ""
 
-#: includes/compatibility.php:178
+#: includes/compatibility.php:201
 msgid "Long operations are chunked and resumable, so a low limit does not block migrations."
 msgstr ""
 
@@ -2432,7 +2432,7 @@ msgstr ""
 msgid "Max execution"
 msgstr ""
 
-#: includes/compatibility.php:175
+#: includes/compatibility.php:198
 msgid "Max execution time"
 msgstr ""
 
@@ -2444,7 +2444,7 @@ msgstr ""
 msgid "Max upload size: %s (server limit)."
 msgstr ""
 
-#: includes/compatibility.php:247
+#: includes/compatibility.php:270
 msgid "Media and uploaded packages OK."
 msgstr ""
 
@@ -2512,7 +2512,7 @@ msgstr ""
 msgid "Migrations"
 msgstr ""
 
-#: core/class-migrator.php:59 includes/compatibility.php:194 includes/compatibility.php:202
+#: core/class-migrator.php:59 includes/compatibility.php:217 includes/compatibility.php:225
 msgid "Missing"
 msgstr ""
 
@@ -2548,27 +2548,27 @@ msgstr ""
 msgid "Never remind"
 msgstr ""
 
-#: admin/class-about.php:398
+#: admin/class-about.php:402
 msgid "New (GitHub): ETag conditional requests, compatibility metadata, icons in the update dialog, structured errors."
 msgstr ""
 
-#: admin/class-about.php:448
+#: admin/class-about.php:452
 msgid "New (Pro): cloud backup destinations — Google Drive, Dropbox, FTP/FTPS, with resumable uploads and connection test."
 msgstr ""
 
-#: admin/class-about.php:444
+#: admin/class-about.php:448
 msgid "New (Pro): HMAC-signed license with domain binding, private GitHub update channel with authenticated proxy."
 msgstr ""
 
-#: admin/class-about.php:464
+#: admin/class-about.php:468
 msgid "New clean light dashboard with reinforced contrast."
 msgstr ""
 
-#: admin/class-about.php:426
+#: admin/class-about.php:430
 msgid "New identity: Infinity MigrateX Pro — official neon logo in the plugin and WordPress.org assets generated."
 msgstr ""
 
-#: admin/class-about.php:432
+#: admin/class-about.php:436
 msgid "New pricing panel in About: Personal (1 site) and Business (5 sites) plans."
 msgstr ""
 
@@ -2576,63 +2576,63 @@ msgstr ""
 msgid "New URL"
 msgstr ""
 
-#: admin/class-about.php:457
+#: admin/class-about.php:461
 msgid "New: About page with full product tour and direct download links."
 msgstr ""
 
-#: admin/class-about.php:449
+#: admin/class-about.php:453
 msgid "New: automatic cloud sending after every backup, or one-click per backup."
 msgstr ""
 
-#: admin/class-about.php:363
+#: admin/class-about.php:367
 msgid "New: clear edition identity — golden PRO pill and tags everywhere, dashboard edition banner, persistent upgrade entry points on the Free edition."
 msgstr ""
 
-#: admin/class-about.php:397
+#: admin/class-about.php:401
 msgid "New: dual update system — official WordPress.org channel and direct GitHub Releases channel, with a one-click check on the About page."
 msgstr ""
 
-#: admin/class-about.php:453
+#: admin/class-about.php:457
 msgid "New: enriched Plugins page — version status, full details & history modal, Go Pro banner."
 msgstr ""
 
-#: admin/class-about.php:420
+#: admin/class-about.php:424
 msgid "New: in-plugin purchase wizard — Go Pro in 4 steps (plan, details, payment, activation) without leaving WordPress."
 msgstr ""
 
-#: admin/class-about.php:458
+#: admin/class-about.php:462
 msgid "New: instant navigation — pages are prefetched while you hover the menu."
 msgstr ""
 
-#: admin/class-about.php:443
+#: admin/class-about.php:447
 msgid "New: multi-layer hardening — rate limiting, security journal, source code seal with daily integrity checks."
 msgstr ""
 
-#: admin/class-about.php:421
+#: admin/class-about.php:425
 msgid "New: Personal / Business with yearly & lifetime pricing, order summary and instant license activation."
 msgstr ""
 
-#: admin/class-about.php:430
+#: admin/class-about.php:434
 msgid "New: Safe / Balanced / Turbo speed presets — Turbo (Pro) uses 3× bigger batches for 30-50% faster operations."
 msgstr ""
 
-#: admin/class-about.php:411
+#: admin/class-about.php:415
 msgid "New: Settings in ONE screen — instant tabs, sticky save bar, AJAX saving with unsaved-changes protection."
 msgstr ""
 
-#: admin/class-about.php:381
+#: admin/class-about.php:385
 msgid "New: settings search, JSON export/import of the configuration, default restore, adjustable smart reminders, Ctrl+S to save."
 msgstr ""
 
-#: admin/class-about.php:459
+#: admin/class-about.php:463
 msgid "New: smooth page transitions (respects reduced-motion preferences)."
 msgstr ""
 
-#: admin/class-about.php:389
+#: admin/class-about.php:393
 msgid "New: Update Center — automatic background check, cached statuses on open, and one-click \"Update to X\" without leaving the page."
 msgstr ""
 
-#: admin/class-about.php:368
+#: admin/class-about.php:372
 msgid "New: WooCommerce Import & Export panel — from → to flow with a detailed live inventory."
 msgstr ""
 
@@ -2744,7 +2744,7 @@ msgstr ""
 msgid "No security scan in the last %s days."
 msgstr ""
 
-#: includes/compatibility.php:213
+#: includes/compatibility.php:236
 msgid "No tables readable — check database credentials."
 msgstr ""
 
@@ -2788,7 +2788,7 @@ msgstr ""
 msgid "Not enough free disk space to restore safely."
 msgstr ""
 
-#: includes/compatibility.php:226
+#: includes/compatibility.php:249
 msgid "Not enough space: the site weighs %s and backups need roughly twice that."
 msgstr ""
 
@@ -2796,7 +2796,7 @@ msgstr ""
 msgid "Not installed"
 msgstr ""
 
-#: admin/class-backup.php:130 includes/compatibility.php:256
+#: admin/class-backup.php:130 includes/compatibility.php:279
 msgid "Not scheduled"
 msgstr ""
 
@@ -2916,7 +2916,7 @@ msgstr ""
 msgid "Operation failed."
 msgstr ""
 
-#: admin/class-about.php:439
+#: admin/class-about.php:443
 msgid "Operations keep progressing when the browser tab is closed; scheduled backup e-mail notifications."
 msgstr ""
 
@@ -2968,7 +2968,7 @@ msgstr ""
 msgid "Package & backup integrity"
 msgstr ""
 
-#: core/class-package.php:142
+#: core/class-package.php:170
 msgid "Package created"
 msgstr ""
 
@@ -3104,19 +3104,23 @@ msgstr ""
 msgid "Performance"
 msgstr ""
 
-#: admin/class-about.php:393
+#: admin/class-about.php:363
+msgid "Performance (major): the dashboard never waits on the full-site scan anymore — stale-while-revalidate statistics, cached health checks and cached packages list."
+msgstr ""
+
+#: admin/class-about.php:397
 msgid "Performance: instant page-to-page navigation (SPA) — no more full admin reloads; zero plugin code on public pages; backups list cached."
 msgstr ""
 
-#: admin/class-about.php:385
+#: admin/class-about.php:389
 msgid "Performance: minified assets (JS −41%), session pre-warm of Dashboard & Settings, lighter locked Cloud tab."
 msgstr ""
 
-#: admin/class-about.php:367
+#: admin/class-about.php:371
 msgid "Performance: targeted update detection (one API call) + passive daily cron detection with a topbar update badge."
 msgstr ""
 
-#: admin/class-about.php:412
+#: admin/class-about.php:416
 msgid "Performance: ThickBox dropped from plugin pages; lighter admin assets."
 msgstr ""
 
@@ -3132,15 +3136,15 @@ msgstr ""
 msgid "PHP"
 msgstr ""
 
-#: includes/compatibility.php:150
+#: includes/compatibility.php:173
 msgid "PHP 7.4 or newer is required."
 msgstr ""
 
-#: admin/class-dashboard.php:226 includes/compatibility.php:167
+#: admin/class-dashboard.php:226 includes/compatibility.php:190
 msgid "PHP memory limit"
 msgstr ""
 
-#: admin/class-dashboard.php:223 includes/compatibility.php:145
+#: admin/class-dashboard.php:223 includes/compatibility.php:168
 msgid "PHP version"
 msgstr ""
 
@@ -3300,7 +3304,7 @@ msgstr ""
 msgid "Pro is active on this site"
 msgstr ""
 
-#: admin/class-about.php:431
+#: admin/class-about.php:435
 msgid "Pro sharpened: scheduled backups, e-mail alerts and cross-site URL rewrite are now Pro features (server-enforced)."
 msgstr ""
 
@@ -3356,7 +3360,7 @@ msgstr ""
 msgid "Put the site in maintenance mode during the restore (recommended)"
 msgstr ""
 
-#: admin/class-about.php:403
+#: admin/class-about.php:407
 msgid "Quality: full wp.org-style compliance audit — 0 errors across all PHP files."
 msgstr ""
 
@@ -3444,11 +3448,11 @@ msgstr ""
 msgid "Regeneration could not be scheduled — try WooCommerce → Status → Tools."
 msgstr ""
 
-#: admin/class-about.php:437
+#: admin/class-about.php:441
 msgid "Reliability: comment-aware SQL parsing with strict verb allowlist, disk watchdog, zip self-verification, backup ID collision guard."
 msgstr ""
 
-#: admin/class-about.php:436
+#: admin/class-about.php:440
 msgid "Reliability: SQL import failures are now detected, reported and stop the import to protect data."
 msgstr ""
 
@@ -3508,7 +3512,7 @@ msgstr ""
 msgid "Required to build the files archive of the migration package."
 msgstr ""
 
-#: includes/compatibility.php:195
+#: includes/compatibility.php:218
 msgid "Required to create packages and backups archives. Ask your host to enable the PHP zip extension."
 msgstr ""
 
@@ -3548,7 +3552,7 @@ msgstr ""
 msgid "Restore now"
 msgstr ""
 
-#: admin/class-about.php:438
+#: admin/class-about.php:442
 msgid "Restore: optional maintenance mode, WP version mismatch warning, stale cache drop-in detection."
 msgstr ""
 
@@ -3740,7 +3744,7 @@ msgstr ""
 msgid "Schedule & retention"
 msgstr ""
 
-#: includes/compatibility.php:256
+#: includes/compatibility.php:279
 msgid "Scheduled"
 msgstr ""
 
@@ -3840,7 +3844,7 @@ msgstr ""
 msgid "Security scanner"
 msgstr ""
 
-#: admin/class-about.php:473
+#: admin/class-about.php:477
 msgid "Security scanner, database manager, detailed logs, WooCommerce & Elementor integrations."
 msgstr ""
 
@@ -3936,7 +3940,7 @@ msgstr ""
 msgid "Signed license API active: keys are HMAC-verified and bound to the licensed domain — a key copied to another site loses Pro features."
 msgstr ""
 
-#: admin/class-about.php:372
+#: admin/class-about.php:376
 msgid "Simplified backup form: name + contents + one button, everything else in a collapsible Advanced options section."
 msgstr ""
 
@@ -3960,7 +3964,7 @@ msgstr ""
 msgid "Site size: %s — at least twice as much free space is recommended for a safe migration."
 msgstr ""
 
-#: includes/compatibility.php:225
+#: includes/compatibility.php:248
 msgid "Site size: %s — enough room for a full backup."
 msgstr ""
 
@@ -4312,7 +4316,7 @@ msgstr ""
 msgid "The file list is unreadable."
 msgstr ""
 
-#: core/class-package.php:268
+#: core/class-package.php:298
 msgid "The files part of this package is not a valid zip archive."
 msgstr ""
 
@@ -4340,7 +4344,7 @@ msgstr ""
 msgid "The operation is resumable: press Resume to continue from where it stopped. Check the destination storage quota if it repeats."
 msgstr ""
 
-#: core/class-package.php:289
+#: core/class-package.php:319
 msgid "The package contains PHP files inside wp-content/uploads — potentially suspicious, needs review before import."
 msgstr ""
 
@@ -4380,7 +4384,7 @@ msgstr ""
 msgid "The SQL file could not be read."
 msgstr ""
 
-#: includes/compatibility.php:237
+#: includes/compatibility.php:260
 msgid "The storage directory is not writable — check permissions or change the location in Settings."
 msgstr ""
 
@@ -4400,7 +4404,7 @@ msgstr ""
 msgid "The update failed — open the Plugins page to retry with the full screen."
 msgstr ""
 
-#: includes/compatibility.php:248
+#: includes/compatibility.php:271
 msgid "The uploads directory is not writable."
 msgstr ""
 
@@ -4464,7 +4468,7 @@ msgstr ""
 msgid "This site"
 msgstr ""
 
-#: includes/compatibility.php:297
+#: includes/compatibility.php:320
 msgid "this site runs an incompatible PHP or WordPress version. The plugin stays inactive to avoid errors. PHP 7.4+ and WordPress 5.8+ are required."
 msgstr ""
 
@@ -4596,7 +4600,7 @@ msgstr ""
 msgid "unknown"
 msgstr ""
 
-#: includes/compatibility.php:223
+#: includes/compatibility.php:246
 msgid "Unknown"
 msgstr ""
 
@@ -4616,7 +4620,7 @@ msgstr ""
 msgid "Unknown provider."
 msgstr ""
 
-#: includes/compatibility.php:169 includes/compatibility.php:177
+#: includes/compatibility.php:192 includes/compatibility.php:200
 msgid "Unlimited"
 msgstr ""
 
@@ -4708,7 +4712,7 @@ msgstr ""
 msgid "Upload max"
 msgstr ""
 
-#: includes/compatibility.php:184
+#: includes/compatibility.php:207
 msgid "Upload max size"
 msgstr ""
 
@@ -4736,7 +4740,7 @@ msgstr ""
 msgid "Uploads and working files stay in the .htaccess-protected storage."
 msgstr ""
 
-#: includes/compatibility.php:243
+#: includes/compatibility.php:266
 msgid "Uploads directory writable"
 msgstr ""
 
@@ -4776,11 +4780,11 @@ msgstr ""
 msgid "Use complete absolute URLs (https://example.com)."
 msgstr ""
 
-#: includes/compatibility.php:257
+#: includes/compatibility.php:280
 msgid "Used for scheduled backups and automatic cleanup. Disabled WP-Cron means schedules will not run on time."
 msgstr ""
 
-#: includes/compatibility.php:203
+#: includes/compatibility.php:226
 msgid "Used to compress database dumps. Without it, dumps are stored uncompressed."
 msgstr ""
 
@@ -4820,7 +4824,7 @@ msgstr ""
 msgid "VERIFIED"
 msgstr ""
 
-#: admin/class-about.php:472
+#: admin/class-about.php:476
 msgid "Verified .infinitymigrate packages (Zip Slip protection) and serialized-safe URL replacement."
 msgstr ""
 
@@ -4996,7 +5000,7 @@ msgstr ""
 msgid "WordPress"
 msgstr ""
 
-#: includes/compatibility.php:161
+#: includes/compatibility.php:184
 msgid "WordPress 5.8 or newer is required."
 msgstr ""
 
@@ -5036,7 +5040,7 @@ msgstr ""
 msgid "WordPress needs your FTP credentials for this update — use the Plugins page once, then this button will work directly."
 msgstr ""
 
-#: admin/class-dashboard.php:222 includes/compatibility.php:156
+#: admin/class-dashboard.php:222 includes/compatibility.php:179
 msgid "WordPress version"
 msgstr ""
 
@@ -5076,7 +5080,7 @@ msgstr ""
 msgid "wp-content"
 msgstr ""
 
-#: includes/compatibility.php:254
+#: includes/compatibility.php:277
 msgid "WP-Cron"
 msgstr ""
 
@@ -5160,7 +5164,7 @@ msgstr ""
 msgid "Zip-Slip and path-traversal protection on every entry."
 msgstr ""
 
-#: core/class-migrator.php:57 includes/compatibility.php:192
+#: core/class-migrator.php:57 includes/compatibility.php:215
 msgid "ZipArchive extension"
 msgstr ""
 
@@ -5168,6 +5172,6 @@ msgstr ""
 msgid "ZipArchive is missing: checksummed archives cannot be created on this server."
 msgstr ""
 
-#: includes/compatibility.php:200
+#: includes/compatibility.php:223
 msgid "Zlib extension (gzip)"
 msgstr ""

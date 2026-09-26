@@ -889,18 +889,67 @@ final class IMP_Settings_defaults {
  */
 final class IMP_Site_Stats {
 
+	/** @var bool Re-programmation du recalcul déjà enregistrée ? */
+	private static $stats_recompute_pending = false;
+
 	/**
-	 * Calcule (et met en cache 15 min) les statistiques réelles du site.
+	 * Statistiques du site — pattern STALE-WHILE-REVALIDATE : on ne fait
+	 * JAMAIS attendre l'utilisateur derrière le scan complet du site.
+	 * Données valides 6 h ; expirées → servies instantanément et
+	 * recalculées sur shutdown (après l'envoi de la réponse). Seule la
+	 * toute première exécution (aucune donnée) calcule en direct.
 	 *
-	 * @param bool $force Forcer le recalcul.
-	 * @return array{files:int,bytes:int,areas:array,db_tables:int,db_rows:int,db_bytes:int,computed:int}
+	 * @param bool $force Forcer le recalcul immédiat (bouton Refresh).
+	 * @return array{files:int,bytes:int,areas:array,db_tables:int,db_rows:int,db_bytes:int,computed:int,stale:bool}
 	 */
 	public static function get( $force = false ) {
+		static $cache = null;
+		if ( null !== $cache && ! $force ) {
+			return $cache;
+		}
+
 		$cached = get_transient( 'imp_site_stats' );
-		if ( ! $force && is_array( $cached ) && isset( $cached['computed'] ) ) {
-			$cached['stale'] = ( time() - (int) $cached['computed'] ) > HOUR_IN_SECONDS;
+		$usable = is_array( $cached ) && isset( $cached['computed'] );
+		$fresh  = $usable && ( time() - (int) $cached['computed'] ) < 6 * HOUR_IN_SECONDS;
+
+		if ( ! $force && $fresh ) {
+			$cached['stale'] = false;
+			$cache           = $cached;
 			return $cached;
 		}
+
+		if ( ! $force && $usable ) {
+			// Expiré mais présent : servir l'ancien CHAUD et recalculer
+			// après l'envoi de la page — zéro attente côté utilisateur.
+			$cached['stale'] = true;
+			$cache           = $cached;
+			if ( ! self::$stats_recompute_pending ) {
+				self::$stats_recompute_pending = true;
+				add_action( 'shutdown', array( __CLASS__, 'recompute' ) );
+			}
+			return $cached;
+		}
+
+		$stats = self::compute();
+		$cache = $stats;
+		return $stats;
+	}
+
+	/**
+	 * Recalcul différé (hook shutdown) : le visiteur a déjà sa page.
+	 *
+	 * @return void
+	 */
+	public static function recompute() {
+		self::compute();
+	}
+
+	/**
+	 * Calcule et met en cache (6 h) les statistiques réelles du site.
+	 *
+	 * @return array{files:int,bytes:int,areas:array,db_tables:int,db_rows:int,db_bytes:int,computed:int,stale:bool}
+	 */
+	private static function compute() {
 
 		$areas = array(
 			'core'    => array( 'files' => 0, 'bytes' => 0 ),
@@ -965,9 +1014,10 @@ final class IMP_Site_Stats {
 			'db_rows'   => $db['rows'],
 			'db_bytes'  => $db['bytes'],
 			'computed'  => time(),
+			'stale'     => false,
 		);
 
-		set_transient( 'imp_site_stats', $stats, 15 * MINUTE_IN_SECONDS );
+		set_transient( 'imp_site_stats', $stats, 6 * HOUR_IN_SECONDS );
 		return $stats;
 	}
 
