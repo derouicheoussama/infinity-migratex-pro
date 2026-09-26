@@ -1,0 +1,211 @@
+<?php
+
+/**
+ * ∞ INFINITY CODER — création originale de Derouiche Oussama
+ *
+ * Plugin   : Infinity Migrate Pro – WordPress Migration, Backup & Deployment Suite
+ * Auteur   : Derouiche Oussama  ·  https://www.derouicheoussama.com
+ * Copyright © 2026 Derouiche Oussama. Tous droits réservés.
+ * Licence  : GPL v2 ou ultérieure — signature et mentions à conserver.
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Page Security Center : état réel des protections, actions de
+ * sécurisation, résumé du dernier scan, nettoyage des fichiers tmp.
+ */
+final class IMP_Admin_Security {
+
+	/**
+	 * Rendu.
+	 */
+	public static function render() {
+		if ( ! IMP_Capabilities::user_can( 'manage' ) ) {
+			wp_die( esc_html__( 'You do not have permission to access this page.', 'infinity-migratex-pro' ) );
+		}
+
+		IMP_Admin::page_open( 'security' );
+
+		IMP_Security::bootstrap_storage();
+		$report    = IMP_Security::protection_report();
+		$hardening = class_exists( 'IMP_Hardening' ) ? IMP_Hardening::layers_report() : array();
+		$last_scan = IMP_Scanner::last_report();
+		?>
+		<section class="imp-panel">
+			<div class="imp-panel-head">
+				<h3><?php esc_html_e( 'Hardening layers', 'infinity-migratex-pro' ); ?></h3>
+				<?php if ( class_exists( 'IMP_Hardening' ) ) : ?>
+				<div class="imp-panel-actions">
+					<button type="button" class="imp-btn imp-btn-ghost" data-imp-action="security-integrity"><?php esc_html_e( 'Verify source code now', 'infinity-migratex-pro' ); ?></button>
+					<button type="button" class="imp-btn imp-btn-ghost" data-imp-action="security-reseal"><?php esc_html_e( 'Re-seal baseline', 'infinity-migratex-pro' ); ?></button>
+				</div>
+				<?php else : ?>
+				<div class="imp-panel-actions"><span class="imp-muted"><?php esc_html_e( 'Hardening module disabled (safe mode).', 'infinity-migratex-pro' ); ?></span></div>
+				<?php endif; ?>
+			</div>
+			<div class="imp-panel-body">
+				<?php if ( empty( $hardening ) ) : ?>
+					<p class="imp-muted"><?php esc_html_e( 'The hardening module is not loaded.', 'infinity-migratex-pro' ); ?></p>
+				<?php else : ?>
+				<table class="imp-table imp-table-list" data-imp-hardening-table>
+					<thead>
+						<tr>
+							<th scope="col"><?php esc_html_e( 'Layer', 'infinity-migratex-pro' ); ?></th>
+							<th scope="col"><?php esc_html_e( 'Status', 'infinity-migratex-pro' ); ?></th>
+							<th scope="col"><?php esc_html_e( 'Details', 'infinity-migratex-pro' ); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ( $hardening as $item ) : ?>
+							<tr data-imp-hardening="<?php echo esc_attr( $item['id'] ); ?>">
+								<td><strong><?php echo esc_html( $item['label'] ); ?></strong></td>
+								<td><?php echo IMP_Admin::badge( $item['ok'] ? 'pass' : 'fail', $item['ok'] ? __( 'ACTIVE', 'infinity-migratex-pro' ) : __( 'ALERT', 'infinity-migratex-pro' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?></td>
+								<td><?php echo esc_html( $item['detail'] ); ?></td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+				<p class="imp-hint"><?php esc_html_e( 'Integrity verdicts are re-checked daily and after every official update. Any unexpected modification raises a visible alert and a security journal entry.', 'infinity-migratex-pro' ); ?></p>
+				<?php endif; ?>
+			</div>
+		</section>
+
+		<section class="imp-panel">
+			<div class="imp-panel-head">
+				<h3><?php esc_html_e( 'Security center', 'infinity-migratex-pro' ); ?></h3>
+				<div class="imp-panel-actions">
+					<button type="button" class="imp-btn imp-btn-primary" data-imp-action="security-resecure"><?php esc_html_e( 'Re-secure storage', 'infinity-migratex-pro' ); ?></button>
+					<button type="button" class="imp-btn imp-btn-ghost" data-imp-action="security-cleanup"><?php esc_html_e( 'Delete temporary files now', 'infinity-migratex-pro' ); ?></button>
+				</div>
+			</div>
+			<div class="imp-panel-body">
+				<table class="imp-table imp-table-list" data-imp-security-table>
+					<thead>
+						<tr>
+							<th scope="col"><?php esc_html_e( 'Protection', 'infinity-migratex-pro' ); ?></th>
+							<th scope="col"><?php esc_html_e( 'Status', 'infinity-migratex-pro' ); ?></th>
+							<th scope="col"><?php esc_html_e( 'Details', 'infinity-migratex-pro' ); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ( $report as $item ) : ?>
+							<tr data-imp-protection="<?php echo esc_attr( $item['id'] ); ?>">
+								<td><strong><?php echo esc_html( $item['label'] ); ?></strong></td>
+								<td><?php echo IMP_Admin::badge( $item['ok'] ? 'pass' : 'warn', $item['ok'] ? __( 'ACTIVE', 'infinity-migratex-pro' ) : __( 'REVIEW', 'infinity-migratex-pro' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?></td>
+								<td><?php echo esc_html( $item['detail'] ); ?></td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+
+				<div class="imp-notice imp-notice-info">
+					<strong><?php esc_html_e( 'Delete temporary migration files automatically', 'infinity-migratex-pro' ); ?></strong> —
+					<?php
+					echo esc_html(
+						imp_setting( 'auto_cleanup', 1 )
+							? __( 'enabled (daily maintenance purges working files).', 'infinity-migratex-pro' )
+							: __( 'disabled — enable it in Settings → General.', 'infinity-migratex-pro' )
+					);
+					?>
+				</div>
+			</div>
+		</section>
+
+		<section class="imp-panel">
+			<div class="imp-panel-head">
+				<h3><?php esc_html_e( 'Last security scan', 'infinity-migratex-pro' ); ?></h3>
+				<div class="imp-panel-actions">
+					<a class="imp-btn imp-btn-ghost" href="<?php echo esc_url( admin_url( 'admin.php?page=infinity-migratex-pro-scanner' ) ); ?>"><?php esc_html_e( 'Scanner page', 'infinity-migratex-pro' ); ?></a>
+				</div>
+			</div>
+			<div class="imp-panel-body">
+				<?php if ( null === $last_scan ) : ?>
+					<p class="imp-muted"><?php esc_html_e( 'No scan performed yet.', 'infinity-migratex-pro' ); ?></p>
+				<?php else : ?>
+					<div class="imp-cards imp-cards-3">
+						<div class="imp-card imp-card-critical">
+							<span class="imp-card-label"><?php esc_html_e( 'Critical', 'infinity-migratex-pro' ); ?></span>
+							<strong class="imp-card-value"><?php echo esc_html( number_format_i18n( $last_scan['summary']['critical'] ) ); ?></strong>
+						</div>
+						<div class="imp-card imp-card-warning">
+							<span class="imp-card-label"><?php esc_html_e( 'Warnings', 'infinity-migratex-pro' ); ?></span>
+							<strong class="imp-card-value"><?php echo esc_html( number_format_i18n( $last_scan['summary']['warning'] ) ); ?></strong>
+						</div>
+						<div class="imp-card imp-card-info">
+							<span class="imp-card-label"><?php esc_html_e( 'Informational', 'infinity-migratex-pro' ); ?></span>
+							<strong class="imp-card-value"><?php echo esc_html( number_format_i18n( $last_scan['summary']['info'] ) ); ?></strong>
+						</div>
+					</div>
+					<p class="imp-muted"><?php echo esc_html( sprintf( /* translators: %s: date */ __( 'Scanned on %s.', 'infinity-migratex-pro' ), mysql2date( get_option( 'date_format' ) . ' H:i', $last_scan['date'] ) ) ); ?></p>
+				<?php endif; ?>
+			</div>
+		</section>
+
+		<section class="imp-panel">
+			<div class="imp-panel-head"><h3><?php esc_html_e( 'Capabilities & access control', 'infinity-migratex-pro' ); ?></h3></div>
+			<div class="imp-panel-body">
+				<table class="imp-table imp-table-info">
+					<tbody>
+						<?php
+						$roles = array();
+						foreach ( wp_roles()->roles as $role_key => $role_info ) {
+							$role = get_role( $role_key );
+							if ( $role && $role->has_cap( 'infinity_migrate_manage' ) ) {
+								$roles[] = $role_info['name'];
+							}
+						}
+						$rows = array(
+							array( __( 'Dedicated capabilities', 'infinity-migratex-pro' ), implode( ', ', IMP_Capabilities::all() ) ),
+							array( __( 'Roles with access', 'infinity-migratex-pro' ), empty( $roles ) ? __( 'None (administrators by default after activation)', 'infinity-migratex-pro' ) : implode( ', ', $roles ) ),
+							array( __( 'Server-side checks', 'infinity-migratex-pro' ), __( 'Every AJAX, download and form action re-verifies nonce + capability — a visible button is never the only barrier.', 'infinity-migratex-pro' ) ),
+						);
+						foreach ( $rows as $row ) :
+							?>
+							<tr><th scope="row"><?php echo esc_html( $row[0] ); ?></th><td><?php echo esc_html( $row[1] ); ?></td></tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
+		</section>
+		<?php
+
+		IMP_Admin::page_close();
+	}
+
+	/**
+	 * AJAX : vérification d'intégrité / rescellement du code.
+	 */
+	public static function ajax_action() {
+		IMP_Security::ajax_guard( 'manage' );
+
+		$do = isset( $_POST['do'] ) ? sanitize_key( wp_unslash( $_POST['do'] ) ) : '';
+
+		switch ( $do ) {
+			case 'integrity':
+				$result = IMP_Hardening::verify_baseline();
+				wp_send_json_success(
+					array(
+						'ok'      => (bool) $result['ok'],
+						'changed' => count( (array) $result['changed'] ),
+						'missing' => count( (array) $result['missing'] ),
+						'added'   => count( (array) $result['added'] ),
+						'count'   => isset( $result['count'] ) ? (int) $result['count'] : 0,
+					)
+				);
+				break;
+
+			case 'reseal':
+				$count = IMP_Hardening::rebuild_baseline();
+				wp_send_json_success(
+					array(
+						/* translators: %d: file count */
+						'message' => sprintf( __( 'Baseline re-sealed: %d files hashed (SHA-256).', 'infinity-migratex-pro' ), $count ),
+					)
+				);
+				break;
+		}
+
+		wp_send_json_error( array( 'code' => 'IMP-224', 'message' => IMP_Job::error_text( 'IMP-224' ) ), 400 );
+	}
+}
