@@ -296,9 +296,10 @@ final class IMP_Checkout {
 						</div>
 
 						<div class="imp-co-success" data-imp-co-success <?php echo $is_pro ? '' : 'hidden'; ?>>
+							<img class="imp-co-merci" src="<?php echo esc_url( IMP_URL . 'assets/images/merci.svg' ); ?>" alt="" width="84" height="84" />
 							<span class="imp-co-check" aria-hidden="true">✓</span>
-							<h3><?php esc_html_e( 'Pro is active on this site', 'infinity-migratex-pro' ); ?></h3>
-							<p><?php esc_html_e( 'Unlocked instantly: cloud destinations, scheduled backups with e-mail alerts, AES-256 encryption, turbo speed and priority support.', 'infinity-migratex-pro' ); ?></p>
+							<h3><?php esc_html_e( 'Thank you for choosing Infinity MigrateX Pro!', 'infinity-migratex-pro' ); ?></h3>
+							<p><?php esc_html_e( 'Pro is active on this site. Unlocked instantly: cloud destinations, scheduled backups with e-mail alerts, AES-256 encryption, turbo speed and priority support.', 'infinity-migratex-pro' ); ?></p>
 							<button type="button" class="imp-btn imp-btn-primary" data-imp-co-finish><?php esc_html_e( 'Start using Pro →', 'infinity-migratex-pro' ); ?></button>
 						</div>
 					</section>

@@ -358,6 +358,18 @@ final class IMP_Admin_About {
 			<section class="imp-panel">
 				<div class="imp-panel-head"><h3><?php esc_html_e( 'Changelog', 'infinity-migratex-pro' ); ?></h3></div>
 				<div class="imp-panel-body">
+					<h4>3.16.1</h4>
+					<ul class="imp-changelog">
+						<li><?php esc_html_e( 'UI: thank-you artwork on the activation success panel.', 'infinity-migratex-pro' ); ?></li>
+					</ul>
+					<h4>3.16.0</h4>
+					<ul class="imp-changelog">
+						<li><?php esc_html_e( 'New: browser console protection — identity banner, anti-scam warning, DevTools detection.', 'infinity-migratex-pro' ); ?></li>
+					</ul>
+					<h4>3.15.0</h4>
+					<ul class="imp-changelog">
+						<li><?php esc_html_e( 'Security: secret fields never printed on the settings page; Data & token protection panel on the Security page; log scrubbing extended.', 'infinity-migratex-pro' ); ?></li>
+					</ul>
 					<h4>3.14.0</h4>
 					<ul class="imp-changelog">
 						<li><?php esc_html_e( 'New: complete self-service purchase — order reference, payment approval by the author, automatic PRO activation.', 'infinity-migratex-pro' ); ?></li>
