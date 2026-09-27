@@ -505,6 +505,19 @@ final class IMP_Admin {
 		// Dernière erreur FATALE capturée (trap boot) : l'erreur réelle,
 		// sans passer par l'e-mail de debug.
 		$fatal = get_option( 'imp_fatal_trap' );
+		/* Rapports PÉRIMÉS auto-purgés : capturés sur une autre version
+		 * (correctif livré depuis) ou vieux de plus de 24 h — ils ne
+		 * reflètent plus l'état du code actuel. */
+		$fatal_stale = is_array( $fatal )
+			&& (
+				( isset( $fatal['version'] ) && (string) $fatal['version'] !== IMP_VERSION )
+				|| ! isset( $fatal['time'] )
+				|| ( time() - (int) $fatal['time'] ) > DAY_IN_SECONDS
+			);
+		if ( $fatal_stale ) {
+			delete_option( 'imp_fatal_trap' );
+			$fatal = null;
+		}
 		if ( is_array( $fatal ) && ! empty( $fatal['message'] ) ) {
 			$clear_url = wp_nonce_url(
 				add_query_arg( 'action', 'imp_clear_fatal', admin_url( 'admin-post.php' ) ),

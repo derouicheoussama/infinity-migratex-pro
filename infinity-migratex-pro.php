@@ -15,7 +15,7 @@
  * Plugin Name:       Infinity MigrateX Pro
  * Plugin URI:        https://github.com/derouicheoussama/infinity-migratex-pro
  * Description:       Migrer, sauvegarder et restaurer un site WordPress sans timeout : changement de domaine avec URLs réécrites sans casser les données sérialisées, clonage staging, sauvegardes automatiques avec rétention, restauration vérifiée par checksums, scanner de sécurité et journal détaillé. Moteur par chunks avec reprise après interruption — WooCommerce et Elementor inclus.
- * Version:           3.17.1
+ * Version:           3.17.2
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Tested up to:      7.1
@@ -31,7 +31,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'IMP_VERSION', '3.17.1' );
+define( 'IMP_VERSION', '3.17.2' );
 define( 'IMP_DB_VERSION', '1.0.0' );
 define( 'IMP_FILE', __FILE__ );
 define( 'IMP_DIR', plugin_dir_path( __FILE__ ) );
@@ -140,32 +140,43 @@ if ( is_admin() ) {
 	if ( ! is_dir( $imp_mu_dir ) ) {
 		@wp_mkdir_p( $imp_mu_dir ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
 	}
-	$imp_diag_php = $imp_mu_dir . 'imp-diag.php';
-	if ( ! file_exists( $imp_diag_php ) ) {
-		@wp_mkdir_p( $imp_mu_dir ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
-		$imp_diag_content = <<<'MUDIAG'
+		$imp_diag_php = $imp_mu_dir . 'imp-diag.php';
+		$imp_diag_wanted = <<<'MUDIAG'
 <?php
-/* Infinity MigrateX Pro - diagnostic mu-plugin (auto-genere, supprimable sans risque). */
+/* Infinity MigrateX Pro - diagnostic mu-plugin v3 (auto-genere, supprimable sans risque).
+ * Rapports affiches 24 h max, effacement via endpoint admin_post + nonce. */
+add_action( 'admin_post_imp_diag_clear', static function () {
+	if ( ! current_user_can( 'manage_options' ) ) { wp_die( 'Forbidden', '', array( 'response' => 403 ) ); }
+	check_admin_referer( 'imp_diag_clear' );
+	delete_option( 'imp_fatal_trap' );
+	delete_option( 'imp_activation_error' );
+	wp_safe_redirect( admin_url( 'plugins.php' ) );
+	exit;
+} );
 add_action( 'admin_notices', static function () {
 	if ( ! current_user_can( 'manage_options' ) ) { return; }
 	$t = get_option( 'imp_fatal_trap' );
 	$a = get_option( 'imp_activation_error' );
-	if ( is_array( $t ) && ! empty( $t['message'] ) ) {
+	$recent = is_array( $t ) && isset( $t['time'] ) && ( time() - (int) $t['time'] ) < 86400;
+	$clear  = wp_nonce_url( admin_url( 'admin-post.php?action=imp_diag_clear' ), 'imp_diag_clear' );
+	if ( $recent && is_array( $t ) && ! empty( $t['message'] ) ) {
 		echo '<div class="notice notice-error"><p><strong>Infinity MigrateX Pro - DERNIERE ERREUR FATALE :</strong><br><code>' . esc_html( $t['message'] ) . '</code><br>' . esc_html( $t['file'] ) . ':' . (int) $t['line'] . ' (v' . esc_html( $t['version'] ) . ')</p>';
 		if ( false !== stripos( (string) $t['message'], 'memory' ) ) {
 			echo '<p>Solution probable : augmentez WP_MEMORY_LIMIT dans wp-config.php ( define( \'WP_MEMORY_LIMIT\', \'256M\' ); ).</p>';
 		}
-		echo '</div>';
+		echo '<p><a class="button" href="' . esc_url( $clear ) . '">Effacer ce rapport</a></p></div>';
 	}
 	if ( is_array( $a ) && ! empty( $a['message'] ) ) {
-		echo '<div class="notice notice-warning"><p><strong>Infinity MigrateX Pro - erreur d\'activation :</strong> <code>' . esc_html( $a['message'] ) . '</code> (' . esc_html( $a['file'] ) . ')</p></div>';
+		echo '<div class="notice notice-warning"><p><strong>Infinity MigrateX Pro - erreur d\'activation :</strong> <code>' . esc_html( $a['message'] ) . '</code> (' . esc_html( $a['file'] ) . ')</p>';
+		echo '<p><a class="button" href="' . esc_url( $clear ) . '">Effacer</a></p></div>';
 	}
 } );
 MUDIAG;
-		@file_put_contents( $imp_diag_php, $imp_diag_content ); // phpcs:ignore WordPress.PHP.NoSilencedErrors, WordPress.WP.AlternativeFunctions
-		unset( $imp_diag_content );
-	}
-	unset( $imp_mu_dir, $imp_diag_php );
+		if ( ! file_exists( $imp_diag_php ) || substr_count( file_get_contents( $imp_diag_php ), 'imp_diag_clear' ) === 0 ) {
+			@wp_mkdir_p( $imp_mu_dir ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
+			@file_put_contents( $imp_diag_php, $imp_diag_wanted ); // phpcs:ignore WordPress.PHP.NoSilencedErrors, WordPress.WP.AlternativeFunctions
+		}
+		unset( $imp_diag_wanted, $imp_diag_php );
 }
 
 /**
@@ -368,6 +379,17 @@ register_deactivation_hook(
 			IMP_Hardening::deactivate();
 		}
 		IMP_Job::cancel_all();
+
+		/* Désactivé = le code ne tourne plus : les rapports de diagnostic
+		 * n'ont plus de sens (et le mu-plugin les ré-afficherait à vie).
+		 * Purge + retrait du mu-plugin de diagnostic. */
+		delete_option( 'imp_fatal_trap' );
+		delete_option( 'imp_activation_error' );
+		$mu = ( defined( 'WPMU_PLUGIN_DIR' ) ? WPMU_PLUGIN_DIR : trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins' ) . '/imp-diag.php';
+		if ( file_exists( $mu ) ) {
+			wp_delete_file( $mu );
+		}
+
 		// Les capabilities dédiées sont retirées ; les backups ne sont
 		// JAMAIS supprimés à la désactivation.
 		$admin = get_role( 'administrator' );

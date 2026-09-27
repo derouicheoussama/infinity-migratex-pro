@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.17.1
+Stable tag: 3.17.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,12 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.17.2 =
+
+* Fixed: old fatal reports kept displaying forever (even with the plugin deactivated) — reports are now auto-purged when captured on a different version than the installed one, or older than 24 hours.
+* The diagnostic mu-plugin was rebuilt: reports only display for 24 hours and now include their own "Clear" buttons that work even when the plugin is deactivated.
+* Deactivating the plugin purges diagnostic reports and removes the diagnostic mu-plugin.
 
 = 3.17.1 =
 

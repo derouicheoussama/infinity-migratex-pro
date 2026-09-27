@@ -358,6 +358,10 @@ final class IMP_Admin_About {
 			<section class="imp-panel">
 				<div class="imp-panel-head"><h3><?php esc_html_e( 'Changelog', 'infinity-migratex-pro' ); ?></h3></div>
 				<div class="imp-panel-body">
+					<h4>3.17.2</h4>
+					<ul class="imp-changelog">
+						<li><?php esc_html_e( 'Fixed: old fatal reports auto-purge after updates or deactivation; diagnostic mu-plugin rebuilt with 24-hour display and clear buttons.', 'infinity-migratex-pro' ); ?></li>
+					</ul>
 					<h4>3.17.0</h4>
 					<ul class="imp-changelog">
 						<li><?php esc_html_e( 'Fixed (important): fatal error when creating an AES-256 encrypted backup — encrypted backups now work end-to-end.', 'infinity-migratex-pro' ); ?></li>
