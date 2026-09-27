@@ -517,6 +517,14 @@ final class IMP_Admin {
 		if ( $fatal_stale ) {
 			delete_option( 'imp_fatal_trap' );
 			$fatal = null;
+			/* Self-healing : le mu-plugin de diagnostic présent sur le site
+			 * peut être une vieille version sans limite de temps — on le
+			 * supprime, le plugin régénère la v3 courante au prochain
+			 * chargement. */
+			$stale_mu = ( defined( 'WPMU_PLUGIN_DIR' ) ? WPMU_PLUGIN_DIR : trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins' ) . '/imp-diag.php';
+			if ( file_exists( $stale_mu ) ) {
+				wp_delete_file( $stale_mu );
+			}
 		}
 		if ( is_array( $fatal ) && ! empty( $fatal['message'] ) ) {
 			$clear_url = wp_nonce_url(

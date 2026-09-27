@@ -15,7 +15,7 @@
  * Plugin Name:       Infinity MigrateX Pro
  * Plugin URI:        https://github.com/derouicheoussama/infinity-migratex-pro
  * Description:       Migrer, sauvegarder et restaurer un site WordPress sans timeout : changement de domaine avec URLs réécrites sans casser les données sérialisées, clonage staging, sauvegardes automatiques avec rétention, restauration vérifiée par checksums, scanner de sécurité et journal détaillé. Moteur par chunks avec reprise après interruption — WooCommerce et Elementor inclus.
- * Version:           3.17.2
+ * Version:           3.17.3
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Tested up to:      7.1
@@ -31,7 +31,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'IMP_VERSION', '3.17.2' );
+define( 'IMP_VERSION', '3.17.3' );
 define( 'IMP_DB_VERSION', '1.0.0' );
 define( 'IMP_FILE', __FILE__ );
 define( 'IMP_DIR', plugin_dir_path( __FILE__ ) );
@@ -143,40 +143,33 @@ if ( is_admin() ) {
 		$imp_diag_php = $imp_mu_dir . 'imp-diag.php';
 		$imp_diag_wanted = <<<'MUDIAG'
 <?php
-/* Infinity MigrateX Pro - diagnostic mu-plugin v3 (auto-genere, supprimable sans risque).
- * Rapports affiches 24 h max, effacement via endpoint admin_post + nonce. */
-add_action( 'admin_post_imp_diag_clear', static function () {
-	if ( ! current_user_can( 'manage_options' ) ) { wp_die( 'Forbidden', '', array( 'response' => 403 ) ); }
-	check_admin_referer( 'imp_diag_clear' );
-	delete_option( 'imp_fatal_trap' );
-	delete_option( 'imp_activation_error' );
-	wp_safe_redirect( admin_url( 'plugins.php' ) );
-	exit;
-} );
+/* Infinity MigrateX Pro - diagnostic mu-plugin v3 (IMP-DIAG-V3, auto-genere, supprimable sans risque).
+ * Rapports affiches 24 h max, puis disparition automatique. */
 add_action( 'admin_notices', static function () {
 	if ( ! current_user_can( 'manage_options' ) ) { return; }
 	$t = get_option( 'imp_fatal_trap' );
 	$a = get_option( 'imp_activation_error' );
 	$recent = is_array( $t ) && isset( $t['time'] ) && ( time() - (int) $t['time'] ) < 86400;
-	$clear  = wp_nonce_url( admin_url( 'admin-post.php?action=imp_diag_clear' ), 'imp_diag_clear' );
 	if ( $recent && is_array( $t ) && ! empty( $t['message'] ) ) {
 		echo '<div class="notice notice-error"><p><strong>Infinity MigrateX Pro - DERNIERE ERREUR FATALE :</strong><br><code>' . esc_html( $t['message'] ) . '</code><br>' . esc_html( $t['file'] ) . ':' . (int) $t['line'] . ' (v' . esc_html( $t['version'] ) . ')</p>';
 		if ( false !== stripos( (string) $t['message'], 'memory' ) ) {
 			echo '<p>Solution probable : augmentez WP_MEMORY_LIMIT dans wp-config.php ( define( \'WP_MEMORY_LIMIT\', \'256M\' ); ).</p>';
 		}
-		echo '<p><a class="button" href="' . esc_url( $clear ) . '">Effacer ce rapport</a></p></div>';
+		echo '</div>';
 	}
 	if ( is_array( $a ) && ! empty( $a['message'] ) ) {
-		echo '<div class="notice notice-warning"><p><strong>Infinity MigrateX Pro - erreur d\'activation :</strong> <code>' . esc_html( $a['message'] ) . '</code> (' . esc_html( $a['file'] ) . ')</p>';
-		echo '<p><a class="button" href="' . esc_url( $clear ) . '">Effacer</a></p></div>';
+		echo '<div class="notice notice-warning"><p><strong>Infinity MigrateX Pro - erreur d\'activation :</strong> <code>' . esc_html( $a['message'] ) . '</code> (' . esc_html( $a['file'] ) . ')</p></div>';
 	}
 } );
 MUDIAG;
-		if ( ! file_exists( $imp_diag_php ) || substr_count( file_get_contents( $imp_diag_php ), 'imp_diag_clear' ) === 0 ) {
+		/* Régénération forcée si le mu présent n'est PAS la v3 (les vieilles
+		 * versions v1/v2 affichaient les rapports sans limite de temps). */
+		$mu_is_current = is_file( $imp_diag_php ) && false !== strpos( (string) file_get_contents( $imp_diag_php ), 'IMP-DIAG-V3' );
+		if ( ! $mu_is_current ) {
 			@wp_mkdir_p( $imp_mu_dir ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
 			@file_put_contents( $imp_diag_php, $imp_diag_wanted ); // phpcs:ignore WordPress.PHP.NoSilencedErrors, WordPress.WP.AlternativeFunctions
 		}
-		unset( $imp_diag_wanted, $imp_diag_php );
+		unset( $imp_diag_wanted, $imp_diag_php, $mu_is_current );
 }
 
 /**

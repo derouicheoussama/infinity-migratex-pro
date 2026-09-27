@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.17.2
+Stable tag: 3.17.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,10 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.17.3 =
+
+* Fixed: old diagnostic mu-plugins (v1/v2, without the 24-hour display limit) are now automatically replaced by the current version on first admin load — previously they kept displaying old fatal reports forever, even after the bug was fixed and after updates.
 
 = 3.17.2 =
 
