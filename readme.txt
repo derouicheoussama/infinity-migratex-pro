@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.17.0
+Stable tag: 3.17.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,10 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.17.1 =
+
+* Fixed (important): fatal "end(): Argument #1 ($array) cannot be passed by reference" when a job completed on PHP 8 — the last-message lookup passed a temporary value by reference. Fixed in both places, and the finalization step is now armored: any error there still saves the job (no more infinite re-fatal loop), resumable.
 
 = 3.17.0 =
 

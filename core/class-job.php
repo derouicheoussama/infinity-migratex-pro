@@ -240,11 +240,19 @@ final class IMP_Job {
 
 		$job['messages'] = array_slice( array_merge( (array) $job['messages'], $messages ), -12 );
 
-		// Statut final ?
-		if ( self::STATUS_COMPLETED === $job['status'] ) {
-			self::complete( $job );
-		} elseif ( self::STATUS_FAILED === $job['status'] ) {
-			self::fail( $job );
+		// Statut final ? — blindé : toute erreur ici doit QUAND MÊME
+		// sauvegarder le job (sinon il reste « running » et re-fatal à
+		// chaque reprise, en boucle).
+		try {
+			if ( self::STATUS_COMPLETED === $job['status'] ) {
+				self::complete( $job );
+			} elseif ( self::STATUS_FAILED === $job['status'] ) {
+				self::fail( $job );
+			}
+		} catch ( Throwable $e ) {
+			$job['status']  = self::STATUS_FAILED;
+			$job['error']   = 'IMP-299';
+			$job['messages'][] = __( 'Finalization error — the operation was stopped. You can resume it.', 'infinity-migratex-pro' );
 		}
 
 		update_option( self::OPTION, $job, false );
@@ -1138,10 +1146,16 @@ final class IMP_Job {
 			$stats['size_bytes'] = (int) $job['result']['sizes']['total'];
 		}
 
+		/* Dernier message : end() exige une RÉFÉRENCE — l'appeler sur un
+		 * cast temporaire (array) est un fatal sur PHP 8. On copie d'abord
+		 * dans une variable, puis on lit le dernier élément. */
+		$msgs      = (array) ( isset( $job['messages'] ) ? $job['messages'] : array() );
+		$last_msg  = $msgs ? (string) end( $msgs ) : '';
+
 		IMP_Logger::finish(
 			(int) $job['log_id'],
 			IMP_Logger::STATUS_COMPLETED,
-			end( (array) $job['messages'] ) ?: '',
+			$last_msg,
 			$stats
 		);
 
@@ -1150,7 +1164,7 @@ final class IMP_Job {
 		self::maybe_notify(
 			$job,
 			true,
-			(string) ( end( (array) $job['messages'] ) ?: __( 'Operation completed.', 'infinity-migratex-pro' ) )
+			$last_msg !== '' ? $last_msg : __( 'Operation completed.', 'infinity-migratex-pro' )
 		);
 	}
 
