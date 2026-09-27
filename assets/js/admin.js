@@ -20,6 +20,41 @@
 	var cfg = IMP_Admin;
 	var i18n = cfg.i18n || {};
 
+	/* ------------------------------------------------------------------ *
+	 * Protection console : bannière d'identité + détection DevTools.
+	 * Rappel standard aux éditeurs (Stripe/Firebase) : la console n'est
+	 * PAS une zone de saisie — collez-y quelque chose = arnaque. La
+	 * détection (écart de fenêtre) ré-affiche la bannière si DevTools
+	 * s'ouvre. Toutes les données sensibles restent protégées serveur.
+	 * ------------------------------------------------------------------ */
+	(function consoleGuard() {
+		var banner = function () {
+			try {
+				console.log('%c∞ INFINITY CODER', 'color:#2f5fe0;font-size:22px;font-weight:bold;text-shadow:1px 1px 0 #c4d3f6;');
+				console.log('%cInfinity MigrateX Pro — © ' + new Date().getFullYear() + ' Derouiche Oussama · https://www.derouicheoussama.com · GPL v2+', 'color:#1e2a44;font-size:12px;');
+				console.log('%c⚠ STOP! / ARRÊTEZ!', 'color:#c9281e;font-size:16px;font-weight:bold;');
+				console.log('%cThis browser feature is for developers. If someone told you to copy-paste something here, it is a SCAM and could give attackers access to your data.\nCette fonction du navigateur est réservée aux développeurs. Si quelqu\'un vous demande de coller quelque chose ici, c\'est une ARNAQUE.', 'color:#c9281e;font-size:12px;');
+			} catch (e) { /* console indisponible */ }
+		};
+		banner();
+
+		var open = false;
+		var check = function () {
+			var detached = (window.outerWidth - window.innerWidth > 160) || (window.outerHeight - window.innerHeight > 160);
+			if (detached && !open) {
+				open = true;
+				try { console.clear(); } catch (e) { /* interdit par le navigateur */ }
+				banner();
+				try {
+					console.log('%c⚠ DevTools detected — / DevTools détectés — toutes les données sensibles restent protégées CÔTÉ SERVEUR.', 'color:#c9281e;font-size:13px;font-weight:bold;');
+				} catch (e) { /* silencieux */ }
+			} else if (!detached && open) {
+				open = false;
+			}
+		};
+		window.setInterval(check, 1500);
+	})();
+
 	/* Thème auto : suit le système quand le réglage est sur "auto". */
 	(function themeApplier() {
 		if (cfg.theme !== 'auto') { return; }

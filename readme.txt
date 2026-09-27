@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.15.0
+Stable tag: 3.16.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,11 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.16.0 =
+
+* New: browser console protection — an identity banner (∞ Infinity Coder, copyright) prints in the console on every plugin screen, with the standard "STOP — pasting code here is a scam" warning, and re-prints if browser developer tools are opened.
+* Reminder: this is a deterrent for non-technical eyes — all sensitive data remains protected server-side (encrypted secrets, nonces, rate limiting).
 
 = 3.15.0 =
 
