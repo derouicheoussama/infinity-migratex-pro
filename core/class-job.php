@@ -226,12 +226,15 @@ final class IMP_Job {
 				$job['state'][ '_msg_' . $phase_key ] = isset( $result['message'] ) ? $result['message'] : '';
 				break; // budget atteint au milieu d'une phase.
 			}
-		} catch ( Exception $e ) {
+		} catch ( Throwable $e ) {
+			// Throwable (et pas seulement Exception) : une erreur de
+			// programmation doit échouer LE JOB proprement, jamais casser
+			// la page en fatal — l'utilisateur peut reprendre l'opération.
 			$job['status'] = self::STATUS_FAILED;
 			$job['error']  = 'IMP-299';
 			$messages[]    = __( 'An unexpected server error interrupted the operation. You can resume it from where it stopped.', 'infinity-migratex-pro' );
 			if ( imp_setting( 'debug_mode', 0 ) ) {
-				$messages[] = 'Debug: ' . $e->getMessage();
+				$messages[] = 'Debug: ' . $e->getMessage() . ' @ ' . basename( $e->getFile() ) . ':' . $e->getLine();
 			}
 		}
 
@@ -359,8 +362,8 @@ final class IMP_Job {
 				return IMP_Backup_Engine::step_files( $job, $budget );
 			case 'backup/database':
 				return IMP_Backup_Engine::step_database( $job, $budget );
-			case 'backup/encrypt':
-				return IMP_Crypto::step_encrypt_backup( $job );
+		case 'backup/encrypt':
+			return IMP_Backup_Engine::step_encrypt_backup( $job );
 			case 'backup/finalize':
 				return IMP_Backup_Engine::step_finalize( $job );
 
@@ -549,10 +552,12 @@ final class IMP_Job {
 	 */
 	private static function phases_for( $type, array $data ) {
 		switch ( $type ) {
-			case 'backup':
-				$files = IMP_Backup_Engine::wants_files( $data );
-				$db    = IMP_Backup_Engine::wants_database( $data );
-				$enc   = ! empty( $data['encrypt'] ) ? 6 : 0;
+		case 'backup':
+			$files = IMP_Backup_Engine::wants_files( $data );
+			$db    = IMP_Backup_Engine::wants_database( $data );
+			/* Phase chiffrement : uniquement si demandée ET implémentée —
+			 * une phase sans implémentation produitrait un fatal. */
+			$enc   = ( ! empty( $data['encrypt'] ) && method_exists( 'IMP_Backup_Engine', 'step_encrypt_backup' ) ) ? 6 : 0;
 				if ( $files && $db ) {
 					return array(
 						array( 'key' => 'prepare', 'label' => __( 'Preparation', 'infinity-migratex-pro' ), 'weight' => 2 ),

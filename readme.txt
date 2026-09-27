@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.16.1
+Stable tag: 3.17.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,12 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.17.0 =
+
+* Fixed (important): fatal "Call to undefined method IMP_Crypto::step_encrypt_backup()" when creating an AES-256 encrypted backup — the job engine called the encryption step on the wrong class (it lives in the backup engine). Encrypted backups now work correctly.
+* Robustness: job steps now catch Throwable (not just Exception), so any future code error fails THE JOB gracefully with a resume point instead of breaking the page with a fatal error.
+* Defensive: the encryption phase is only scheduled when its implementation actually exists.
 
 = 3.16.1 =
 
