@@ -54,6 +54,14 @@ msgstr ""
 msgid "%1$d files scanned — %2$d findings."
 msgstr ""
 
+#: admin/class-security.php:96
+msgid "%1$d of %2$d encrypted — re-save the others to encrypt"
+msgstr ""
+
+#: admin/class-security.php:94
+msgid "%1$d of %2$d encrypted (AES-256-GCM)"
+msgstr ""
+
 #: core/class-backup-engine.php:1137
 msgid "%1$d SQL statements failed — the import stopped to protect your data. Last error: %2$s"
 msgstr ""
@@ -182,6 +190,14 @@ msgstr ""
 msgid "%s: writable"
 msgstr ""
 
+#: admin/class-settings.php:401 admin/class-settings.php:406 admin/class-settings.php:421 admin/class-settings.php:444
+msgid "•••• saved — leave empty to keep"
+msgstr ""
+
+#: admin/class-settings.php:511
+msgid "•••• saved — paste here only to replace"
+msgstr ""
+
 #: admin/class-about.php:216
 msgid "1 · Back up"
 msgstr ""
@@ -286,7 +302,7 @@ msgstr ""
 msgid "active"
 msgstr ""
 
-#: admin/class-security.php:85 admin/class-security.php:117
+#: admin/class-security.php:144 admin/class-security.php:176
 msgid "ACTIVE"
 msgstr ""
 
@@ -354,7 +370,7 @@ msgstr ""
 msgid "Aggressive (large batches, dedicated servers)"
 msgstr ""
 
-#: admin/class-security.php:85
+#: admin/class-security.php:144
 msgid "ALERT"
 msgstr ""
 
@@ -431,7 +447,7 @@ msgid "Any FTP or FTPS (explicit TLS) server: your hosting FTP account, a NAS or
 msgstr ""
 
 #: admin/class-settings.php:422
-msgid "App Console → generate token with files.content.write scope. Stored encrypted."
+msgid "App Console → generate token with files.content.write scope. Stored encrypted — never printed on this page."
 msgstr ""
 
 #: admin/class-settings.php:166
@@ -634,7 +650,7 @@ msgstr ""
 msgid "Balanced (default)"
 msgstr ""
 
-#: admin/class-security.php:228
+#: admin/class-security.php:287
 msgid "Baseline re-sealed: %d files hashed (SHA-256)."
 msgstr ""
 
@@ -734,7 +750,7 @@ msgstr ""
 msgid "Canceled"
 msgstr ""
 
-#: admin/class-security.php:168
+#: admin/class-security.php:227
 msgid "Capabilities & access control"
 msgstr ""
 
@@ -992,6 +1008,10 @@ msgstr ""
 msgid "Compression (gzip database dumps)"
 msgstr ""
 
+#: admin/class-security.php:105
+msgid "Configuration export"
+msgstr ""
+
 #: admin/class-settings.php:1076
 msgid "Configuration imported — review the highlighted values and save."
 msgstr ""
@@ -1144,7 +1164,7 @@ msgstr ""
 msgid "Credentials are encrypted and time-limited. Restart the migration wizard."
 msgstr ""
 
-#: admin/class-scanner.php:90 admin/class-security.php:150
+#: admin/class-scanner.php:90 admin/class-security.php:209
 msgid "Critical"
 msgstr ""
 
@@ -1198,6 +1218,10 @@ msgstr ""
 
 #: admin/class-admin.php:30
 msgid "Dashboard"
+msgstr ""
+
+#: admin/class-security.php:83
+msgid "Data & token protection"
 msgstr ""
 
 #: admin/class-admin.php:37 admin/class-backup.php:191 admin/class-dashboard.php:166 admin/class-import.php:85 admin/class-logs.php:65 admin/class-migration.php:59 admin/class-restore.php:98 admin/class-tools.php:93
@@ -1284,7 +1308,7 @@ msgstr ""
 msgid "Decryption password (only if the backup was encrypted)"
 msgstr ""
 
-#: admin/class-security.php:181
+#: admin/class-security.php:240
 msgid "Dedicated capabilities"
 msgstr ""
 
@@ -1316,11 +1340,11 @@ msgstr ""
 msgid "Delete plugin data on uninstall"
 msgstr ""
 
-#: admin/class-security.php:101
+#: admin/class-security.php:160
 msgid "Delete temporary files now"
 msgstr ""
 
-#: admin/class-security.php:125
+#: admin/class-security.php:184
 msgid "Delete temporary migration files automatically"
 msgstr ""
 
@@ -1372,7 +1396,7 @@ msgstr ""
 msgid "Detailed logs for every operation, exportable in one click."
 msgstr ""
 
-#: admin/class-checkout.php:142 admin/class-logs.php:149 admin/class-security.php:78 admin/class-security.php:110 admin/class-woocommerce.php:127
+#: admin/class-checkout.php:142 admin/class-logs.php:149 admin/class-security.php:137 admin/class-security.php:169 admin/class-woocommerce.php:127
 msgid "Details"
 msgstr ""
 
@@ -1408,7 +1432,7 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: admin/class-security.php:130
+#: admin/class-security.php:189
 msgid "disabled — enable it in Settings → General."
 msgstr ""
 
@@ -1548,7 +1572,7 @@ msgstr ""
 msgid "Enabled — %s"
 msgstr ""
 
-#: admin/class-security.php:129
+#: admin/class-security.php:188
 msgid "enabled (daily maintenance purges working files)."
 msgstr ""
 
@@ -1616,7 +1640,7 @@ msgstr ""
 msgid "Errors"
 msgstr ""
 
-#: admin/class-security.php:183
+#: admin/class-security.php:242
 msgid "Every AJAX, download and form action re-verifies nonce + capability — a visible button is never the only barrier."
 msgstr ""
 
@@ -1977,7 +2001,7 @@ msgid "General"
 msgstr ""
 
 #: admin/class-settings.php:407
-msgid "Generate with the drive.file scope."
+msgid "Generate with the drive.file scope. Stored encrypted — never printed on this page."
 msgstr ""
 
 #: integrations/class-elementor.php:114
@@ -2017,7 +2041,7 @@ msgid "Good speed on most hosts."
 msgstr ""
 
 #: admin/class-settings.php:512
-msgid "Google Cloud → Service account → Keys → JSON. Stored encrypted; never leaves this site. Share the target sheet with the service account e-mail."
+msgid "Google Cloud → Service account → Keys → JSON. Stored encrypted; never printed on this page and never leaves this site. Leave empty to keep the saved key."
 msgstr ""
 
 #: core/class-remote.php:42
@@ -2060,11 +2084,11 @@ msgstr ""
 msgid "Guided, verified restore"
 msgstr ""
 
-#: admin/class-security.php:59
+#: admin/class-security.php:118
 msgid "Hardening layers"
 msgstr ""
 
-#: admin/class-security.php:66
+#: admin/class-security.php:125
 msgid "Hardening module disabled (safe mode)."
 msgstr ""
 
@@ -2220,7 +2244,7 @@ msgstr ""
 msgid "Infinity MigrateX Pro menu"
 msgstr ""
 
-#: admin/class-scanner.php:98 admin/class-security.php:158
+#: admin/class-scanner.php:98 admin/class-security.php:217
 msgid "Informational"
 msgstr ""
 
@@ -2276,7 +2300,7 @@ msgstr ""
 msgid "Integrity is verified before anything is written, you choose exactly what gets restored, and an optional safety backup protects the current site first."
 msgstr ""
 
-#: admin/class-security.php:91
+#: admin/class-security.php:150
 msgid "Integrity verdicts are re-checked daily and after every official update. Any unexpected modification raises a visible alert and a security journal entry."
 msgstr ""
 
@@ -2368,7 +2392,7 @@ msgstr ""
 msgid "Last scan report"
 msgstr ""
 
-#: admin/class-security.php:139
+#: admin/class-security.php:198
 msgid "Last security scan"
 msgstr ""
 
@@ -2376,7 +2400,7 @@ msgstr ""
 msgid "Latest backup: %s"
 msgstr ""
 
-#: admin/class-security.php:76
+#: admin/class-security.php:135
 msgid "Layer"
 msgstr ""
 
@@ -2488,7 +2512,7 @@ msgstr ""
 msgid "Log retention (days)"
 msgstr ""
 
-#: admin/class-admin.php:39 admin/class-settings.php:49
+#: admin/class-admin.php:39 admin/class-security.php:109 admin/class-settings.php:49
 msgid "Logs"
 msgstr ""
 
@@ -2658,6 +2682,10 @@ msgstr ""
 
 #: admin/class-settings.php:157
 msgid "Never"
+msgstr ""
+
+#: admin/class-security.php:102
+msgid "Never — secret fields are never printed, even encrypted."
 msgstr ""
 
 #: admin/class-settings.php:186 admin/class-settings.php:196
@@ -2872,8 +2900,12 @@ msgstr ""
 msgid "No proxied package available."
 msgstr ""
 
-#: admin/class-security.php:146
+#: admin/class-security.php:205
 msgid "No scan performed yet."
+msgstr ""
+
+#: admin/class-security.php:92
+msgid "No secrets configured"
 msgstr ""
 
 #: admin/class-dashboard.php:74
@@ -2904,7 +2936,7 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: admin/class-security.php:182
+#: admin/class-security.php:241
 msgid "None (administrators by default after activation)"
 msgstr ""
 
@@ -3520,7 +3552,7 @@ msgstr ""
 msgid "Protected storage directory"
 msgstr ""
 
-#: admin/class-security.php:108
+#: admin/class-security.php:167
 msgid "Protection"
 msgstr ""
 
@@ -3556,11 +3588,11 @@ msgstr ""
 msgid "Re-check now"
 msgstr ""
 
-#: admin/class-security.php:63
+#: admin/class-security.php:122
 msgid "Re-seal baseline"
 msgstr ""
 
-#: admin/class-security.php:100
+#: admin/class-security.php:159
 msgid "Re-secure storage"
 msgstr ""
 
@@ -3776,7 +3808,7 @@ msgstr ""
 msgid "Retry count"
 msgstr ""
 
-#: admin/class-security.php:117 admin/class-woocommerce.php:134
+#: admin/class-security.php:176 admin/class-woocommerce.php:134
 msgid "REVIEW"
 msgstr ""
 
@@ -3800,7 +3832,7 @@ msgstr ""
 msgid "Robustness: executable author watermark in all 46 code files, verified from the Security page; defensive Google Sheets logging."
 msgstr ""
 
-#: admin/class-security.php:182
+#: admin/class-security.php:241
 msgid "Roles with access"
 msgstr ""
 
@@ -3924,7 +3956,7 @@ msgstr ""
 msgid "Scanned %1$d rows, %2$d values updated — %3$s"
 msgstr ""
 
-#: admin/class-security.php:162
+#: admin/class-security.php:221
 msgid "Scanned on %s."
 msgstr ""
 
@@ -3932,7 +3964,7 @@ msgstr ""
 msgid "Scanner"
 msgstr ""
 
-#: admin/class-security.php:141
+#: admin/class-security.php:200
 msgid "Scanner page"
 msgstr ""
 
@@ -3996,8 +4028,24 @@ msgstr ""
 msgid "Search settings"
 msgstr ""
 
+#: admin/class-security.php:110
+msgid "Secret-like keys are redacted automatically."
+msgstr ""
+
+#: admin/class-security.php:106
+msgid "Secrets excluded from JSON exports."
+msgstr ""
+
+#: admin/class-security.php:101
+msgid "Secrets in page source"
+msgstr ""
+
 #: core/class-hardening.php:401
 msgid "Secrets isolation (anti-leak)"
+msgstr ""
+
+#: admin/class-security.php:89
+msgid "Secrets stored encrypted"
 msgstr ""
 
 #: admin/class-checkout.php:309
@@ -4024,7 +4072,7 @@ msgstr ""
 msgid "Security built in"
 msgstr ""
 
-#: admin/class-security.php:98
+#: admin/class-security.php:157
 msgid "Security center"
 msgstr ""
 
@@ -4108,7 +4156,7 @@ msgstr ""
 msgid "Server"
 msgstr ""
 
-#: admin/class-security.php:183
+#: admin/class-security.php:242
 msgid "Server-side checks"
 msgstr ""
 
@@ -4292,7 +4340,7 @@ msgstr ""
 msgid "Starting…"
 msgstr ""
 
-#: admin/class-about.php:336 admin/class-dashboard.php:356 admin/class-logs.php:112 admin/class-security.php:77 admin/class-security.php:109 admin/class-woocommerce.php:126
+#: admin/class-about.php:336 admin/class-dashboard.php:356 admin/class-logs.php:112 admin/class-security.php:136 admin/class-security.php:168 admin/class-woocommerce.php:126
 msgid "Status"
 msgstr ""
 
@@ -4320,8 +4368,12 @@ msgstr ""
 msgid "Storage recreated — on nginx servers, deny access to the storage folder in your vhost config."
 msgstr ""
 
-#: admin/class-settings.php:402 admin/class-settings.php:445
-msgid "Stored encrypted (AES-256-GCM when available)."
+#: admin/class-settings.php:402
+msgid "Stored encrypted (AES-256-GCM when available). Never printed on this page — leave empty to keep the saved value."
+msgstr ""
+
+#: admin/class-settings.php:445
+msgid "Stored encrypted (AES-256-GCM when available). Never printed on this page."
 msgstr ""
 
 #: admin/class-packages.php:74
@@ -4560,7 +4612,7 @@ msgstr ""
 msgid "The full URL where the clone will be served (domain + folder), used to rewrite all URLs in the target database."
 msgstr ""
 
-#: admin/class-security.php:71
+#: admin/class-security.php:130
 msgid "The hardening module is not loaded."
 msgstr ""
 
@@ -5128,7 +5180,7 @@ msgstr ""
 msgid "Verify"
 msgstr ""
 
-#: admin/class-security.php:62
+#: admin/class-security.php:121
 msgid "Verify source code now"
 msgstr ""
 
@@ -5176,7 +5228,7 @@ msgstr ""
 msgid "Warning: this backup comes from WordPress %1$s while this site runs %2$s — database schema differences are possible."
 msgstr ""
 
-#: admin/class-scanner.php:94 admin/class-security.php:154
+#: admin/class-scanner.php:94 admin/class-security.php:213
 msgid "Warnings"
 msgstr ""
 

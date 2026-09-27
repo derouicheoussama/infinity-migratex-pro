@@ -398,13 +398,13 @@ final class IMP_Admin_Settings {
 				</tr>
 				<tr>
 					<th scope="row"><label><?php esc_html_e( 'OAuth client secret', 'infinity-migratex-pro' ); ?></label></th>
-					<td><input type="password" class="regular-text" name="imp_settings[cloud_drive_client_secret]" value="<?php echo esc_attr( $settings['cloud_drive_client_secret'] ); ?>" autocomplete="new-password" <?php disabled( ! $is_pro ); ?>>
-					<p class="description"><?php esc_html_e( 'Stored encrypted (AES-256-GCM when available).', 'infinity-migratex-pro' ); ?></p></td>
+					<td><input type="password" class="regular-text" name="imp_settings[cloud_drive_client_secret]" value="" placeholder="<?php esc_attr_e( '•••• saved — leave empty to keep', 'infinity-migratex-pro' ); ?>" autocomplete="new-password" <?php disabled( ! $is_pro ); ?>>
+					<p class="description"><?php esc_html_e( 'Stored encrypted (AES-256-GCM when available). Never printed on this page — leave empty to keep the saved value.', 'infinity-migratex-pro' ); ?></p></td>
 				</tr>
 				<tr>
 					<th scope="row"><label><?php esc_html_e( 'Refresh token', 'infinity-migratex-pro' ); ?></label></th>
-					<td><input type="password" class="regular-text" name="imp_settings[cloud_drive_refresh]" value="<?php echo esc_attr( $settings['cloud_drive_refresh'] ); ?>" autocomplete="new-password" <?php disabled( ! $is_pro ); ?>>
-					<p class="description"><?php esc_html_e( 'Generate with the drive.file scope.', 'infinity-migratex-pro' ); ?></p></td>
+					<td><input type="password" class="regular-text" name="imp_settings[cloud_drive_refresh]" value="" placeholder="<?php esc_attr_e( '•••• saved — leave empty to keep', 'infinity-migratex-pro' ); ?>" autocomplete="new-password" <?php disabled( ! $is_pro ); ?>>
+					<p class="description"><?php esc_html_e( 'Generate with the drive.file scope. Stored encrypted — never printed on this page.', 'infinity-migratex-pro' ); ?></p></td>
 				</tr>
 				<tr>
 					<th scope="row"><label><?php esc_html_e( 'Folder ID (optional)', 'infinity-migratex-pro' ); ?></label></th>
@@ -418,8 +418,8 @@ final class IMP_Admin_Settings {
 			<table class="form-table imp-form" role="presentation">
 				<tr>
 					<th scope="row"><label><?php esc_html_e( 'Access token', 'infinity-migratex-pro' ); ?></label></th>
-					<td><input type="password" class="regular-text" name="imp_settings[cloud_dropbox_token]" value="<?php echo esc_attr( $settings['cloud_dropbox_token'] ); ?>" autocomplete="new-password" <?php disabled( ! $is_pro ); ?>>
-					<p class="description"><?php esc_html_e( 'App Console → generate token with files.content.write scope. Stored encrypted.', 'infinity-migratex-pro' ); ?></p></td>
+					<td><input type="password" class="regular-text" name="imp_settings[cloud_dropbox_token]" value="" placeholder="<?php esc_attr_e( '•••• saved — leave empty to keep', 'infinity-migratex-pro' ); ?>" autocomplete="new-password" <?php disabled( ! $is_pro ); ?>>
+					<p class="description"><?php esc_html_e( 'App Console → generate token with files.content.write scope. Stored encrypted — never printed on this page.', 'infinity-migratex-pro' ); ?></p></td>
 				</tr>
 			</table>
 		</div>
@@ -441,8 +441,8 @@ final class IMP_Admin_Settings {
 				</tr>
 				<tr>
 					<th scope="row"><label><?php esc_html_e( 'Password', 'infinity-migratex-pro' ); ?></label></th>
-					<td><input type="password" class="regular-text" name="imp_settings[cloud_ftp_pass]" value="<?php echo esc_attr( $settings['cloud_ftp_pass'] ); ?>" autocomplete="new-password" <?php disabled( ! $is_pro ); ?>>
-					<p class="description"><?php esc_html_e( 'Stored encrypted (AES-256-GCM when available).', 'infinity-migratex-pro' ); ?></p></td>
+					<td><input type="password" class="regular-text" name="imp_settings[cloud_ftp_pass]" value="" placeholder="<?php esc_attr_e( '•••• saved — leave empty to keep', 'infinity-migratex-pro' ); ?>" autocomplete="new-password" <?php disabled( ! $is_pro ); ?>>
+					<p class="description"><?php esc_html_e( 'Stored encrypted (AES-256-GCM when available). Never printed on this page.', 'infinity-migratex-pro' ); ?></p></td>
 				</tr>
 				<tr>
 					<th scope="row"><label><?php esc_html_e( 'Remote path', 'infinity-migratex-pro' ); ?></label></th>
@@ -508,8 +508,8 @@ final class IMP_Admin_Settings {
 			<tr>
 				<th scope="row"><?php esc_html_e( 'Service account JSON', 'infinity-migratex-pro' ); ?></th>
 				<td>
-					<textarea class="imp-textarea" rows="6" name="imp_settings[sheets_json]" autocomplete="off" <?php disabled( ! $is_pro ); ?>><?php echo esc_textarea( $settings['sheets_json'] ); ?></textarea>
-					<p class="description"><?php esc_html_e( 'Google Cloud → Service account → Keys → JSON. Stored encrypted; never leaves this site. Share the target sheet with the service account e-mail.', 'infinity-migratex-pro' ); ?></p>
+					<textarea class="imp-textarea" rows="6" name="imp_settings[sheets_json]" placeholder="<?php esc_attr_e( '•••• saved — paste here only to replace', 'infinity-migratex-pro' ); ?>" autocomplete="off" <?php disabled( ! $is_pro ); ?>><?php echo esc_textarea( '' ); ?></textarea>
+					<p class="description"><?php esc_html_e( 'Google Cloud → Service account → Keys → JSON. Stored encrypted; never printed on this page and never leaves this site. Leave empty to keep the saved key.', 'infinity-migratex-pro' ); ?></p>
 				</td>
 			</tr>
 			<tr>

@@ -54,6 +54,65 @@ final class IMP_Admin_Security {
 				?>
 			</div>
 		<?php endif; ?>
+		<?php
+		/* Panneau « Data & token protection » : état réel de la protection
+		 * des secrets (chiffrement au repos, non-affichage HTML, exports
+		 * sans secrets, logs scrubés, tokens exportés jamais). */
+		$protected_settings = imp_settings();
+		$secret_map         = array(
+			'Google Drive client secret' => 'cloud_drive_client_secret',
+			'Google Drive refresh token' => 'cloud_drive_refresh',
+			'Dropbox access token'       => 'cloud_dropbox_token',
+			'FTP password'               => 'cloud_ftp_pass',
+			'Google Sheets account JSON' => 'sheets_json',
+		);
+		$enc_count  = 0;
+		$conf_count = 0;
+		foreach ( $secret_map as $label => $key ) {
+			if ( empty( $protected_settings[ $key ] ) ) {
+				continue;
+			}
+			$conf_count++;
+			if ( 0 === strpos( (string) $protected_settings[ $key ], 'impenc1:' ) ) {
+				$enc_count++;
+			}
+		}
+		?>
+		<section class="imp-panel">
+			<div class="imp-panel-head">
+				<h3><?php esc_html_e( 'Data & token protection', 'infinity-migratex-pro' ); ?></h3>
+			</div>
+			<div class="imp-panel-body">
+				<table class="imp-table imp-table-info">
+					<tbody>
+						<tr>
+							<th scope="row"><?php esc_html_e( 'Secrets stored encrypted', 'infinity-migratex-pro' ); ?></th>
+							<td><?php
+							if ( 0 === $conf_count ) {
+								echo IMP_Admin::badge( 'neutral', __( 'No secrets configured', 'infinity-migratex-pro' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
+							} elseif ( $enc_count === $conf_count ) {
+								echo IMP_Admin::badge( 'pass', sprintf( /* translators: 1: encrypted 2: total */ __( '%1$d of %2$d encrypted (AES-256-GCM)', 'infinity-migratex-pro' ), $enc_count, $conf_count ) ); // phpcs:ignore WordPress.Security.EscapeOutput
+							} else {
+								echo IMP_Admin::badge( 'warn', sprintf( /* translators: 1: encrypted 2: total */ __( '%1$d of %2$d encrypted — re-save the others to encrypt', 'infinity-migratex-pro' ), $enc_count, $conf_count ) ); // phpcs:ignore WordPress.Security.EscapeOutput
+							}
+							?></td>
+						</tr>
+						<tr>
+							<th scope="row"><?php esc_html_e( 'Secrets in page source', 'infinity-migratex-pro' ); ?></th>
+							<td><?php echo esc_html( __( 'Never — secret fields are never printed, even encrypted.', 'infinity-migratex-pro' ) ); ?></td>
+						</tr>
+						<tr>
+							<th scope="row"><?php esc_html_e( 'Configuration export', 'infinity-migratex-pro' ); ?></th>
+							<td><?php echo esc_html( __( 'Secrets excluded from JSON exports.', 'infinity-migratex-pro' ) ); ?></td>
+						</tr>
+						<tr>
+							<th scope="row"><?php esc_html_e( 'Logs', 'infinity-migratex-pro' ); ?></th>
+							<td><?php echo esc_html( __( 'Secret-like keys are redacted automatically.', 'infinity-migratex-pro' ) ); ?></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
 		<section class="imp-panel">
 			<div class="imp-panel-head">
 				<h3><?php esc_html_e( 'Hardening layers', 'infinity-migratex-pro' ); ?></h3>

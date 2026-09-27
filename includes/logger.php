@@ -177,7 +177,7 @@ final class IMP_Logger {
 	 * @return array
 	 */
 	public static function scrub( array $details ) {
-		$blacklist = '/pass|pwd|secret|token|key|credential|auth|cookie/i';
+		$blacklist = '/pass|pwd|secret|token|key|credential|auth|cookie|json|private|client_email|bearer/i';
 		$clean     = array();
 		foreach ( $details as $k => $v ) {
 			if ( is_string( $k ) && preg_match( $blacklist, $k ) ) {

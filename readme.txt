@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.14.0
+Stable tag: 3.15.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,12 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.15.0 =
+
+* Security: secret fields (cloud tokens, passwords, service account JSON) are never printed on the Settings page anymore — not even encrypted. Leave them empty to keep the saved value.
+* New: "Data & token protection" panel on the Security page — encrypted-secrets count, no-secrets-in-HTML guarantee, exports exclude secrets, logs auto-redact secret-like keys.
+* Logs: scrubbing extended (json, private, client_email, bearer).
 
 = 3.14.0 =
 
