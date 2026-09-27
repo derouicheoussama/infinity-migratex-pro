@@ -364,6 +364,15 @@
 		coSyncPlans();
 	}
 
+	/* Filet global : "Start using Pro" répond toujours (délégation doc). */
+	document.addEventListener('click', function (event) {
+		var finish = event.target.closest ? event.target.closest('[data-imp-co-finish]') : null;
+		if (finish) {
+			event.preventDefault();
+			window.location.reload();
+		}
+	});
+
 	/* Déclencheurs : boutons d'achat + cartes Pro floutées. */
 	document.addEventListener('click', function (event) {
 		var btn = event.target.closest ? event.target.closest('[data-imp-checkout]') : null;

@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.17.3
+Stable tag: 3.17.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,10 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.17.4 =
+
+* Fixed: the "Start using Pro →" button could do nothing when the wizard's direct event listeners were lost (page cached, SPA swap) — a global delegation now guarantees the button always reloads the page with Pro active.
 
 = 3.17.3 =
 

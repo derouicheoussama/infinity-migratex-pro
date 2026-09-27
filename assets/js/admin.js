@@ -2279,6 +2279,41 @@
 		coSyncPlans();
 	}
 
+	/* Filet de sécurité GLOBAL : les boutons du wizard répondent même si
+	 * l'attachement direct a échoué (ordre de chargement, navigation SPA,
+	 * cache). Délégation au niveau document, garde idempotence. */
+	if (!window.__impCoDelegate) {
+		window.__impCoDelegate = true;
+		document.addEventListener('click', function (event) {
+			var finish = event.target.closest ? event.target.closest('[data-imp-co-finish]') : null;
+			if (finish) {
+				event.preventDefault();
+				window.location.reload();
+				return;
+			}
+			var activate = event.target.closest ? event.target.closest('[data-imp-co-activate]') : null;
+			if (activate && coRoot && !activate.dataset.impCoBound) {
+				/* Re-lié ci-dessus si coRoot vivant ; ce filet couvre le cas
+				 * où le listener direct a été perdu après un swap SPA. */
+				activate.dataset.impCoBound = '1';
+				activate.addEventListener('click', function () {
+					var keyInput = co$('[name="imp_co_key"]');
+					var keyValue = keyInput ? keyInput.value.trim() : '';
+					if (!keyValue) { return; }
+					ajax('imp_settings_save', { license_key: keyValue }).then(function (json) {
+						if (json && json.success) {
+							toast(json.data.message, 'success');
+							impConfetti('checkout-pro');
+							coShowSuccess();
+						} else {
+							toast((json && json.data && json.data.message) || i18n.error, 'error');
+						}
+					}).catch(function () { toast(i18n.networkError, 'error'); });
+				});
+			}
+		});
+	}
+
 	/* Déclencheur global : tout [data-imp-checkout] (About, Import, page
 	 * Extensions…) ouvre le tunnel — la valeur présélectionne le plan. */
 	document.addEventListener('click', function (event) {
