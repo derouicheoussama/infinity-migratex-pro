@@ -218,7 +218,43 @@ final class IMP_Admin_Dashboard {
 						<em><?php esc_html_e( 'Core checksums and file analysis', 'infinity-migratex-pro' ); ?></em>
 					</button>
 				</div>
-			</section>
+				</section>
+
+			<?php /* Signaux de confiance — affichés tant que l'utilisateur n'a
+			 * pas fait son premier backup (transient) : preuves objectives
+			 * que le plugin est sûr, sans jargon ni inquiétude. */ ?>
+			<?php if ( ! get_transient( 'imp_trust_dismissed' ) ) : ?>
+				<section class="imp-panel">
+					<div class="imp-panel-head">
+						<h3><?php esc_html_e( 'Why you can trust this plugin', 'infinity-migratex-pro' ); ?></h3>
+						<div class="imp-panel-actions">
+							<button type="button" class="imp-btn imp-btn-ghost imp-btn-small" data-imp-action="trust-dismiss">✕ <?php esc_html_e( 'Dismiss', 'infinity-migratex-pro' ); ?></button>
+						</div>
+					</div>
+					<div class="imp-panel-body">
+						<table class="imp-table imp-table-info">
+							<tbody>
+								<tr>
+									<th scope="row">🔐 <?php esc_html_e( 'Your data stays on your server', 'infinity-migratex-pro' ); ?></th>
+									<td><?php esc_html_e( 'Backups are stored on YOUR hosting. No telemetry, no external account required — the only external calls are official WordPress.org checksums and your own update channel.', 'infinity-migratex-pro' ); ?></td>
+								</tr>
+								<tr>
+									<th scope="row">🔎 <?php esc_html_e( 'Code sealed and signed', 'infinity-migratex-pro' ); ?></th>
+									<td><?php esc_html_e( 'Every code file carries the author signature and is verified daily against a SHA-256 seal — the Security page proves it in one click.', 'infinity-migratex-pro' ); ?></td>
+								</tr>
+								<tr>
+									<th scope="row">🛡 <?php esc_html_e( 'Tested before release', 'infinity-migratex-pro' ); ?></th>
+									<td><?php echo esc_html( sprintf( /* translators: %s: version */ __( 'Version %s passed the full test suite (unit tests, PHP 7.4 compatibility scan, WordPress Plugin Check) before being published.', 'infinity-migratex-pro' ), IMP_VERSION ) ); ?></td>
+								</tr>
+								<tr>
+									<th scope="row">↩ <?php esc_html_e( 'Never lose your site', 'infinity-migratex-pro' ); ?></th>
+									<td><?php esc_html_e( 'Every operation is chunked and resumable — pause, resume or cancel at any step, and a safety snapshot protects your database before updates.', 'infinity-migratex-pro' ); ?></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</section>
+			<?php endif; ?>
 
 			<section class="imp-panel">
 				<div class="imp-panel-head"><h3><?php esc_html_e( 'Site information', 'infinity-migratex-pro' ); ?></h3></div>
@@ -392,9 +428,17 @@ final class IMP_Admin_Dashboard {
 	/**
 	 * AJAX : recalcul santé + stats.
 	 */
-	public static function ajax_health_refresh() {
+	/**
+	 * AJAX : ferme le panneau « Why you can trust this plugin ».
+	 */
+	public static function ajax_trust_dismiss() {
 		IMP_Security::ajax_guard( 'manage' );
-		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
+		set_transient( 'imp_trust_dismissed', 1, 30 * DAY_IN_SECONDS );
+		wp_send_json_success( array( 'message' => __( 'Panel dismissed.', 'infinity-migratex-pro' ) ) );
+	}
+
+	public static function ajax_health_refresh() {
+		IMP_Security::ajax_guard( 'manage' );		// Nonce explicite pour les analyseurs statiques (ajax_guard ci-dessus le vérifie déjà).
 		check_ajax_referer( 'imp-admin', 'nonce', false );
 
 

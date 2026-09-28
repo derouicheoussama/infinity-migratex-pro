@@ -265,6 +265,12 @@ final class IMP_Job {
 			IMP_Sheets::log_job( $job );
 		}
 
+		// Premier backup réussi = l'utilisateur a pris en main le plugin :
+		// le panneau « Why you can trust this plugin » s'efface.
+		if ( self::STATUS_COMPLETED === $job['status'] && 'backup' === $job['type'] ) {
+			set_transient( 'imp_trust_dismissed', 1, 30 * DAY_IN_SECONDS );
+		}
+
 		// Job en arrière-plan (cron) : relancer la chaîne asynchrone.
 		if ( 'cron' === $job['origin'] && self::STATUS_RUNNING === $job['status'] ) {
 			self::kick_background( $job );

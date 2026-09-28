@@ -990,6 +990,15 @@
 			return;
 		}
 
+		/* ---- Dashboard : fermer le panneau de confiance ---- */
+		if (action === 'trust-dismiss') {
+			var panel = btn.closest('.imp-panel');
+			ajax('imp_trust_dismiss', {}).then(function (json) {
+				if (json && json.success && panel) { panel.remove(); }
+			}).catch(function () { toast(i18n.networkError, 'error'); });
+			return;
+		}
+
 		/* ---- Google Sheets : test de connexion ---- */
 		if (action === 'sheets-test') {
 			busy(btn, true);

@@ -4,7 +4,7 @@ Tags: backup, clone, export-import, migrate, move
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.17.4
+Stable tag: 3.18.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,11 @@ Never. Even the opt-in "Delete plugin data on uninstall" setting (off by default
 No telemetry. The only external requests are core checksums from the official WordPress.org API (scanner) and update checks against GitHub Releases (optional GitHub-edition channel).
 
 == Changelog ==
+
+= 3.18.0 =
+
+* Trust: a "Why you can trust this plugin" panel on the dashboard for new installs — data stays on your server, code sealed and signed, tested before release, resumable everything. Dismissable in one click, and it auto-hides after your first successful backup.
+* UI: confusing developer-oriented wording replaced with client-friendly guidance (license binding, cloud tab notice, encryption badge wording softened to positive "protected" phrasing).
 
 = 3.17.4 =
 

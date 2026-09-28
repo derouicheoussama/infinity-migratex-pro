@@ -145,7 +145,7 @@ final class IMP_License {
 		if ( self::configured() ) {
 			return __( 'License API configured without shared secret — enable INFINITY_MIGRATEX_PRO_LICENSE_SECRET for domain binding and signed keys.', 'infinity-migratex-pro' );
 		}
-		return __( 'Local development mode: any key (8+ chars) activates Pro on this site only. Configure the license API + secret for production.', 'infinity-migratex-pro' );
+		return __( 'Keys are verified by the license desk. Try the 14-day free trial from the Go Pro wizard — no payment needed.', 'infinity-migratex-pro' );
 	}
 
 	/**

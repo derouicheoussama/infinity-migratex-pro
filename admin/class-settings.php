@@ -351,7 +351,7 @@ final class IMP_Admin_Settings {
 		<?php if ( ! $is_pro ) : ?>
 			<div class="imp-notice imp-notice-info">
 				<strong>★ <?php esc_html_e( 'Pro feature', 'infinity-migratex-pro' ); ?></strong> —
-				<?php esc_html_e( 'Send every backup to Google Drive, Dropbox or an FTP server. The engine below is fully implemented (resumable uploads, connection test) and unlocks with your Pro license. Everything is tested locally in development mode: activate any key in the Advanced tab to try it now.', 'infinity-migratex-pro' ); ?>
+				<?php esc_html_e( 'Send every backup to Google Drive, Dropbox or an FTP server. The engine is fully implemented (resumable uploads, connection test) and unlocks with your Pro license — start the 14-day free trial from the Go Pro wizard to try it now.', 'infinity-migratex-pro' ); ?>
 				<button type="button" class="imp-btn imp-btn-primary" style="margin-left:8px;" data-imp-checkout="personal">★ <?php esc_html_e( 'Go Pro', 'infinity-migratex-pro' ); ?></button>
 			</div>
 		<?php endif; ?>

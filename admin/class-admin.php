@@ -835,6 +835,7 @@ final class IMP_Admin {
 			'imp_tools_action'         => array( 'IMP_Admin_Tools', 'ajax_action' ),
 			'imp_integrations_action'  => array( 'IMP_Admin_Integrations', 'ajax_action' ),
 			'imp_health_refresh'       => array( 'IMP_Admin_Dashboard', 'ajax_health_refresh' ),
+			'imp_trust_dismiss'        => array( 'IMP_Admin_Dashboard', 'ajax_trust_dismiss' ),
 			'imp_logs_action'          => array( 'IMP_Admin_Logs', 'ajax_action' ),
 			'imp_settings_save'        => array( 'IMP_Admin_Settings', 'ajax_save' ),
 			'imp_settings_save_all'    => array( 'IMP_Admin_Settings', 'ajax_save_all' ),

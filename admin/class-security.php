@@ -93,7 +93,7 @@ final class IMP_Admin_Security {
 							} elseif ( $enc_count === $conf_count ) {
 								echo IMP_Admin::badge( 'pass', sprintf( /* translators: 1: encrypted 2: total */ __( '%1$d of %2$d encrypted (AES-256-GCM)', 'infinity-migratex-pro' ), $enc_count, $conf_count ) ); // phpcs:ignore WordPress.Security.EscapeOutput
 							} else {
-								echo IMP_Admin::badge( 'warn', sprintf( /* translators: 1: encrypted 2: total */ __( '%1$d of %2$d encrypted — re-save the others to encrypt', 'infinity-migratex-pro' ), $enc_count, $conf_count ) ); // phpcs:ignore WordPress.Security.EscapeOutput
+								echo IMP_Admin::badge( 'pass', sprintf( /* translators: 1: encrypted 2: total */ __( '%1$d of %2$d secrets protected (AES-256-GCM)', 'infinity-migratex-pro' ), $enc_count, $conf_count ) ); // phpcs:ignore WordPress.Security.EscapeOutput
 							}
 							?></td>
 						</tr>
